@@ -1,0 +1,27 @@
+
+
+
+
+div {
+  margin: .4em 0;
+	
+}
+div label {
+  width: 10%;
+  
+}
+
+.jumbotron{
+	background: #3E3439;
+	width: 60%;
+	margin:0 auto;
+	color:#fff;
+	padding: 20px 0;
+	border-radius: 5px;
+
+
+}
+
+.jumbotron form{
+	color:00000;
+}

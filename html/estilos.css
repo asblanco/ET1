@@ -1,0 +1,105 @@
+/* --HEADER -- */
+.navbar{
+	margin-bottom:  0;	
+}
+
+.jumbotron {
+	background:#428BCA;
+	color:#FFF;
+	padding:20px 0;  	
+}
+
+.jumbotron .titulo-blog{
+	font-size:50; 
+}
+
+/* -- POST --  */
+.main {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.post {
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid#999;
+}
+
+.post .post-title {
+	color:#333;
+}
+
+.post .thumb {
+	margin-right: 10px;
+	width: 40%;
+}
+
+.post .thumb img {
+	width: 100%;
+}
+
+.post .contenedor-botones {
+	width: 100%;
+}
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+/* -- Media Querie -- */
+
+@media screen and (max-width: 768px) {
+		.post .thumb {
+			width: 100%;
+			margin-bottom: 20px;
+			margin-right: 0;
+		}
+}
+
+.social {
+	
+	position: fixed;
+	left: 0px;
+	top: 50%;
+	z-index: 2000;
+}
+
+
+
+.social ul {
+	list-style:none;
+}
+
+
+/* BARRA REDES SOCIALES HORIZONTAL
+.social ul li {
+  float: left;
+}
+*/
+
+.social ul li a {
+	display:inline-block;
+	color: #fff;
+	background: #000;
+	padding:10px 15px;
+	text-decoration: none;
+	-webkit-transition:all 500ms ease;
+	-o-tansition:all 500ms ease;
+	transition:all 500ms ease;
+	
+}
+
+.social ul li .icon-skype {background:#12a5f4;}
+.social ul li .icon-mail {background:#666666;}
+.social ul li .icon-facebook {background:#3b5998;}
+.social ul li .icon-google {background:#d95232;}
+.social ul li .icon-youtube {background:#ae181f;}
+.social ul li .icon-twitter {background:#00abf0;}
+
+.social ul li a:hover {
+	padding: 10px 30px;
+	background:#000;
+}

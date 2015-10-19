@@ -1,0 +1,77 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/*-----------BARRA DE NAVEGACION-------------*/
+nav{
+	display: block;
+	background-color:#5CA4E7;
+	overflow: hidden;
+}
+
+ul{
+	display: block;
+	float: left;
+}
+
+nav ul>li, span{
+	display: inline-block;
+}
+
+nav ul>li>a, span>a{
+	display: block;
+	line-height: 50px;
+	padding: 0 20 0 20;
+	text-decoration: none;
+	color: white;
+	text-transform: uppercase;
+	font-family: Helvetica;
+	font-size: 0.8em;
+}
+
+nav ul>li>a:hover{
+	background-color: #FF5D1F;
+}
+
+span{
+	position: absolute;
+	right: 20px;
+}
+
+/*---------CONTENIDO (BOTONES)----------*/
+
+div.content{
+	margin-top: 50px;
+}
+
+div.boton {
+	float: left;
+	width: 48%;
+	
+	margin: 1%;
+	background-color: #EFF2ED;
+	border-radius: 5px;
+	border: 1px solid #C0C2BF;
+	text-align: center;
+	font-size: 2em;
+	text-transform: uppercase;
+}
+
+div.boton>a{
+	display: block;
+	width: 100%;
+	line-height: 200px;
+	text-decoration: none;
+	color: #626163;
+	font-family: Helvetica;
+}
+
+div.boton>a:hover{
+	background-color: #D9D7DB;
+}
+
+.icon-bar {
+     color: white;
+ }

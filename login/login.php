@@ -6,7 +6,7 @@ Formulario de login. Envia los datos a ProcesarLogin.php
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
-	<link rel="stylesheet" type="text/css" href="../css/form.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	<section class="jumbotron">

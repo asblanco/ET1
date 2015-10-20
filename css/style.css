@@ -7,8 +7,12 @@
 /*-----------BARRA DE NAVEGACION-------------*/
 nav{
 	display: block;
-	background-color:#5CA4E7;
+	background-color:#330099; 
 	overflow: hidden;
+}
+
+.navbar-brand {
+    color: #9900FF;
 }
 
 ul{
@@ -31,13 +35,17 @@ nav ul>li>a, span>a{
 	font-size: 0.8em;
 }
 
-nav ul>li>a:hover{
-	background-color: #FF5D1F;
+li>a:hover{
+    background-color: orange;
 }
 
 span{
 	position: absolute;
 	right: 20px;
+}
+
+.active{
+    background-color: #9900FF;
 }
 
 /*---------CONTENIDO (BOTONES)----------*/
@@ -72,6 +80,21 @@ div.boton>a:hover{
 	background-color: #D9D7DB;
 }
 
-.icon-bar {
-     color: white;
- }
+/*--------- Roles ----------*/
+.titulo {
+    font-size: 22pt;
+}
+
+.well{
+    background-color: rgba(0,0,204,0.09);
+    border: none;
+}
+
+.edit-icon {
+    text-align: right;
+}
+
+.remove-icon {
+    float: right;
+    font-size: 1.2em;
+}

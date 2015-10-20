@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <div id="includedContent"></div>
     
     <!-- Contenido Principal -->
     <body>
         <!-- Rol 1 -->
         <div class="col-md-8 col-md-offset-2 well">
-            <a href=""> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
+            <a href="#" data-toggle="modal" data-target="#removeModal"> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
             <div class="col-md-6">
                 <div class="titulo"> Administrador 
                    <a href="mod_rol.html"> <div class="edit-icon glyphicon glyphicon-edit"></div></a>
@@ -27,6 +28,7 @@
         
         <!-- Rol 2 -->
         <div class="col-md-8 col-md-offset-2 well">
+            <a href="#" data-toggle="modal" data-target="#removeModal"> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
             <div class="col-md-6">
                 <div class="titulo">Registrador
                     <a href="mod_rol.html"> <div class="edit-icon glyphicon glyphicon-edit"></div></a>
@@ -44,6 +46,28 @@
                 <p>Hola</p>
             </div>
         </div>
+        
+        <!-- Login Modal Page -->
+        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="myModalLabel">Advertencia</h4>
+              </div>
+                
+            <!-- Contenido de la página login modal -->
+              <div class="modal-body">
+                 <p>¿Está seguro de eliminar el elemento?</p>
+              </div>
+                
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-primary">Si</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </body>
     
     <!-- Footer -->
@@ -55,7 +79,7 @@
     <!-- Bootstrap JavaScript -->
     <script src="../js/bootstrap.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <script> 
         $(function(){
           $("#includedContent").load("../html/navBar.html"); 

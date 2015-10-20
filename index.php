@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<?php include('html/navBar.html'); ?>
+
 <html lang="en">
-    <div id="includedContent"></div>
-    
     <!-- Contenido Principal -->
     <body>
         <div class="content">
@@ -18,14 +17,8 @@
         <p class="autores">Copyright &copy; GesTor 2015</p>
     </footer>
 
-    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
-    <script src="../js/bootstrap.js"></script> 
-    <script> 
-        $(function(){
-          $("#includedContent").load("../html/navBar.html"); 
-        });
-    </script>
+    <script src="../js/bootstrap.js"></script>
 </html>

@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb2+deb7u1
+-- version 4.2.12deb2
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-10-2015 a las 19:26:42
--- Versión del servidor: 5.5.38
--- Versión de PHP: 5.4.4-14+deb7u4
+-- Tiempo de generación: 20-10-2015 a las 17:56:33
+-- Versión del servidor: 5.5.44-0+deb8u1
+-- Versión de PHP: 5.6.13-0+deb8u1
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `GestorPermisos`
+-- Base de datos: `Gestor de Permisos`
 --
 
 -- --------------------------------------------------------
@@ -28,8 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `Funcionalidad` (
   `NombreFun` varchar(65) NOT NULL,
-  `DescFun` varchar(65) DEFAULT NULL,
-  PRIMARY KEY (`NombreFun`)
+  `DescFun` varchar(65) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -37,7 +36,16 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 --
 
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
-('Visitar', 'Permite visualizar las páginas a las que se tiene acceso.');
+('Crear Usuario', 'Permite crear usuarios de la aplicación.');
+
+--
+-- Disparadores `Funcionalidad`
+--
+DELIMITER //
+CREATE TRIGGER `after_insert_funcionalidad` AFTER INSERT ON `Funcionalidad`
+ FOR EACH ROW INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ("Administrador", NEW.NombreFun)
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -48,16 +56,17 @@ INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
 CREATE TABLE IF NOT EXISTS `Pagina` (
   `Url` varchar(65) NOT NULL COMMENT 'url',
   `DescPag` varchar(65) DEFAULT NULL COMMENT 'descripcion de pagina',
-  `NombreFun` varchar(65) NOT NULL,
-  PRIMARY KEY (`Url`),
-  UNIQUE KEY `url` (`Url`),
-  UNIQUE KEY `NombreFun` (`NombreFun`)
+  `NombreFun` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Disparadores `Pagina`
 --
-DROP TRIGGER IF EXISTS `before_insert_pagina`;
+DELIMITER //
+CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
+ FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
+//
+DELIMITER ;
 DELIMITER //
 CREATE TRIGGER `before_insert_pagina` BEFORE INSERT ON `Pagina`
  FOR EACH ROW BEGIN
@@ -72,12 +81,6 @@ END IF;
 END
 //
 DELIMITER ;
-DROP TRIGGER IF EXISTS `after_insert_pagina`;
-DELIMITER //
-CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
- FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
-//
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -87,8 +90,7 @@ DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS `Rol` (
   `NombreRol` varchar(65) NOT NULL,
-  `DescRol` varchar(65) DEFAULT NULL,
-  PRIMARY KEY (`NombreRol`)
+  `DescRol` varchar(65) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -96,17 +98,7 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 --
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
-('Lector', 'Rol por defecto al registrarse. Funcionalidad: Visitar.');
-
---
--- Disparadores `Rol`
---
-DROP TRIGGER IF EXISTS `after_insert_rol`;
-DELIMITER //
-CREATE TRIGGER `after_insert_rol` AFTER INSERT ON `Rol`
- FOR EACH ROW INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('admin', NEW.NombreRol)
-//
-DELIMITER ;
+('Administrador', 'Funcionalidades: Todas las funcionalidades de la aplicación.');
 
 -- --------------------------------------------------------
 
@@ -116,9 +108,7 @@ DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS `Rol_Fun` (
   `NombreRol` varchar(65) NOT NULL,
-  `NombreFun` varchar(65) NOT NULL,
-  PRIMARY KEY (`NombreRol`,`NombreFun`),
-  KEY `FK2_Funcionalidad` (`NombreFun`)
+  `NombreFun` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -126,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 --
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Lector', 'Visitar');
+('Administrador', 'Crear Usuario');
 
 -- --------------------------------------------------------
 
@@ -140,8 +130,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `Nombre` varchar(65) NOT NULL,
   `Apellidos` varchar(65) NOT NULL,
   `Email` varchar(65) NOT NULL,
-  `FechaAlta` date NOT NULL,
-  PRIMARY KEY (`Login`)
+  `FechaAlta` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -149,17 +138,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 --
 
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`) VALUES
-('admin', 'admin', 'admin', 'adsfs', 'dfdf', '2015-10-15');
-
---
--- Disparadores `Usuario`
---
-DROP TRIGGER IF EXISTS `after_insert_usuario`;
-DELIMITER //
-CREATE TRIGGER `after_insert_usuario` AFTER INSERT ON `Usuario`
- FOR EACH ROW INSERT INTO Usu_Rol (Login, NombreRol) VALUES (NEW.Login, 'Lector')
-//
-DELIMITER ;
+('admin', 'admin', 'admin', 'admin', 'admin', '2015-10-14');
 
 -- --------------------------------------------------------
 
@@ -169,9 +148,7 @@ DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS `Usu_Pag` (
   `Login` varchar(65) NOT NULL,
-  `Url` varchar(65) NOT NULL,
-  PRIMARY KEY (`Login`,`Url`),
-  KEY `FK_Pagina` (`Url`)
+  `Url` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -182,9 +159,7 @@ CREATE TABLE IF NOT EXISTS `Usu_Pag` (
 
 CREATE TABLE IF NOT EXISTS `Usu_Rol` (
   `Login` varchar(65) NOT NULL,
-  `NombreRol` varchar(65) NOT NULL,
-  PRIMARY KEY (`Login`,`NombreRol`),
-  KEY `FK_Rol` (`NombreRol`)
+  `NombreRol` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -192,7 +167,53 @@ CREATE TABLE IF NOT EXISTS `Usu_Rol` (
 --
 
 INSERT INTO `Usu_Rol` (`Login`, `NombreRol`) VALUES
-('admin', 'Lector');
+('admin', 'Administrador');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `Funcionalidad`
+--
+ALTER TABLE `Funcionalidad`
+ ADD PRIMARY KEY (`NombreFun`);
+
+--
+-- Indices de la tabla `Pagina`
+--
+ALTER TABLE `Pagina`
+ ADD PRIMARY KEY (`Url`), ADD UNIQUE KEY `url` (`Url`), ADD UNIQUE KEY `NombreFun` (`NombreFun`);
+
+--
+-- Indices de la tabla `Rol`
+--
+ALTER TABLE `Rol`
+ ADD PRIMARY KEY (`NombreRol`);
+
+--
+-- Indices de la tabla `Rol_Fun`
+--
+ALTER TABLE `Rol_Fun`
+ ADD PRIMARY KEY (`NombreRol`,`NombreFun`), ADD KEY `FK2_Funcionalidad` (`NombreFun`);
+
+--
+-- Indices de la tabla `Usuario`
+--
+ALTER TABLE `Usuario`
+ ADD PRIMARY KEY (`Login`);
+
+--
+-- Indices de la tabla `Usu_Pag`
+--
+ALTER TABLE `Usu_Pag`
+ ADD PRIMARY KEY (`Login`,`Url`), ADD KEY `FK_Pagina` (`Url`);
+
+--
+-- Indices de la tabla `Usu_Rol`
+--
+ALTER TABLE `Usu_Rol`
+ ADD PRIMARY KEY (`Login`,`NombreRol`), ADD KEY `FK_Rol` (`NombreRol`);
 
 --
 -- Restricciones para tablas volcadas
@@ -202,28 +223,28 @@ INSERT INTO `Usu_Rol` (`Login`, `NombreRol`) VALUES
 -- Filtros para la tabla `Pagina`
 --
 ALTER TABLE `Pagina`
-  ADD CONSTRAINT `FK_Fun` FOREIGN KEY (`NombreFun`) REFERENCES `Funcionalidad` (`NombreFun`);
+ADD CONSTRAINT `FK_Fun` FOREIGN KEY (`NombreFun`) REFERENCES `Funcionalidad` (`NombreFun`);
 
 --
 -- Filtros para la tabla `Rol_Fun`
 --
 ALTER TABLE `Rol_Fun`
-  ADD CONSTRAINT `FK2_Funcionalidad` FOREIGN KEY (`NombreFun`) REFERENCES `Funcionalidad` (`NombreFun`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK2_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `FK2_Funcionalidad` FOREIGN KEY (`NombreFun`) REFERENCES `Funcionalidad` (`NombreFun`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `FK2_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `Usu_Pag`
 --
 ALTER TABLE `Usu_Pag`
-  ADD CONSTRAINT `FK2_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_Pagina` FOREIGN KEY (`Url`) REFERENCES `Pagina` (`Url`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `FK2_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_Pagina` FOREIGN KEY (`Url`) REFERENCES `Pagina` (`Url`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `Usu_Rol`
 --
 ALTER TABLE `Usu_Rol`
-  ADD CONSTRAINT `FK_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `FK_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

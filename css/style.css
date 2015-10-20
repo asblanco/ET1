@@ -1,5 +1,5 @@
 *{
-	margin: 0;
+	margin:0;
 	padding: 0;
 	box-sizing: border-box;
 }
@@ -13,11 +13,6 @@ nav{
 
 .navbar-brand {
     color: #9900FF;
-}
-
-ul{
-	display: block;
-	float: left;
 }
 
 nav ul>li, span{
@@ -97,4 +92,28 @@ div.boton>a:hover{
 .remove-icon {
     float: right;
     font-size: 1.2em;
+}
+
+.modificar {
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.panel-default > .panel-heading{
+    background-color: rgba(0,0,204,0.09);
+    font-weight: bold;
+}
+
+.list-onHover>li:hover{
+    background-color: lightgrey;
+}
+
+.glyphicon-plus {
+    color: green;
+    float: right;
+}
+
+.glyphicon-trash {
+    color: red;
+    float: right;
 }

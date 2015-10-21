@@ -108,9 +108,13 @@ div.boton>a:hover{
     background-color: lightgrey;
 }
 
+/*Pull right the icon plus on the rol page*/
+.pull-right{
+    float: right;
+}
+
 .glyphicon-plus {
     color: green;
-    float: right;
 }
 
 .glyphicon-trash {

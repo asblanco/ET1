@@ -131,11 +131,21 @@ div.boton>a:hover{
     float: right;
 }
 
-.glyphicon-plus {
+.panel .glyphicon-plus {
     color: green;
 }
 
-.glyphicon-trash {
+.panel .glyphicon-trash {
     color: red;
     float: right;
+}
+
+.btn-parent {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-child {
+    display: table;
+    margin: 0 auto;
 }

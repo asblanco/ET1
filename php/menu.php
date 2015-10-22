@@ -4,10 +4,10 @@
     <!-- Contenido Principal -->
     <body>
         <div class="content">
-            <div class="boton" id="usuarios"><a href="/p_usuarios/usuarios.html">Usuarios</a></div>
-            <div class="boton" id="páginas"><a href="/p_paginas/paginas.html">Paginas </a></div>
-            <div class="boton" id="roles"><a href="/p_roles/roles.html"> Roles</a></div>
-            <div class="boton" id="funcionalidades"><a href="/p_funcionalidades/funcionalidades.html">Funcionalidades </a> </div>
+            <div class="boton" id="usuarios"><a href="../p_usuarios/usuarios.html">Usuarios</a></div>
+            <div class="boton" id="páginas"><a href="../p_paginas/paginas.html">Paginas </a></div>
+            <div class="boton" id="roles"><a href="../p_roles/roles.html"> Roles</a></div>
+            <div class="boton" id="funcionalidades"><a href="../p_funcionalidades/funcionalidades.html">Funcionalidades </a> </div>
         </div>
     </body>
     

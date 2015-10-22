@@ -7,12 +7,26 @@
 /*-----------BARRA DE NAVEGACION-------------*/
 nav{
 	display: block;
-	background-color:#330099; 
+	background-color: #3D5CD2; 
 	overflow: hidden;
 }
 
+.navbar{
+	border-radius: 0px;
+	border: none;
+}
+
+.navbar{
+	font-size: 1.1em;
+}
+
 .navbar-brand {
-    color: #9900FF;
+    color: #AECDFF;
+    font-size: 1.3em;
+}
+
+.navbar-brand:hover{
+    color: white;
 }
 
 nav ul>li, span{
@@ -30,8 +44,12 @@ nav ul>li>a, span>a{
 	font-size: 0.8em;
 }
 
-li>a:hover{
-    background-color: orange;
+.nav > li > a:hover{
+    background-color: #5B81FF;
+}
+
+.nav a:hover, .nav a:focus{
+	color: white;
 }
 
 span{

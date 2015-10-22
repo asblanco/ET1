@@ -1,24 +1,29 @@
-<?php include('html/navBar.html'); ?>
-
-<html lang="en">
-    <!-- Contenido Principal -->
-    <body>
-        <div class="content">
-            <div class="boton" id="usuarios"><a href="/p_usuarios/usuarios.html">Usuarios</a></div>
-            <div class="boton" id="páginas"><a href="/p_paginas/paginas.html">Paginas </a></div>
-            <div class="boton" id="roles"><a href="/p_roles/roles.html"> Roles</a></div>
-            <div class="boton" id="funcionalidades"><a href="/p_funcionalidades/funcionalidades.html">Funcionalidades </a> </div>
-        </div>
-    </body>
-    
-    <!-- Footer -->
-    <footer class="col-xs-12 col-sm-12 col-md-12">
-        <hr class="small">
-        <p class="autores">Copyright &copy; GesTor 2015</p>
-    </footer>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../js/jquery.min.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="../js/bootstrap.js"></script>
-</html>
+<!--
+======================================================================
+Formulario de login. Envia los datos a ProcesarLogin.php
+======================================================================
+-->
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+	<link rel="stylesheet" type="text/css" href="css/form.css">
+</head>
+<body>
+	<section class="jumbotron">
+		<div class="container" align="center">
+			<h1>LOGIN</h1>
+			<p> Introduzca su usuario y contrase&ntildea</p>
+		</div>
+		<div class="container" align="center">
+			<form action='php/ProcesarLogin.php' method='POST'>
+				<label for="nombre">Usuario</label>
+				<input type="text" name="login" id="login"><br>
+				<label for="apellidos">Contraseña</label>
+				<input type="text" name="pass" id="pass"><br>
+				<input type='submit' name='accion' value='Aceptar'>
+			</form>
+			<a href="php/registro.php">Registrarse</a>
+		</div>
+	</section>		
+</body>
+<html>	

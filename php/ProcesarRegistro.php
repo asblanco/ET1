@@ -18,6 +18,13 @@ $email= $_POST['email'];
 //Conectamos con el gestor de la bd
 echo ConectarBD();
 
+//Comprobamos que se hayan cubierto todos los campos
+if ( empty($login) OR empty($pass) OR empty($nombre) OR empty($apellidos) OR (!filter_var($email, FILTER_VALIDATE_EMAIL) AND !empty($email))) {
+            // Set a 400 (bad request) response code and exit.
+            header("HTTP/1.0 400 bad request");
+            echo '<p>Por favor, rellene correctamente todos los campos<p>';
+            exit;
+ }
 
 //Comprobamos si ya existe ese login
 $consultaSilogin = "select * from Usuario where Login = '$login' ";
@@ -29,13 +36,12 @@ if (mysql_num_rows($resultado) == 0)
 	// insertamos el usuario en la bd
 	$InsertaUsuario = "Insert into Usuario (Login, Password, Nombre, Apellidos, Email) values ('$login','$pass','$nombre','$apellidos','$email')";
 	$insercion = mysql_query($InsertaUsuario) or die('error al ejecutar la insercion de usuario');
-	echo 'El Login <b>' . $login . '</b> ha sido registrado en el sistema' . '<BR>';
+	echo 'El Login ' . $login . ' ha sido registrado en el sistema';
 }
 // devuelve una fila por lo tanto encontro ese login
 else
 {
-	echo 'El usuario <b>' . $login . '</b> ya existe en la bd <BR>';
-	echo '<a href=\'Registro.php\'>Volver al registro</a><BR>';
+	echo '<p>El usuario ' . $login . ' ya existe en la bd<p>';
 
 }
 

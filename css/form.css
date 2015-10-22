@@ -60,3 +60,51 @@ div label {
 	color: #649BD5;
 	font-style: none;
 }
+
+/*-------VALIDACION--------*/
+
+.jumbotron form input.invalid, textarea.invalid{
+	border-right: 2px solid #FF1A00;
+}
+
+.jumbotron form input.valid, textarea.valid{
+	border-right: 2px solid #00DC00;
+}
+
+.error{
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    color: #b94a48;
+    background-color: #f2dede;
+}
+
+#alerta-wrapper{
+	display: table; /*Para poder darle un ancho del 100% a #alerta */
+	width: 100%; /* idem */
+}
+
+#alerta{
+	margin-bottom: 0;
+	width: 100%;
+	font-size: 10px;
+	display: table-cell; /* Para que el texto se muestre centrado*/
+    vertical-align:middle;
+    text-align: center;
+}
+
+#alerta span{
+	padding: 20px 0 20px 0;
+}
+
+.success {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #468847;
+  background-color: #dff0d8;
+  border: 1px solid #CFD3D3;
+}
+
+.fail{
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: #b94a48;
+  background-color: #f2dede;
+  border: 1px solid #CFD3D3;
+}

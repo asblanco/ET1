@@ -15,14 +15,14 @@ Formulario de login. Envia los datos a ProcesarLogin.php
 			<p> Introduzca su usuario y contrase&ntildea</p>
 		</div>
 		<div class="container" align="center">
-			<form action='php/ProcesarLogin.php' method='POST'>
+			<form action='controladores/ctrl_procesar_login.php' method='POST'>
 				<label for="nombre">Usuario</label>
 				<input type="text" name="login" id="login"><br>
 				<label for="apellidos">Contraseña</label>
 				<input type="text" name="pass" id="pass"><br>
 				<input type='submit' name='accion' value='Aceptar'>
 			</form>
-			<a href="php/registro.php">Registrarse</a>
+			<a href="vistas/registro.php">Registrarse</a>
 		</div>
 	</section>		
 </body>

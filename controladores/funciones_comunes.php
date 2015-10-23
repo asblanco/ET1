@@ -15,12 +15,12 @@
 //---------------------------------------------------------------------------------
 function ConectarBD()
 {
-	if (!(mysql_connect('localhost','root','iu')))
+	if (!mysql_connect('localhost', 'admin', 'iu'))
 	{
 		echo 'No es posible conectar al gestor de bd';
 		return 0;
 	}
-	if (!(mysql_select_db('BD_ET1_G5')))
+	if (!(mysql_select_db('DB_ET1_G5')))
 	{
 		echo 'No es posible seleccionar la bd';
 		return 0;

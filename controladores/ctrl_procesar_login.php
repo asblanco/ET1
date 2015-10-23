@@ -16,11 +16,12 @@ $login= $_POST['login'];
 $pass= $_POST['pass'];
 
 //Conectarmos con la bd
+
 echo ConectarBD();
 
-//comprobamos la identidad
 $ExisteLogin = 'SELECT * FROM Usuario WHERE Login = \''. $login . '\'';
 $ResultadoExisteLogin = mysql_query($ExisteLogin) or die('No se puede comprobar si existe login');
+
 
 if (mysql_num_rows($ResultadoExisteLogin)==1)
 {
@@ -28,9 +29,10 @@ if (mysql_num_rows($ResultadoExisteLogin)==1)
 	//sacamos la fila de usuario del recordset
 	$TuplaLogin = mysql_fetch_array($ResultadoExisteLogin);
 	//comprobamos si el atributo PASSWORD coincide con lo introducido por el usuario como password para ese login
-	if ($TuplaLogin['pass'] == $pass)
+	echo $pass;
+	if ($TuplaLogin['Password'] == $pass)
 	{
-		header('Location:menu.php');
+		header('Location:../vistas/menu.php');
 	}
 	else
 	//la pass introducida por el usuario no es correcta para ese login

@@ -1,5 +1,7 @@
 <!--Importar las cabeceras y la barra de navegacion-->
-<?php include('../html/navBar.html'); ?>
+<?php include('../html/navBar.html'); 
+include('../controladores/ctrl_rol.php');
+ ?>
 
 <html lang="en">
     <!-- Contenido Principal -->
@@ -25,7 +27,7 @@
             </div>
             <div class="col-md-3">
                 <h4>Usuarios</h4>
-                <p>Manolo Perez</p>
+                <p><?php print $result ?> a</p>
                 <p>Carlos Francisco</p>
                 <p>Juan</p>
             </div>

@@ -8,26 +8,23 @@
 //========================================================================================
 
 //incluimos las funciones comunes para tener la conexion a la bd
-include 'funciones_comunes.php';
+include '../modelo/connect_DB.php';
 
 //Recogemos las variables que vienen por POST desde el formulario
-
 $login= $_POST['login'];
 $pass= $_POST['pass'];
 
-//Conectarmos con la bd
-
-echo ConectarBD();
+//Conectar con la bd
+$db = new Database();
 
 $ExisteLogin = 'SELECT * FROM Usuario WHERE Login = \''. $login . '\'';
-$ResultadoExisteLogin = mysql_query($ExisteLogin) or die('No se puede comprobar si existe login');
+$ResultadoExisteLogin = $db->consulta($ExisteLogin) or die('No se puede comprobar si existe login');
 
-
-if (mysql_num_rows($ResultadoExisteLogin)==1)
+if (mysqli_num_rows($ResultadoExisteLogin)==1)
 {
 	//si existe el login
 	//sacamos la fila de usuario del recordset
-	$TuplaLogin = mysql_fetch_array($ResultadoExisteLogin);
+	$TuplaLogin = mysqli_fetch_array($ResultadoExisteLogin);
 	//comprobamos si el atributo PASSWORD coincide con lo introducido por el usuario como password para ese login
 	echo $pass;
 	if ($TuplaLogin['Password'] == $pass)

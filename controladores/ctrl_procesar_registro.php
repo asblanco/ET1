@@ -6,11 +6,11 @@
 // Recoge por post los valores de registro de un usuario. Conecta con el gestor de bd y selecciona la bd
 // Comprueba si existe el login. Si no existe lo inserta e informa. Si existe informa y proporciona link a Registro.php
 //=====================================================================================================================
-include 'FuncionesComunes.php';
+include 'funciones_comunes.php';
 
 //Recogemos las variables que vienen por POST desde el formulario
 $login= $_POST['login'];
-$pass= $_POST['pass'];
+$pass= $_POST['password'];
 $nombre= $_POST['nombre'];
 $apellidos= $_POST['apellidos'];
 $email= $_POST['email'];

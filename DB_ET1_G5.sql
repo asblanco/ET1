@@ -41,6 +41,15 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
 ('Crear Usuario', 'Permite crear usuarios de la aplicación.');
 
+INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
+('Consultar Usuario', 'Permite consultar usuarios de la aplicación.');
+
+INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
+('Modificar Usuario', 'Permite modificar usuarios de la aplicación.');
+
+INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
+('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.');
+
 --
 -- Disparadores `Funcionalidad`
 --
@@ -101,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 --
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
-('Administrador', 'Funcionalidades: Todas las funcionalidades de la aplicación.');
+('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.');
 
 -- --------------------------------------------------------
 
@@ -120,6 +129,16 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
 ('Administrador', 'Crear Usuario');
+
+INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
+('Administrador', 'Modificar Usuario');
+
+INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
+('Administrador', 'Consultar Usuario');
+
+INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
+('Administrador', 'Eliminar Usuario');
+
 
 -- --------------------------------------------------------
 

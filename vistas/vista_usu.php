@@ -1,3 +1,11 @@
+<!--
+===========================================================================
+Muestra los usuarios
+Creado por: 
+Fecha: /10/2015
+============================================================================
+-->
+
 <!--Importar las cabeceras y la barra de navegacion-->
 <?php include('../html/navBar.html'); ?>
 

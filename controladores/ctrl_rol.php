@@ -1,12 +1,24 @@
+<!--
+===========================================================================
+Controlador para mostrar los datos de los roles
+Creado por: Andrea Sanchez Blanco
+Fecha: 25/10/2015
+============================================================================
+-->
+
 <?php
-    include '../modelo/connect_DB.php';
-    include "../modelo/model_rol.php";
+    include_once '../modelo/connect_DB.php';
+    include_once "../modelo/model_rol.php";
 
     //Conectar con la bd
     $db = new Database();
 
-    $query= 'SELECT NombreRol FROM Rol WHERE NombreRol = "prueba"';
-    $result = $db->consulta($query) or die('No se puede acceder al nombre');
+    //Conectar con el modelo de Rol
+    $roles = new Rol();
+    
+    //Array asociativo de la tabla roles, tiene NombreRol y DescRol
+    $arrayRoles = $roles->arrayRoles();
 
+    //Desconectar de la base de datos
     $db->desconectar();
 ?>

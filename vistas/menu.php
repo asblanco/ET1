@@ -1,5 +1,13 @@
-<!--Importar las cabeceras y la barra de navegacion-->
-<?php include('../html/navBar.html'); ?>
+<!--
+===========================================================================
+Cabeceras y barra de navegacion
+Creado por: Andrea Sanchez Blanco
+Fecha: 25/10/2015
+============================================================================
+-->
+
+<?php 
+include('../html/navBar.html'); ?>
 
 <html lang="en">
     <!-- Contenido Principal -->

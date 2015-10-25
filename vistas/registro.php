@@ -1,9 +1,8 @@
 <!--
 ===========================================================================
-Fichero: Registro.php V1
-Creado por: jrodeiro
-Fecha: 29/9/2015
 Formulario de registro. Envia la informacion por POST a ProcesarRegistro.php
+Creado por: 
+Fecha: 29/9/2015
 ============================================================================
 -->
 

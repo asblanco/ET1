@@ -1,6 +1,13 @@
+<!--
+===========================================================================
+Muestra los roles
+Creado por: Andrea Sanchez Blanco, Edgar Conde Novoa
+Fecha: 25/10/2015
+============================================================================
+-->
 <!--Importar las cabeceras y la barra de navegacion-->
-<?php include('../html/navBar.html'); 
-include('../controladores/ctrl_rol.php');
+<?php include_once('../html/navBar.html'); 
+include_once('../controladores/ctrl_rol.php');
  ?>
 
 <html lang="en">
@@ -16,47 +23,41 @@ include('../controladores/ctrl_rol.php');
             </div>
         </div>
         <br>
-        <!-- Rol 1 -->
-        <div class="col-md-8 col-md-offset-2 well">
-            <a href="#" data-toggle="modal" data-target="#removeModal"> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
-            <div class="col-md-6">
-                <div class="titulo"> Administrador 
-                   <a href="vista_rol_mod.php"> <div class="edit-icon glyphicon glyphicon-edit"></div></a>
-                </div>
-                <p class="descripcion">El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.</p>
-            </div>
-            <div class="col-md-3">
-                <h4>Usuarios</h4>
-                <p><?php print $result ?> a</p>
-                <p>Carlos Francisco</p>
-                <p>Juan</p>
-            </div>
-            <div class="col-md-2">
-                <h4>Funcionalidades</h4>
-                <p>Hola</p>
-            </div>
-        </div>
         
-        <!-- Rol 2 -->
-        <div class="col-md-8 col-md-offset-2 well">
-            <a href="#" data-toggle="modal" data-target="#removeModal"> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
-            <div class="col-md-6">
-                <div class="titulo">Registrador
-                    <a href="vista_rol_mod.php"> <div class="edit-icon glyphicon glyphicon-edit"></div></a>
+        <!-- Mostrar Roles -->
+        <?php 
+        foreach ($arrayRoles as $rol)  {
+            echo "<div class='col-md-8 col-md-offset-2 well'>
+            <a href='#' data-toggle='modal' data-target='#removeModal'> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <div class='col-md-6'>
+                <div class='titulo'> {$rol['NombreRol']} 
+            <a href='vista_rol_mod.php'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
                 </div>
-                <p class="descripcion">El registrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.</p>
+                <p class='descripcion'> {$rol['DescRol']} </p>
             </div>
-            <div class="col-md-3">
-                <h4>Usuarios</h4>
-                <p>Manolo Perez</p>
-                <p>Carlos Francisco</p>
-                <p>Juan</p>
+            <div class='col-md-3'>
+                <h4>Usuarios</h4>";
+                // array asociativo de los usuarios ligados al rol actual del bucle
+                $arrayUsuarios = $roles->arrayUsu($rol['NombreRol']);
+                foreach ($arrayUsuarios as $usu ){
+                    echo "<p> {$usu['Login']} </p>";
+                }
+                
+            echo "
             </div>
-            <div class="col-md-2">
-                <h4>Funcionalidades</h4>
-                <p>Hola</p>
+            <div class='col-md-2'>
+                <h4>Funcionalidades</h4>";
+                // array asociativo de las funcionalidades ligadas al rol actual del bucle
+                $arrayFuncionalidades = $roles->arrayFunc($rol['NombreRol']);
+                foreach ($arrayFuncionalidades as $func ){
+                    echo "<p> {$func['NombreFun']} </p>";
+                }
+            echo "        
             </div>
-        </div>
+        </div>";
+        }
+        ?>
+        
         
         <!-- Remove Modal Page -->
         <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

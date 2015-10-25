@@ -1,3 +1,11 @@
+<!--
+===========================================================================
+Modifica un rol
+Creado por: Andrea Sanchez Blanco, Edgar Conde Novoa
+Fecha: 25/10/2015
+============================================================================
+-->
+
 <!--Importar las cabeceras y la barra de navegacion-->
 <?php include('../html/navBar.html'); ?>
 

@@ -1,68 +1,92 @@
 <?php
 
+/*Mediante la clase Rol se puede gestionar todo lo relacionado a los Roles en la base de datos
+Para crearlo solo es necesario indicar la base de datos*/
+include_once '../modelo/connect_DB.php';
+
 class Rol {
-    private $_db;
     private $rolName;
     private $descripcion;
+    public $numRoles = 0;
 
-    public function __construct($rolName, $desc=null, $db) {
+    public function __construct($rolName="", $desc="") {
         $this->rolName=$rolName;
         $this->descripcion=$desc;
-        $this->_db = $db;
     }
 
-    public function getDescripcion (){
-        $query = "SELECT DescRol FROM Rol WHERE NombreRol = '$this->rolName'";
-        return $this->_db->consulta($query);
+    public function getDescripcion ($rolName){
+        $db = new Database();
+        
+        $query = 'SELECT DescRol FROM Rol WHERE NombreRol = \'' . $rolName .  '\'';
+        
+        $db->desconectar();
+        return $db->consulta($query);
     }
     
-    public function setRolName ($newRolName) {
-        $sql = "UPDATE Rol SET NombreRol='$newRolName' WHERE NombreRol = $this->rolName";
-
-        if ($_bd->consulta($sql) === TRUE) {
-            echo "Guardado correctamente";
-        } else {
-            echo "Error actualizando el nombre: " . $this->_bd->error;
-        }
-    }
-    
-    public function setDescripcion ($newDescripcion) {
-        $sql = "UPDATE Rol SET DescRol='$newDescripcion' WHERE NombreRol = $this->rolName";
-
-        if ($this->_bd->consulta($sql) === TRUE) {
-            echo "Guardado correctamente";
-        } else {
-            echo "Error actualizando la descripcion: " . $this->_bd->error;
-        }
-    }
-    
-    public function exists () {
+    public function exists ($rolName) {
+        $db = new Database();
+        
         //Comprueba si ya existe ese rol
-        $consultaRol = "SELECT * FROM Rol WHERE NombreRol = '$this->rolName'";
-        $resultado = $this->_db->consulta($consultaRol) or die('Error al ejecutar la consulta de rol');
+        $consultaRol = 'SELECT * FROM Rol WHERE NombreRol = \'' .  $rolName .  '\'';
+        $resultado = $db->consulta($consultaRol) or die('Error al ejecutar la consulta de rol');
         
         // Si el numero de filas es 0 significa que no encontro el rol
         if (mysqli_num_rows($resultado) == 0){
+            $db->desconectar();
             return false;
         } else {
-            echo '<p>El rol ' . $this->rolName . ' ya existe en la bd</p>';
+            echo '<p>El rol ' . $this->rolName . ' ya existe en la db</p>';
+            $db->desconectar();
             return true;
         }
     }
     
-    public function newRol () {
+    //Transformar la tabla Rol en un array asociativo
+    public function arrayRoles() {
+        $db = new Database();
         
-        if (exists() == false) 
-        {
-             // inserta el rol en la bd
-             $InsertaRol = "INSERT INTO Rol (NombreRol, DescRol) VALUES ('$this->rolName','$this->desc')";
-             $insercion = $this->_db->consulta($InsertaRol) or die('Error al ejecutar la insercion de rol');
-             echo 'El rol ' . $this->rolName . ' ha sido registrado en el sistema';
+        $sqlRol = $db->consulta("SELECT NombreRol, DescRol FROM Rol");
+        $arrayRol = array();
+
+        //Numero de roles 
+        $this->numRoles = 0;
+
+        while ($row_rol = mysqli_fetch_assoc($sqlRol)) {
+            $arrayRol[] = $row_rol;
+            $this->numRoles++;
         }
+        $db->desconectar();
+        
+        return $arrayRol;
     }
     
-    public function deleteRol(){
-        $this->_db->consulta('DELETE FROM Rol WHERE NombreRol = ' . $this->rolName);
+        
+    //Transformar la tabla Usu_Rol de un Rol especificado en un array y devolverlo
+    public function arrayUsu ($nameRol){
+        $db = new Database();
+        
+        $sqlUsu = $db->consulta('SELECT Login, NombreRol FROM Usu_Rol WHERE NombreRol = \'' . $nameRol . '\'');
+        $arrayUsu = array();
+        
+        while ($row_usu = mysqli_fetch_assoc($sqlUsu))
+            $arrayUsu[] = $row_usu;
+        
+        $db->desconectar();
+        return $arrayUsu;
+    }
+    
+    //Transformar la tabla Rol_Fun de un Rol especificado en un array y devolverlo
+    public function arrayFunc ($nameRol){
+        $db = new Database();
+        
+        $sqlFunc = $db->consulta('SELECT NombreRol, NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $nameRol . '\'');
+        $arrayFunc = array();
+        
+        while ($row_func = mysqli_fetch_assoc($sqlFunc))
+            $arrayFunc[] = $row_func;
+        
+        $db->desconectar();
+        return $arrayFunc;
     }
 }
 ?>

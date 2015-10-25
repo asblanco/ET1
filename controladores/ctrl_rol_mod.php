@@ -18,25 +18,6 @@ Fecha: 25/10/2015
     //Nuevo nombre del rol de la vista
     $newRolName;
 
-    public function setRolName ($oldRolName, $newRolName) {
-        $sql = 'UPDATE Rol SET NombreRol=' . $newRolName . ' WHERE NombreRol = \'' . $oldRolName .  '\'';
-
-        if ($this->db->consulta($sql) === TRUE) {
-            echo "Guardado correctamente";
-        } else {
-            echo "Error actualizando el nombre: " . $this->db->error;
-        }
-    }
-    
-    public function setDescripcion ($rolName, $newDescripcion) {
-        $sql = 'UPDATE Rol SET DescRol='. $newDescripcion . ' WHERE NombreRol = \'' . $rolName .  '\'' ;
-
-        if ($this->db->consulta($sql) === TRUE) {
-            echo "Guardado correctamente";
-        } else {
-            echo "Error actualizando la descripcion: " . $this->db->error;
-        }
-    }
 
     //Desconectar de la base de datos
     $db->desconectar();

@@ -12,9 +12,6 @@ Fecha: 25/10/2015
 
     $db = new Database();
     
-    function deleteRol($nameRol){
-        $db->consulta('DELETE FROM Rol WHERE NombreRol = ' . $nameRol);
-    }
 
     $db->desconectar();
 ?>

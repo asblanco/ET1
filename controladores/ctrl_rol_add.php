@@ -19,15 +19,7 @@ Fecha: 25/10/2015
 
     //Se debe pasar el nombre, descripcion, usuarios y hacer un bucle para añadir los usuarios y funcionalidades asociadas
         
-    function addRol ($rolName, $rolDesc) {
-        if (exists() == false) 
-        {
-             // inserta el rol en la db
-             $InsertaRol = "INSERT INTO Rol (NombreRol, DescRol) VALUES ('$rolName','$rolDesc')";
-             $insercion = $this->db->consulta($InsertaRol) or die('Error al ejecutar la insercion de rol');
-             echo 'El rol ' . $this->rolName . ' ha sido registrado en el sistema';
-        }
-    }
+    
 
     $db->desconectar();
 ?>

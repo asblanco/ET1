@@ -1,7 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.2.12deb2
--- http://www.phpmyadmin.net
---
 -- Servidor: localhost
 -- Tiempo de generación: 20-10-2015 a las 17:56:33
 -- Versión del servidor: 5.5.44-0+deb8u1
@@ -20,7 +16,12 @@ SET time_zone = "+00:00";
 -- Base de datos: `Gestor de Permisos`
 --
 DROP DATABASE IF EXISTS DB_ET1_G5;
-CREATE DATABASE DB_ET1_G5;
+CREATE DATABASE DB_ET1_G5 default character set utf8 default collate utf8_spanish_ci;
+grant usage on *.* to 'admin'@'localhost';
+drop user 'admin'@'localhost';
+create user 'admin'@'localhost' identified by 'iu';
+grant all on DB_ET1_G5.* to 'admin'@'localhost';
+
 USE DB_ET1_G5;
 
 -- --------------------------------------------------------
@@ -128,16 +129,10 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 --
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Administrador', 'Crear Usuario');
-
-INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Administrador', 'Modificar Usuario');
-
-INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Administrador', 'Consultar Usuario');
-
-INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Administrador', 'Eliminar Usuario');
+('Administrador', 'Crear Usuario'),
+('Administrador', 'Modificar Usuario'),
+('Administrador', 'Consultar Usuario'),
+('Administrador', 'Eliminar Usuario') ;
 
 
 -- --------------------------------------------------------
@@ -268,11 +263,6 @@ ALTER TABLE `Usu_Rol`
 ADD CONSTRAINT `FK_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FK_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'iu';
-
-GRANT USAGE ON * . * TO  'admin'@'localhost' IDENTIFIED BY  'iu';
-
-GRANT ALL PRIVILEGES ON  `DB_ET1_G5` . * TO  'admin'@'localhost';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

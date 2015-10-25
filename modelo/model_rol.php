@@ -1,10 +1,26 @@
-<?php
+<!--
+===========================================================================
+Clase Rol, permite gestionar todo lo relacionado a los Roles en la base de datos
+Creado por: Andrea Sanchez Blanco
+Fecha: 24/10/2015
+============================================================================
+-->
 
-/*Mediante la clase Rol se puede gestionar todo lo relacionado a los Roles en la base de datos
-Para crearlo solo es necesario indicar la base de datos*/
+<?php
 include_once '../modelo/connect_DB.php';
 
-class Rol {
+//Interfaz de la clase Rol => funciones que contiene
+interface iRol {
+    public function getDescripcion ($rolName);
+    public function exists ($rolName);          //Comprueba si existe $rolName
+    public function listarRoles();              //Transforma la tabla Rol en un array asociativo
+    public function arrayUsu ($nameRol);        //Devuelve la tabla Usu_Rol de $nameRol en un array asociativo
+    public function arrayFunc ($nameRol);       //Devuelve la tabla Rol_Fun de $nameRol en un array asociativo
+}
+
+
+//Clase rol con las funciones de iRol implementadas
+class Rol implements iRol{
     private $rolName;
     private $descripcion;
     public $numRoles = 0;
@@ -42,7 +58,7 @@ class Rol {
     }
     
     //Transformar la tabla Rol en un array asociativo
-    public function arrayRoles() {
+    public function listarRoles() {
         $db = new Database();
         
         $sqlRol = $db->consulta("SELECT NombreRol, DescRol FROM Rol");

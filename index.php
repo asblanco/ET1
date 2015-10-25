@@ -1,8 +1,11 @@
 <!--
 ======================================================================
 Formulario de login. Envia los datos a ProcesarLogin.php
+Creado por: 
+Fecha: /10/2015
 ======================================================================
 -->
+
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 

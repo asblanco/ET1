@@ -17,7 +17,7 @@ Fecha: 25/10/2015
     $roles = new Rol();
     
     //Array asociativo de la tabla roles, tiene NombreRol y DescRol
-    $arrayRoles = $roles->arrayRoles();
+    $arrayRoles = $roles->listarRoles();
 
     //Desconectar de la base de datos
     $db->desconectar();

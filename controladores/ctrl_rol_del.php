@@ -7,7 +7,6 @@ Fecha: 25/10/2015
 -->
 
 <?php
-    include_once '../modelo/connect_DB.php';
     include_once "../modelo/model_rol.php";
 
     $db = new Database();

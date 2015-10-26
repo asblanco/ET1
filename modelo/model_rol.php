@@ -85,7 +85,27 @@ class Rol implements iModel {
         if ($oldDesc != $newDesc){
             $sql = 'UPDATE Rol SET DescRol='. $newDesc . ' WHERE NombreRol = \'' . $oldName .  '\'' ;
 
+            $db->consulta($sql) or die('Error al modificar la descripcion');;
+        }
+        
+    //Añadir nuevos usuarios asociados al rol
+        //Crear un array asociativo con los usuarios sin modificar
+        $sqlOldUsu = $db->consulta('SELECT Login FROM Usu_Rol WHERE NombreRol = \'' . $pk .  '\'');
+        $arrayOldUsu = array();
+        while ($row_usu = mysqli_fetch_assoc($sqlOldUsu))
+            $arrayOldUsu[] = $row_usu;
+        
+        //Crear el array asociativo con los nuevos usuarios
+        $arrayNewUsu = $objeto->usuarios;
+        
+        //Comparar si hay nuevos usuarios recorriendo $newUsuarios
+        foreach ($arrayNewUsu as $new){
+            $resultado = $db->consulta('SELECT Login FROM Usu_Rol WHERE Login = \'' . $new['Login'] .  '\'');
+            //Si las filas es igual a 0, no existe, por lo tanto es nuevo
             
+            if( mysqli_num_rows($resultado) == 0 ){
+                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$new['Login'].','.$objeto->rolName.')');
+            }
         }
         
         $existeNombre = exists($newName);
@@ -94,15 +114,45 @@ class Rol implements iModel {
             if ($oldName != $newName){
                 $sql = 'UPDATE Rol SET NombreRol=' . $newName . ' WHERE NombreRol = \'' . $oldName .  '\'';
 
+                $result = $db->consulta($sql);
             }
         }
+        
+        if ($result === TRUE)
+            return true;
+        else return false;
         
         $db->desconectar();
     }
     
+    //Crea el objeto pasado en la tabla de la base de datos, si devuelve fue bien devuelve true
     public function crear($objeto){
         $db = new Database();
+        if (exists($objeto->rolName) == false) 
         {
+             //Inserta el rol en la tabla Rol
+            $insertaRol = "INSERT INTO Rol (NombreRol, DescRol) VALUES ('$objeto->rolName','$objeto->descripcion')";
+            $db->consulta($InsertaRol) or die('Error al crear el rol');
+            
+            //Comprueba si esta relacionado con algun usuario
+            if($objeto->usuarios != array()){
+                foreach ($objeto->$arrayA as $usu){
+                    $newUsu = $usu['Login'];
+                    $queryUsu = 'INSERT INTO Usu_Rol (NombreRol, Login) VALUES ('.$objeto->rolName.','.$newUsu.')';
+                    $db->consulta($queryUsu) or die('Error al insertar los usuarios');
+                }
+            }
+            
+            //Comprueba si esta relacionado con alguna funcionalidad
+            if($objeto->$arrayB != array()){
+                foreach ($objeto->$arrayB as $func){
+                    $newFunc = $func['NombreFun'];
+                    $queryFunc = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$newFunc.')';
+                    $db->consulta($queryFunc) or die('Error al insertar las funcionalidades');
+                }
+            }     
+        } else return false;
+        
         $db->desconectar();
     }
     
@@ -141,3 +191,4 @@ class Rol implements iModel {
         return $arrayFunc;
     }
 }
+?>

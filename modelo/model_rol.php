@@ -111,12 +111,12 @@ class Rol implements iModel {
         //Comparar si hay usuarios a eliminar recorriendo $arrayOldUsu
         foreach ($arrayOldUsu as $old){
             //Comprobar si el usuario está en $arrayNewUsu
-            int cont=0;
+            $cont=0;
             foreach($arrayNewUsu as $new){
-                if($new['Login'] == $old['Login']) cont++;
+                if($new['Login'] == $old['Login']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
-            if( cont == 0 ){
+            if( $cont == 0 ){
                 $db->consulta('DELETE FROM Usu_Rol (Login, NombreRol) WHERE Login = \'' . $old['Login'] . '\'');
             }
         }
@@ -144,12 +144,12 @@ class Rol implements iModel {
         //Comparar si hay funcionalidades a eliminar recorriendo $arrayOldFunc
         foreach ($arrayOldFunc as $old){
             //Comprobar si la funcionalidad está en $arrayNewFunc
-            int cont=0;
+            $cont=0;
             foreach($arrayNewFunc as $new){
-                if($new['NombreFun'] == $old['NombreFun']) cont++;
+                if($new['NombreFun'] == $old['NombreFun']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarla
-            if( cont == 0 ){
+            if( $cont == 0 ){
                 $db->consulta('DELETE FROM Rol_Fun (NombreRol, NombreFun) WHERE NombreFun = \'' . $old['NombreFun'] . '\'');
             }
         }

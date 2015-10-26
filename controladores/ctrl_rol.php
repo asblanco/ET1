@@ -7,7 +7,6 @@ Fecha: 25/10/2015
 -->
 
 <?php
-    include_once '../modelo/connect_DB.php';
     include_once "../modelo/model_rol.php";
 
     //Conectar con la bd
@@ -17,7 +16,7 @@ Fecha: 25/10/2015
     $roles = new Rol();
     
     //Array asociativo de la tabla roles, tiene NombreRol y DescRol
-    $arrayRoles = $roles->listarRoles();
+    $arrayRoles = $roles->listar();
 
     //Desconectar de la base de datos
     $db->desconectar();

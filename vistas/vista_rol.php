@@ -38,7 +38,7 @@ include_once('../controladores/ctrl_rol.php');
             <div class='col-md-3'>
                 <h4>Usuarios</h4>";
                 // array asociativo de los usuarios ligados al rol actual del bucle
-                $arrayUsuarios = $roles->arrayUsu($rol['NombreRol']);
+                $arrayUsuarios = $roles->arrayA($rol['NombreRol']);
                 foreach ($arrayUsuarios as $usu ){
                     echo "<p> {$usu['Login']} </p>";
                 }
@@ -48,7 +48,7 @@ include_once('../controladores/ctrl_rol.php');
             <div class='col-md-2'>
                 <h4>Funcionalidades</h4>";
                 // array asociativo de las funcionalidades ligadas al rol actual del bucle
-                $arrayFuncionalidades = $roles->arrayFunc($rol['NombreRol']);
+                $arrayFuncionalidades = $roles->arrayB($rol['NombreRol']);
                 foreach ($arrayFuncionalidades as $func ){
                     echo "<p> {$func['NombreFun']} </p>";
                 }

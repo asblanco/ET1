@@ -11,10 +11,10 @@ Fecha: 25/10/2015
     
     $db = new Database();
 
-    $rolName; //traer de la vista
+    $rolName ; //traer de la vista
     $rolDesc;
 
-    $rol = new Rol();
+    $rol = new Rol($rolName);
 
     //Se debe pasar el nombre, descripcion, usuarios y hacer un bucle para añadir los usuarios y funcionalidades asociadas
         

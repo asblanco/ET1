@@ -8,7 +8,6 @@ Fecha: 26/10/2015
 
 <?php
 include_once 'interface.php';
-
 //Clase rol con las funciones de iRol implementadas
 class Rol implements iModel {
     private $rolName;
@@ -16,7 +15,6 @@ class Rol implements iModel {
     private $usuarios = array();
     private $funcionalidades = array();
     public $numRoles = 0;
-
     public function __construct($rolName="", $desc="", $usu=array(), $func=array()) {
         $this->rolName=$rolName;
         $this->descripcion=$desc;
@@ -37,7 +35,6 @@ class Rol implements iModel {
             $db->desconectar();
             return false;
         } else {
-            echo '<p>El rol ' . $pk . ' ya existe en la db</p>';
             $db->desconectar();
             return true;
         }
@@ -49,10 +46,8 @@ class Rol implements iModel {
         
         $sqlRol = $db->consulta("SELECT NombreRol, DescRol FROM Rol");
         $arrayRol = array();
-
         //Numero de roles 
         $this->numRoles = 0;
-
         while ($row_rol = mysqli_fetch_assoc($sqlRol)) {
             $arrayRol[] = $row_rol;
             $this->numRoles++;
@@ -90,11 +85,6 @@ class Rol implements iModel {
         if ($oldDesc != $newDesc){
             $sql = 'UPDATE Rol SET DescRol='. $newDesc . ' WHERE NombreRol = \'' . $oldName .  '\'' ;
 
-            if ($db->consulta($sql) === TRUE) {
-                echo "Guardado correctamente";
-            } else {
-                echo "Error actualizando la descripcion: " . $this->db->error;
-            }
             
         }
         
@@ -104,28 +94,15 @@ class Rol implements iModel {
             if ($oldName != $newName){
                 $sql = 'UPDATE Rol SET NombreRol=' . $newName . ' WHERE NombreRol = \'' . $oldName .  '\'';
 
-                if ($db->consulta($sql) === TRUE) {
-                    echo "Guardado correctamente";
-                } else {
-                    echo "Error actualizando el nombre: " . $db->error;
-                }
             }
         }
         
         $db->desconectar();
     }
     
-    //Crea el objeto pasado en la tabla de la base de datos
     public function crear($objeto){
         $db = new Database();
-        if (exists() == false) 
         {
-             //Inserta el rol en la db
-             $InsertaRol = "INSERT INTO Rol (NombreRol, DescRol) VALUES ('$objeto->rolName','$objeto->descripcion')";
-             $insercion = $db->consulta($InsertaRol) or die('Error al ejecutar la insercion de rol');
-             echo 'El rol ' . $objeto->rolName . ' ha sido registrado en el sistema';
-            //Falta insertar los usuarios y funcionalidades en sus tablas
-        }
         $db->desconectar();
     }
     
@@ -164,4 +141,3 @@ class Rol implements iModel {
         return $arrayFunc;
     }
 }
-?>

@@ -80,21 +80,6 @@ CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
  FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
 //
 DELIMITER ;
-DELIMITER //
-CREATE TRIGGER `before_insert_pagina` BEFORE INSERT ON `Pagina`
- FOR EACH ROW BEGIN
-DECLARE
-num INT;
-SELECT COUNT(*) INTO num
-FROM Funcionalidad
-WHERE NombreFun=NEW.NombreFun;
-IF (num=0) THEN
-INSERT INTO Funcionalidad (NombreFun, DescFun) VALUES (NEW.NombreFun, NULL);
-END IF;
-END
-//
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --

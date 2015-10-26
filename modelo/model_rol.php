@@ -75,7 +75,7 @@ class Rol implements iModel {
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
-        //Guardar los datos de $pk en la clase actual
+        //Guardar los datos de $pk
         $datos = consultar($pk);
         $oldName = $datos['rolName'];
         $newName = $objeto->rolName;
@@ -85,10 +85,10 @@ class Rol implements iModel {
         if ($oldDesc != $newDesc){
             $sql = 'UPDATE Rol SET DescRol='. $newDesc . ' WHERE NombreRol = \'' . $oldName .  '\'' ;
 
-            $db->consulta($sql) or die('Error al modificar la descripcion');;
+            $db->consulta($sql) or die('Error al modificar la descripcion');
         }
         
-    //Añadir nuevos usuarios asociados al rol
+    //Actualizar usuarios asociados al rol
         //Crear un array asociativo con los usuarios sin modificar
         $sqlOldUsu = $db->consulta('SELECT Login FROM Usu_Rol WHERE NombreRol = \'' . $pk .  '\'');
         $arrayOldUsu = array();
@@ -102,7 +102,6 @@ class Rol implements iModel {
         foreach ($arrayNewUsu as $new){
             $resultado = $db->consulta('SELECT Login FROM Usu_Rol WHERE Login = \'' . $new['Login'] .  '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nuevo
-            
             if( mysqli_num_rows($resultado) == 0 ){
                 $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$new['Login'].','.$objeto->rolName.')');
             }
@@ -121,7 +120,7 @@ class Rol implements iModel {
             }
         }
         
-        //Añadir nuevas funcionalidades asociadas al rol
+    //Actualizar funcionalidades asociadas al rol
         //Crear un array asociativo con las funcionalidades sin modificar
         $sqlOldFunc = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $pk .  '\'');
         $arrayOldFunc = array();

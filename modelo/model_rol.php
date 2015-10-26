@@ -121,6 +121,40 @@ class Rol implements iModel {
             }
         }
         
+        //Añadir nuevas funcionalidades asociadas al rol
+        //Crear un array asociativo con las funcionalidades sin modificar
+        $sqlOldFunc = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $pk .  '\'');
+        $arrayOldFunc = array();
+        while ($row_func = mysqli_fetch_assoc($sqlOldFunc))
+            $arrayOldFunc[] = $row_Func;
+        
+        //Crear el array asociativo con las nuevas funcionalidades
+        $arrayNewFunc = $objeto->funcionalidades;
+        
+        //Comparar si hay nuevas funcionalidades recorriendo $arrayNewFunc
+        foreach ($arrayNewFunc as $new){
+            $resultado = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $new['NombreFun'] .  '\'');
+            //Si las filas es igual a 0, no existe, por lo tanto es nueva
+            
+            if( mysqli_num_rows($resultado) == 0 ){
+                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$new['NombreFun'].','.$objeto->funcName.')');
+            }
+        }
+        
+        //Comparar si hay funcionalidades a eliminar recorriendo $arrayOldFunc
+        foreach ($arrayOldFunc as $old){
+            //Comprobar si la funcionalidad está en $arrayNewFunc
+            int cont=0;
+            foreach($arrayNewFunc as $new){
+                if($new['NombreFun'] == $old['NombreFun']) cont++;
+            }
+            //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarla
+            if( cont == 0 ){
+                $db->consulta('DELETE FROM Rol_Fun (NombreRol, NombreFun) WHERE NombreFun = \'' . $old['NombreFun'] . '\'');
+            }
+        }
+        
+        
         $existeNombre = exists($newName);
         if($newName != "" && $existeNombre == false){
             //Comparar los datos con $objeto y modificar los que sean necesarios

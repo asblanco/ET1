@@ -108,6 +108,19 @@ class Rol implements iModel {
             }
         }
         
+        //Comparar si hay usuarios a eliminar recorriendo $arrayOldUsu
+        foreach ($arrayOldUsu as $old){
+            //Comprobar si el usuario está en $arrayNewUsu
+            int cont=0;
+            foreach($arrayNewUsu as $new){
+                if($new['Login'] == $old['Login']) cont++;
+            }
+            //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
+            if( cont == 0 ){
+                $db->consulta('DELETE FROM Usu_Rol (Login, NombreRol) WHERE Login = \'' . $old['Login'] . '\'');
+            }
+        }
+        
         $existeNombre = exists($newName);
         if($newName != "" && $existeNombre == false){
             //Comparar los datos con $objeto y modificar los que sean necesarios

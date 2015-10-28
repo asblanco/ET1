@@ -41,12 +41,10 @@ class Funcionalidad implements iModel {
         
         $sqlFun = $db->consulta("SELECT NombreFun, DescFun FROM Funcionalidad");
         $arrayFun = array();
-
         //Numero de funcionalidades 
         $this->numFun = 0;
-
         while ($row_fun = mysqli_fetch_assoc($sqlFun)) {
-            $arrayFun[] = $row_Fun;
+            $arrayFun[] = $row_fun;
             $this->numFun++;
         }
         
@@ -86,8 +84,7 @@ class Funcionalidad implements iModel {
                 echo "Guardado correctamente";
             } else {
                 echo "Error actualizando la descripcion: " . $this->db->error;
-            }
-            
+            }  
         }
 
         //Actualizar páginas con esa funcionalidad
@@ -192,7 +189,7 @@ class Funcionalidad implements iModel {
             //Comprueba si esta relacionada con alguna página
             if($objeto->$arrayB != array()){
                 foreach ($objeto->$arrayB as $newPag){
-                    $queryPag = 'INSERT INTO Pagina (NombreFun) VALUES ('.$objeto->funName.') WHERE Url='.$newPag['Url'] ')';
+                    $queryPag = 'INSERT INTO Pagina (NombreFun) VALUES ('.$objeto->funName.') WHERE Url='.$newPag['Url'] ;
                     $db->consulta($queryPag) or die('Error al insertar las funcionalidades');
                 }
             }     
@@ -214,11 +211,11 @@ class Funcionalidad implements iModel {
     public function arrayA ($pk){
         $db = new Database();
         
-        $sqlRol = $db->consulta('SELECT Rol, NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $pk . '\'');
+        $sqlRol = $db->consulta('SELECT NombreRol, NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $pk . '\'');
         $arrayRol = array();
         
-        while ($row_Rol = mysqli_fetch_assoc($sqlRol))
-            $arrayRol[] = $row_Rol;
+        while ($row_rol = mysqli_fetch_assoc($sqlRol))
+            $arrayRol[] = $row_rol;
         
         $db->desconectar();
         return $arrayRol;

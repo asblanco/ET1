@@ -9,7 +9,6 @@
 
 //incluimos las funciones comunes para tener la conexion a la bd
 include '../modelo/connect_DB.php';
-
 //Recogemos las variables que vienen por POST desde el formulario
 $login= $_POST['login'];
 $pass= $_POST['pass'];
@@ -26,7 +25,7 @@ if (mysqli_num_rows($ResultadoExisteLogin)==1)
 	//sacamos la fila de usuario del recordset
 	$TuplaLogin = mysqli_fetch_array($ResultadoExisteLogin);
 	//comprobamos si el atributo PASSWORD coincide con lo introducido por el usuario como password para ese login
-	echo $pass;
+	//echo $pass;
 	if ($TuplaLogin['Password'] == $pass)
 	{
 		header('Location:../vistas/menu.php');

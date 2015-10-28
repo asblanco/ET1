@@ -21,9 +21,9 @@ Fecha: /10/2015
 			<form id="login" action='controladores/ctrl_procesar_login.php' method='POST'>
 				<label for="nombre">Usuario</label>
 				<input id="login" type="text" name="login" id="login"><br>
-				<label for="apellidos">Contraseña</label>
+				<label for="contraseña">Contraseña</label>
 				<input id="password" type="password" name="pass" id="pass"><br>
-				<input type='submit' name='accion' value='Aceptar'>
+				<input type='submit' onclick="cifrar()" name='accion' value='Aceptar'>
 			</form>
 			<div id="alerta-wrapper">
 				<div id="alerta"></div>
@@ -35,4 +35,11 @@ Fecha: /10/2015
 
 <script src="js/jquery.min.js"></script>
 <script src="js/login.js"></script>
+<script src="../js/md5.js" type="text/javascript"></script> 
+<script>
+		function cifrar(){
+			var input_pass = document.getElementById("password");
+			input_pass.value = hex_md5(input_pass.value);
+		}
+	</script>
 <html>	

@@ -8,6 +8,7 @@ $(function() {
     // Detenemos la introducción normal del formulario
         event.preventDefault();
     //Cogemos los datos del formulario
+        
         var formData = $(form).serialize();
     // Introducimos el formulario usando AJAX
         $.ajax({
@@ -26,6 +27,9 @@ $(function() {
             $('#nombre').val('').removeClass('valid');
             $('#apellidos').val('').removeClass('valid');
             $('#email').val('').removeClass('valid');
+            setTimeout(function() {
+             location.href = "../index.php";
+            },3000);
         }).fail(function(data){ // Si falla...
     // Nos aseguramos que el div del mensaje tiene la clase fail
             $(formAlert).removeClass('success');
@@ -76,7 +80,7 @@ $(document).ready(function() {
         var input=$(this);
         var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]{2,}$/;
         var is_email=re.test(input.val());
-        if(is_email || !$(this).val()){input.removeClass("invalid").removeClass("error").addClass("valid");}
+        if(is_email){input.removeClass("invalid").removeClass("error").addClass("valid");}
         else{input.removeClass("valid").addClass("invalid");}
     });
 

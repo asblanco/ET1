@@ -18,15 +18,21 @@ Fecha: /10/2015
 			<p> Introduzca su usuario y contrase&ntildea</p>
 		</div>
 		<div class="container" align="center">
-			<form action='controladores/ctrl_procesar_login.php' method='POST'>
+			<form id="login" action='controladores/ctrl_procesar_login.php' method='POST'>
 				<label for="nombre">Usuario</label>
-				<input type="text" name="login" id="login"><br>
+				<input id="login" type="text" name="login" id="login"><br>
 				<label for="apellidos">Contraseña</label>
-				<input type="text" name="pass" id="pass"><br>
+				<input id="password" type="password" name="pass" id="pass"><br>
 				<input type='submit' name='accion' value='Aceptar'>
 			</form>
+			<div id="alerta-wrapper">
+				<div id="alerta"></div>
+			</div>
 			<a href="vistas/registro.php">Registrarse</a>
 		</div>
 	</section>		
 </body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/login.js"></script>
 <html>	

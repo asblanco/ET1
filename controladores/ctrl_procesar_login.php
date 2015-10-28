@@ -35,14 +35,14 @@ if (mysqli_num_rows($ResultadoExisteLogin)==1)
 	//la pass introducida por el usuario no es correcta para ese login
 	{
 		echo 'Error al introducir la password para ese login';
-		echo "<a href='../index.php'>Volver al login</a>";
+
 	}	
 }
 //si es incorrecta
 else
 {
 	echo 'Error, no existe ese login';
-	echo "<a href='../index.php'>Volver al login</a>";
+
 }
 
 ?>

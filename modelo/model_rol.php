@@ -182,19 +182,17 @@ class Rol implements iModel {
             
             //Comprueba si esta relacionado con algun usuario
             if($objeto->usuarios != array()){
-                foreach ($objeto->$arrayA as $usu){
-                    $newUsu = $usu['Login'];
-                    $queryUsu = 'INSERT INTO Usu_Rol (NombreRol, Login) VALUES ('.$objeto->rolName.','.$newUsu.')';
+                foreach ($objeto->$arrayA as $newUsu){
+                    $queryUsu = 'INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$newUsu['Login'].','.$objeto->rolName.')';
                     $db->consulta($queryUsu) or die('Error al insertar los usuarios');
                 }
             }
             
             //Comprueba si esta relacionado con alguna funcionalidad
             if($objeto->$arrayB != array()){
-                foreach ($objeto->$arrayB as $func){
-                    $newFunc = $func['NombreFun'];
-                    $queryFunc = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$newFunc.')';
-                    $db->consulta($queryFunc) or die('Error al insertar las funcionalidades');
+                foreach ($objeto->$arrayB as $newFun){
+                    $queryFun = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$newFun['NombreFun'].')';
+                    $db->consulta($queryFun) or die('Error al insertar las funcionalidades');
                 }
             }     
         } else return false;

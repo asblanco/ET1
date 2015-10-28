@@ -177,13 +177,30 @@ class Funcionalidad implements iModel {
         $db = new Database();
         if (exists() == false) 
         {
-             //Inserta la funcionalidad en la db
-             $InsertaFun = "INSERT INTO Funcionalidad (NombreFun, DescFun) VALUES ('$objeto->funName','$objeto->descripcion')";
-             $insercion = $db->consulta($InsertaFun) or die('Error al ejecutar la insercion de funcionalidad');
-             echo 'La funcionalidad ' . $objeto->funName . ' ha sido registrado en el sistema';
+            //Inserta la funcionalidad en la db
+            $InsertaFun = "INSERT INTO Funcionalidad (NombreFun, DescFun) VALUES ('$objeto->funName','$objeto->descripcion')";
+            $db->consulta($InsertaFun) or die('Error al crear la funcionalidad');
             
-        }
+            //Comprueba si esta relacionada con algun rol
+            if($objeto->roles != array()){
+                foreach ($objeto->$arrayA as $newRol){
+                    $queryRol = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$newRol['NombreRol'].','.$objeto->funName.')';
+                    $db->consulta($queryRol) or die('Error al insertar los roles');
+                }
+            }
+            
+            //Comprueba si esta relacionada con alguna página
+            if($objeto->$arrayB != array()){
+                foreach ($objeto->$arrayB as $newPag){
+                    $queryPag = 'INSERT INTO Pagina (NombreFun) VALUES ('.$objeto->funName.') WHERE Url='.$newPag['Url'] ')';
+                    $db->consulta($queryPag) or die('Error al insertar las funcionalidades');
+                }
+            }     
+            
+        } else return false;
+        
         $db->desconectar();
+        
     }
     
     //Elimina de la base de datos segun la primary key pasada

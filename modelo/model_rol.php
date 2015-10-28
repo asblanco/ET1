@@ -116,7 +116,7 @@ class Rol implements iModel {
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
             if( $cont == 0 ){
-                $db->consulta('DELETE FROM Usu_Rol (Login, NombreRol) WHERE Login = \'' . $old['Login'] . '\'');
+                $db->consulta('DELETE FROM Usu_Rol WHERE Login = \'' . $old['Login'] . '\'');
             }
         }
         
@@ -136,7 +136,7 @@ class Rol implements iModel {
             //Si las filas es igual a 0, no existe, por lo tanto es nueva
             
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$new['NombreFun'].','.$objeto->funcName.')');
+                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$new['NombreFun'].')');
             }
         }
         
@@ -149,7 +149,7 @@ class Rol implements iModel {
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarla
             if( $cont == 0 ){
-                $db->consulta('DELETE FROM Rol_Fun (NombreRol, NombreFun) WHERE NombreFun = \'' . $old['NombreFun'] . '\'');
+                $db->consulta('DELETE FROM Rol_Fun WHERE NombreFun = \'' . $old['NombreFun'] . '\'');
             }
         }
         

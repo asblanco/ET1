@@ -40,15 +40,9 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 --
 
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
-('Crear Usuario', 'Permite crear usuarios de la aplicación.');
-
-INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
-('Consultar Usuario', 'Permite consultar usuarios de la aplicación.');
-
-INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
-('Modificar Usuario', 'Permite modificar usuarios de la aplicación.');
-
-INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
+('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
+('Consultar Usuario', 'Permite consultar usuarios de la aplicación.'),
+('Modificar Usuario', 'Permite modificar usuarios de la aplicación.'),
 ('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.');
 
 --

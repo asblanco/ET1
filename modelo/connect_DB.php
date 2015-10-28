@@ -1,12 +1,13 @@
-<!--
-===========================================================================
+<?php
+
+/*===========================================================================
 Clase de la base de datos, establece la conexion con la base de datos DB_ET1_G5 usando MySQL improved (mysqli)
 Creado por: Andrea Sanchez Blanco
 Fecha: 24/10/2015
 ============================================================================
--->
+*/
 
-<?php
+
 class Database {
     var $conexion;
     

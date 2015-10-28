@@ -26,7 +26,7 @@ Fecha: 29/9/2015
                     <input id="apellidos" type='text' name='apellidos'><BR>
                     <label for="email">Email</label>
                     <input id="email" type='text' name='email'><BR>
-                    <input id="submit" type='submit' name='accion' value='validar'>
+                    <input id="submit" type='submit' onclick="cifrar()" name='accion' value='validar'>
                 </form>
                     
                 <div id="alerta-wrapper">
@@ -38,4 +38,11 @@ Fecha: 29/9/2015
                     
     <script src="../js/jquery.min.js"></script>
     <script src="../js/formulario.js"></script>
+    <script src="../js/md5.js" type="text/javascript"></script> 
+<script>
+        function cifrar(){
+            var input_pass = document.getElementById("password");
+            input_pass.value = hex_md5(input_pass.value);
+        }
+    </script>
 </html>

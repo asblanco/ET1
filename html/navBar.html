@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if(!$_SESSION["idioma_usuario"]){
+include_once "../modelo/es.php";
+  
+}else{
+  include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
+}
+
+?>
+
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,14 +42,16 @@
         <!-- Navegacion -->
         <div class="collapse navbar-collapse" id="navBar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="../vistas/vista_usu.php">Usuarios</a></li>
-            <li><a href="../vistas/vista_rol.php">Roles</a></li> 
-            <li><a href="../vistas/vista_func.php">Funcionalidades</a></li> 
-            <li><a href="../vistas/vista_pag.php">Paginas</a></li>  
+            <li><a href="../vistas/vista_usu.php"><?php echo $idioma["navbar_usuarios"]; ?></a></li>
+            <li><a href="../vistas/vista_rol.php"><?php echo $idioma["navbar_roles"]; ?></a></li> 
+            <li><a href="../vistas/vista_func.php"><?php echo $idioma["navbar_funcionalidades"]; ?></a></li> 
+            <li><a href="../vistas/vista_pag.php"><?php echo $idioma["navbar_paginas"]; ?></a></li>  
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../index.php">
+           <li><a href="../controladores/ctrl_cambio_idioma_espanol.php">ESP</a></li>  
+           <li><a href="../controladores/ctrl_cambio_idioma_ingles.php">ING</a></li>  
+            <li><a href="../controladores/ctrl_log_out.php">
                 <div class="glyphicon glyphicon-log-out"></div>
                 Cerrar Sesi&#243;n</a></li>  
           </ul>

@@ -8,6 +8,33 @@ Fecha: 23/10/2015
 -->
 
 <!--Importar las cabeceras y la barra de navegacion-->
+
+
+<?php
+session_start();
+
+
+if(!$_SESSION["idioma_usuario"]){
+include_once "../modelo/es.php";
+    
+}else{
+    include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
+}
+
+
+?>
+
+
+<?php
+
+if(!$_SESSION){
+session_start();
+header('Location:../vistas/login.php');
+
+}
+
+?>
+
 <?php include('../html/navBar.html'); ?>
 <html lang="en">
     <div id="includedContent"></div>
@@ -16,15 +43,15 @@ Fecha: 23/10/2015
     <body>
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-              <div class="panel-heading">Usuario</div>
+              <div class="panel-heading"><?php echo $idioma["modificar_usuario_usuario"]; ?></div>
               <div class="panel-body">
-                <p>Nombre del usuario:  <input type="text" name="nombreRol" value="Administrador"></p>
-                <p>Descripcion: <input type="text" name="descRol" value="El Administrador es Dios."></p>
+                <p><?php echo $idioma["modificar_usuario_nombre"]; ?>  <input type="text" name="nombreRol" value="Administrador"></p>
+                <p><?php echo $idioma["modificar_usuario_descripcion"]; ?> <input type="text" name="descRol" value="El Administrador es Dios."></p>
               </div>
             </div>
             
             <div class="panel panel-default">
-              <div class="panel-heading">Roles
+              <div class="panel-heading"><?php echo $idioma["modificar_usuario_usuarios"]; ?>
                     <div class="pull-right">
                     <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
                   </div>
@@ -47,7 +74,7 @@ Fecha: 23/10/2015
             </div>
             
             <div class="panel panel-default">
-              <div class="panel-heading">Paginas
+              <div class="panel-heading"><?php echo $idioma["modificar_usuario_paginas"]; ?>
                   <div class="pull-right">
                     <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
                   </div>
@@ -70,7 +97,7 @@ Fecha: 23/10/2015
             </div> 
 			
 			  <div class="panel panel-default">
-              <div class="panel-heading">Permisos
+              <div class="panel-heading"><?php echo $idioma["modificar_usuario_permisos"]; ?>
                   <div class="pull-right">
                     <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
                   </div>
@@ -96,7 +123,7 @@ Fecha: 23/10/2015
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
                     <a href="roles.html" class="btn btn-info btn-lg">
-                        Guardar Usuario
+                        <?php echo $idioma["modificar_usuario_guardar"]; ?>
                         <div class="glyphicon glyphicon-save"></div>
                     </a>
                 </div>

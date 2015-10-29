@@ -7,23 +7,50 @@ Fecha: /10/2015
 -->
 
 <!--Importar las cabeceras y la barra de navegacion-->
+
+
+<?php
+session_start();
+
+
+if(!$_SESSION["idioma_usuario"]){
+include_once "../modelo/es.php";
+    
+}else{
+    include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
+}
+
+
+?>
+
+
+<?php
+
+if(!$_SESSION){
+session_start();
+header('Location:../vistas/login.php');
+
+}
+
+?>
+
 <?php include('../html/navBar.html'); ?>
 
 <html lang="en">
     <!-- Contenido Principal -->
-    <body>
+        <body>
         <div class="col-md-8 col-md-offset-2"> <!-- centra el contenido -->
             <!-- Nombre y descripcion -->
             <div class="panel panel-default">
-              <div class="panel-heading">Funcionalidad</div>
+              <div class="panel-heading"><?php echo $idioma["anadir_func_funcionalidad"]; ?></div>
               <div class="panel-body">
                 <div class="form-group">
-                    <label for="funcionalidad">Nombre de la funcionalidad:</label>
+                    <label for="funcionalidad"><?php echo $idioma["anadir_func_nombre"]; ?></label>
                     <input type="text" class="form-control" id="funcionalidad">
                 </div>
                   
                 <div class="form-group">
-                    <label for="comment">Descripci&oacuten:</label>
+                    <label for="comment"><?php echo $idioma["anadir_func_descripcion"]; ?></label>
                     <textarea class="form-control" rows="5" id="comment"></textarea>
                 </div>
               </div>
@@ -33,7 +60,7 @@ Fecha: /10/2015
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
                     <a href="vista_func.php" class="btn btn-info btn-lg">
-                        Crear
+                        <?php echo $idioma["anadir_func_crear"]; ?>
                         <div class="glyphicon glyphicon-ok"></div>
                     </a>
                 </div>

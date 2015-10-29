@@ -28,6 +28,16 @@ if (mysqli_num_rows($ResultadoExisteLogin)==1)
 	//echo $pass;
 	if ($TuplaLogin['Password'] == $pass)
 	{
+		session_start();
+		$_SESSION["login_usuario"] = $login;
+
+		$consultaIdioma = 'SELECT idioma FROM Usuario WHERE Login = "'.$login.'"';
+		$resultado = $db->consulta($consultaIdioma);
+		$tuplaIdioma = mysqli_fetch_array($resultado);
+
+
+		$_SESSION["idioma_usuario"] = $tuplaIdioma["idioma"];
+
 		header('Location:../vistas/menu.php');
 	}
 	else

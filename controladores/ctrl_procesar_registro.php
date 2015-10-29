@@ -34,7 +34,9 @@
     if (mysqli_num_rows($resultado) == 0) 
     {
          // insertamos el usuario en la bd
-         $InsertaUsuario = "INSERT INTO Usuario (Login, Password, Nombre, Apellidos, Email) VALUES ('$login','$pass','$nombre','$apellidos','$email')";
+        $mysqldate = date( 'Y-m-d H:i:s');
+
+         $InsertaUsuario = "INSERT INTO Usuario (Login, Password, Nombre, Apellidos, Email, FechaAlta) VALUES ('$login','$pass','$nombre','$apellidos','$email','$mysqldate')";
          $insercion = $db->consulta($InsertaUsuario) or die('error al ejecutar la insercion de usuario');
          echo 'El Login ' . $login . ' ha sido registrado en el sistema';
          header( "url=../index.php" ); 

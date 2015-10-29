@@ -6,6 +6,32 @@ Fecha: 25/10/2015
 ============================================================================
 -->
 <!--Importar las cabeceras y la barra de navegacion-->
+
+<?php
+session_start();
+
+
+if(!$_SESSION["idioma_usuario"]){
+include_once "../modelo/es.php";
+    
+}else{
+    include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
+}
+
+
+?>
+
+
+<?php
+
+if(!$_SESSION){
+session_start();
+header('Location:../vistas/login.php');
+
+}
+
+?>
+
 <?php include_once('../html/navBar.html'); 
 include_once('../controladores/ctrl_rol.php');
  ?>
@@ -17,7 +43,7 @@ include_once('../controladores/ctrl_rol.php');
         <div class="btn-parent">
             <div class="btn-child"> <!-- centran el boton -->
                 <a href="vista_rol_add.php" class="btn btn-info btn-lg">
-                    A&ntilde;adir Rol
+                   <?php echo $idioma["anadir_rol"]; ?>
                     <div class="glyphicon glyphicon-plus"></div>
                 </a>
             </div>
@@ -65,17 +91,17 @@ include_once('../controladores/ctrl_rol.php');
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="myModalLabel">Advertencia</h4>
+                <h4 id="myModalLabel"><?php echo $idioma["advertencia_borrar_rol"]; ?></h4>
               </div>
                 
             <!-- Contenido de la página login modal -->
               <div class="modal-body">
-                 <p>¿Est&#225; seguro de eliminar el elemento?</p>
+                 <p><?php echo $idioma["seguro_borrar_rol"]; ?></p>
               </div>
                 
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary">Si</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $idioma["NO_borrar_rol"]; ?></button>
+                <button type="button" class="btn btn-primary"><?php echo $idioma["SI_borrar_rol"]; ?></button>
               </div>
             </div>
           </div>

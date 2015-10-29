@@ -1,10 +1,34 @@
 <!--
 ===========================================================================
 Formulario de registro. Envia la informacion por POST a ProcesarRegistro.php
-Creado por: 
+Creado por: Edgard Ruiz
 Fecha: 29/9/2015
 ============================================================================
 -->
+
+<?php
+
+$idioma = $_GET["lang"];
+
+if(!$idioma){
+    unset($idioma);
+    include "../modelo/es.php";
+}else{
+    if($idioma == "es"){
+        unset($idioma);
+        include "../modelo/es.php";
+    }else{
+        if($idioma == "en"){
+            unset($idioma);
+            include "../modelo/en.php";
+        }else{
+            unset($idioma);
+            include "../modelo/es.php";
+        }
+    }
+}
+
+?>
 
 <html>
     <head>
@@ -16,24 +40,26 @@ Fecha: 29/9/2015
         <section class="jumbotron">
             <div class="container" align="center">
                 <form id="registro" action='../controladores/ctrl_procesar_registro.php' method='POST'>
-                    <label for="nombre">Usuario</label>
+                    <label for="nombre"><?php echo $idioma["reg_usuario"]; ?></label>
                     <input id="login" type='text' name='login'><BR>
-                    <label for="password">Contraseña</label>
+                    <label for="password"><?php echo $idioma["reg_pass"]; ?></label>
                     <input id="password" type='password' name='password'><BR>
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre"><?php echo $idioma["reg_nombre"]; ?></label>
                     <input id="nombre" type='text' name='nombre'><BR>
-                    <label for="apellidos">Apellidos</label>
+                    <label for="apellidos"><?php echo $idioma["reg_apellidos"]; ?></label>
                     <input id="apellidos" type='text' name='apellidos'><BR>
-                    <label for="email">Email</label>
+                    <label for="email"><?php echo $idioma["reg_email"]; ?></label>
                     <input id="email" type='text' name='email'><BR>
-                    <input id="submit" type='submit' onclick="cifrar()" name='accion' value='validar'>
+                    <input id="submit" type='submit' onclick="cifrar()" name='accion' value=<?php echo $idioma["reg_valor"]; ?>>
                 </form>
                     
                 <div id="alerta-wrapper">
                     <div id="alerta"></div>
                 </div>
             </div>
-        </section>		
+        </section>
+            <a href="./registro.php?lang=es">ESP</a><br>       
+            <a href="./registro.php?lang=en">ENG</a>		
     </body>
                     
     <script src="../js/jquery.min.js"></script>

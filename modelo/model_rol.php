@@ -116,7 +116,7 @@ class Rol implements iModel {
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
             if( $cont == 0 ){
-                $db->consulta('DELETE FROM Usu_Rol WHERE Login = \'' . $old['Login'] . '\'');
+                $db->consulta('DELETE FROM Usu_Rol WHERE Login = \'' . $old['Login'] . '\' AND NombreRol = \'' . $pk . '\'');
             }
         }
         

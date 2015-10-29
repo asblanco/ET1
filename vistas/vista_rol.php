@@ -13,7 +13,6 @@ session_start();
 
 if(!$_SESSION["idioma_usuario"]){
 include_once "../modelo/es.php";
-include_once "../modelo/en.php";
     
 }else{
     include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';

@@ -1,5 +1,9 @@
-﻿-- Servidor: localhost
--- Tiempo de generación: 20-10-2015 a las 17:56:33
+-- phpMyAdmin SQL Dump
+-- version 4.2.12deb2
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 30-10-2015 a las 00:39:56
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -13,16 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `Gestor de Permisos`
+-- Base de datos: `DB_ET1_G5`
 --
-DROP DATABASE IF EXISTS DB_ET1_G5;
-CREATE DATABASE DB_ET1_G5 default character set utf8 default collate utf8_spanish_ci;
-grant usage on *.* to 'admin'@'localhost';
-drop user 'admin'@'localhost';
-create user 'admin'@'localhost' identified by 'iu';
-grant all on DB_ET1_G5.* to 'admin'@'localhost';
-
-USE DB_ET1_G5;
 
 -- --------------------------------------------------------
 
@@ -40,10 +36,10 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 --
 
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
-('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
 ('Consultar Usuario', 'Permite consultar usuarios de la aplicación.'),
-('Modificar Usuario', 'Permite modificar usuarios de la aplicación.'),
-('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.');
+('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
+('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.'),
+('Modificar Usuario', 'Permite modificar usuarios de la aplicación.');
 
 --
 -- Disparadores `Funcionalidad`
@@ -74,6 +70,7 @@ CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
  FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
 //
 DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -90,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 --
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
-('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.');
+('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las f');
 
 -- --------------------------------------------------------
 
@@ -108,11 +105,10 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 --
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Administrador', 'Crear Usuario'),
-('Administrador', 'Modificar Usuario'),
 ('Administrador', 'Consultar Usuario'),
-('Administrador', 'Eliminar Usuario') ;
-
+('Administrador', 'Crear Usuario'),
+('Administrador', 'Eliminar Usuario'),
+('Administrador', 'Modificar Usuario');
 
 -- --------------------------------------------------------
 
@@ -123,20 +119,25 @@ INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
 CREATE TABLE IF NOT EXISTS `Usuario` (
   `Login` varchar(65) NOT NULL,
   `Password` varchar(65) NOT NULL,
+  `Idioma` enum('es','en') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `Nombre` varchar(65) NOT NULL,
   `Apellidos` varchar(65) NOT NULL,
   `Email` varchar(65) NOT NULL,
-  `FechaAlta` date NOT NULL,
-  `idioma` varchar(2)
+  `FechaAlta` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Usuario`
 --
 
+<<<<<<< HEAD
+INSERT INTO `Usuario` (`Login`, `Password`, `Idioma`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`) VALUES
+('admin', 'admin', 'es', 'admin', 'admin', 'admin', '2015-10-14');
+=======
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`) VALUES
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14');
 -- password admin
+>>>>>>> origin/master
 
 -- --------------------------------------------------------
 
@@ -243,7 +244,6 @@ ADD CONSTRAINT `FK_Pagina` FOREIGN KEY (`Url`) REFERENCES `Pagina` (`Url`) ON DE
 ALTER TABLE `Usu_Rol`
 ADD CONSTRAINT `FK_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FK_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

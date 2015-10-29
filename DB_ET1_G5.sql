@@ -1,4 +1,4 @@
--- Servidor: localhost
+﻿-- Servidor: localhost
 -- Tiempo de generación: 20-10-2015 a las 17:56:33
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
@@ -126,7 +126,8 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `Nombre` varchar(65) NOT NULL,
   `Apellidos` varchar(65) NOT NULL,
   `Email` varchar(65) NOT NULL,
-  `FechaAlta` date NOT NULL
+  `FechaAlta` date NOT NULL,
+  `idioma` varchar(2)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

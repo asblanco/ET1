@@ -1,6 +1,6 @@
 <!--
 ===========================================================================
-Controlador para mostrar los datos de las funcionalidades
+Controlador para mostrar los datos de los roles
 Creado por: Edgar Conde Nóvoa
 Fecha: 28/10/2015
 ============================================================================

@@ -9,24 +9,25 @@ Fecha: /10/2015
 <?php
 
 $idioma = $_GET["lang"];
-
+   
 if(!$idioma){
-	unset($idioma);
-	include "../modelo/es.php";
+    unset($idioma);
+    header('Location:../vistas/login.php?lang=es');
 }else{
-	if($idioma == "es"){
-		unset($idioma);
-		include "../modelo/es.php";
-	}else{
-		if($idioma == "en"){
-			unset($idioma);
-			include "../modelo/en.php";
-		}else{
-			unset($idioma);
-			include "../modelo/es.php";
-		}
-	}
+    if($idioma == "es"){
+        unset($idioma);
+        include "../modelo/es.php";
+    }else{
+        if($idioma == "en"){
+            unset($idioma);
+            include "../modelo/en.php";
+        }else{
+            unset($idioma);
+            include "../modelo/es.php";
+        }
+    }
 }
+
 
 ?>
 

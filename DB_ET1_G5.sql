@@ -134,7 +134,8 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 --
 
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`) VALUES
-('admin', 'admin', 'admin', 'admin', 'admin', '2015-10-14');
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14');
+-- password admin
 
 -- --------------------------------------------------------
 

@@ -12,7 +12,7 @@ $idioma = $_GET["lang"];
 
 if(!$idioma){
     unset($idioma);
-    include "../modelo/es.php";
+    header('Location:../vistas/registro.php?lang=es');
 }else{
     if($idioma == "es"){
         unset($idioma);

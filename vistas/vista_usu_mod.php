@@ -122,7 +122,7 @@ header('Location:../vistas/login.php');
             <!-- Boton guardar -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <a href="roles.html" class="btn btn-info btn-lg">
+                    <a href="vista_usu.php" class="btn btn-info btn-lg">
                         <?php echo $idioma["modificar_usuario_guardar"]; ?>
                         <div class="glyphicon glyphicon-save"></div>
                     </a>

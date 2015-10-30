@@ -81,7 +81,7 @@ header('Location:../vistas/login.php');
             <!-- Boton crear -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <a href="roles.html" class="btn btn-info btn-lg">
+                    <a href="vista_usu.php" class="btn btn-info btn-lg">
                         <?php echo $idioma["anadir_usuario_crear"]; ?>
                         <div class="glyphicon glyphicon-ok"></div>
                     </a>

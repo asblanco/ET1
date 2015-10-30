@@ -45,7 +45,7 @@ include_once('../controladores/ctrl_usu.php');
         <div class="btn-parent">
             <div class="btn-child"> <!-- centran el boton -->
                 <a href="vista_usu_add.php" class="btn btn-info btn-lg">
-                    <?php echo $idioma["anadir_usuario_usuario"]; ?>
+                    <?php echo $idioma["anadir_usuario"]; ?>
                     <div class="glyphicon glyphicon-plus"></div>
                 </a>
             </div>

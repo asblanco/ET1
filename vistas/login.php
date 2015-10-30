@@ -48,6 +48,8 @@ if(!$idioma){
 				<input id="login" type="text" name="login" id="login"><br>
 				<label for="contraseña"><?php echo $idioma["pass_login"]; ?></label>
 				<input id="password" type="password" name="pass" id="pass"><br>
+				<label for="espanol"><a href="./login.php?lang=es"><img src="../img/espana_icon.png"></a></label>
+				<label for="ingles"><a href="./login.php?lang=en"><img src="../img/uk_icon.png"></a></label>
 				<input type='submit' onclick="cifrar()" name='accion' value=<?php echo $idioma["valor_login"]; ?>>
 			</form>
 			<div id="alerta-wrapper">
@@ -56,8 +58,8 @@ if(!$idioma){
 			<a href="./registro.php"><?php echo $idioma["registrarse"]; ?></a>
 		</div>
 	</section>
-	<a href="./login.php?lang=es"><img src="../img/espana_icon.png"></a><br>		
-	<a href="./login.php?lang=en"><img src="../img/uk_icon.png"></a>		
+	<br>		
+			
 </body>	
 
 <script src="../js/jquery.min.js"></script>

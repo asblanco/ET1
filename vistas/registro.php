@@ -50,6 +50,8 @@ if(!$idioma){
                     <input id="apellidos" type='text' name='apellidos'><BR>
                     <label for="email"><?php echo $idioma["reg_email"]; ?></label>
                     <input id="email" type='text' name='email'><BR>
+                    <label for="espanol"><a href="./login.php?lang=es"><img src="../img/espana_icon.png"></a></label>
+                    <label for="ingles"><a href="./login.php?lang=en"><img src="../img/uk_icon.png"></a></label>
                     <input id="submit" type='submit' onclick="cifrar()" name='accion' value=<?php echo $idioma["reg_valor"]; ?>>
                 </form>
                     
@@ -58,8 +60,7 @@ if(!$idioma){
                 </div>
             </div>
         </section>
-            <a href="./registro.php?lang=es"><img src="../img/espana_icon.png"></a><br>       
-            <a href="./registro.php?lang=en"><img src="../img/uk_icon.png"></a>		
+
     </body>
                     
     <script src="../js/jquery.min.js"></script>

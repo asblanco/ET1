@@ -21,7 +21,6 @@ include_once "../modelo/es.php";
     include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
 }
 
-
 ?>
 
 
@@ -35,7 +34,8 @@ header('Location:../vistas/login.php');
 
 ?>
 
-<?php include_once('../html/navBar.html'); 
+<?php include_once('../html/navBar.html');
+include_once('../controladores/ctrl_usu.php');
  ?>
 
 <html lang="en">
@@ -58,13 +58,13 @@ header('Location:../vistas/login.php');
             echo "<div class='col-md-8 col-md-offset-2 well'>
             <a href='#' data-toggle='modal' data-target='#removeModal'> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
-                <div class='titulo'> {$usu['NombreUsuario']} 
+                <div class='titulo'> {$usu['Login']} 
             <a href='vista_usu_mod.php'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
             
             <div class='col-md-3'>
-                <h4>Usuarios</h4>";
+                <h4>Roles</h4>";
                 // array asociativo de los roles ligados al usuario actual del bucle
-                $arrayRoles = $usuarios->arrayA($usu['NombreUsuario']);
+                $arrayRoles = $usuarios->arrayA($usu['Login']);
                 foreach ($arrayRoles as $rol){
                     echo "<p> {$rol['NombreRol']} </p>";
                 }
@@ -72,11 +72,11 @@ header('Location:../vistas/login.php');
             echo "
             </div>
             <div class='col-md-2'>
-                <h4>Funcionalidades</h4>";
+                <h4>Paginas</h4>";
                 // array asociativo de las paginas ligadas al usuario actual del bucle
-                $arrayPaginas = $usuarios->arrayB($usu['NombreUsuario']);
+                $arrayPaginas = $usuarios->arrayB($usu['Login']);
                 foreach ($arrayPaginas as $pag ){
-                    echo "<p> {$pag['NombrePag']} </p>";
+                    echo "<p> {$pag['Url']} </p>";
                 }
             echo "        
             </div>

@@ -23,14 +23,14 @@ class Usuario implements iModel {
     private $password;
     private $roles = array();
     private $paginas = array();
-    public $numUsuarioss = 0;
-    public function __construct($loginClase="" , $nombre="", $apellidos="", $fechaAlta , $email="" , $password="" , $rol=array(), $pag=array()) {
+    public $numUsuarios = 0;
+    public function __construct($loginClase="" , $nombre="", $apellidos="" , $email="" , $password="" , $rol=array(), $pag=array()) {
         
 		$this->loginClase = $loginClase;
 		$this->nombre = $nombre;
         $this->apellidos = $apellidos;
 		$this->email = $email;
-		$this->fechaAlta =$fechaAlta;
+		$this->fechaAlta =date("d-m-Y");
         $this->roles = $rol;
         $this->paginas= $pag;
     }
@@ -105,7 +105,7 @@ class Usuario implements iModel {
         }
 		
         $oldNombre = $datos['nombre'];
-        $newNombre = $objeto->nombre
+        $newNombre = $objeto->nombre;
 		
 			if ($oldNombre != $newNombre){
             $sql = 'UPDATE Usuario SET Nombre='. $newNombre . ' WHERE Login = \'' . $oldLogin .  '\'' ;

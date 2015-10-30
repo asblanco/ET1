@@ -58,8 +58,8 @@ if(!$idioma){
                 </div>
             </div>
         </section>
-            <a href="./registro.php?lang=es">ESP</a><br>       
-            <a href="./registro.php?lang=en">ENG</a>		
+            <a href="./registro.php?lang=es"><img src="../img/espana_icon.png"></a><br>       
+            <a href="./registro.php?lang=en"><img src="../img/uk_icon.png"></a>		
     </body>
                     
     <script src="../js/jquery.min.js"></script>

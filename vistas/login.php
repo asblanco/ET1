@@ -56,8 +56,8 @@ if(!$idioma){
 			<a href="./registro.php"><?php echo $idioma["registrarse"]; ?></a>
 		</div>
 	</section>
-	<a href="./login.php?lang=es">ESP</a><br>		
-	<a href="./login.php?lang=en">ENG</a>		
+	<a href="./login.php?lang=es"><img src="../img/espana_icon.png"></a><br>		
+	<a href="./login.php?lang=en"><img src="../img/uk_icon.png"></a>		
 </body>	
 
 <script src="../js/jquery.min.js"></script>

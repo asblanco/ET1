@@ -4,7 +4,7 @@ include_once '../modelo/connect_DB.php';
 $db = new Database();
 
 session_start();
-$modif = 'UPDATE Usuario SET idioma = "es" WHERE Usuario.Login = "'.$_SESSION["login_usuario"].'"';
+$modif = 'UPDATE Usuario SET Idioma = "es" WHERE Login = "'.$_SESSION["login_usuario"].'"';
 
 $Resultado = $db->consulta($modif);
 

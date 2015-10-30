@@ -45,7 +45,8 @@ header('Location:../vistas/login.php');
             <div class="panel panel-default">
               <div class="panel-heading"><?php echo $idioma["modificar_usuario_usuario"]; ?></div>
               <div class="panel-body">
-                <p><?php echo $idioma["modificar_usuario_nombre"]; ?>  <input type="text" name="nombreUsuario" value="Administrador"></p>
+                <p><?php echo $idioma["modificar_usuario_nombre"]; ?>  <input type="text" name="nombreRol" value="Administrador"></p>
+                <p><?php echo $idioma["modificar_usuario_descripcion"]; ?> <input type="text" name="descRol" value="El Administrador es Dios."></p>
               </div>
             </div>
             

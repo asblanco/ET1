@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "OpenSans-Bold";
+    src: url(../fonts/OpenSans-Bold.otf);
+}
+
+.opSansBFont {
+    font-family: "OpenSans-Bold";
+    color: black;
+}

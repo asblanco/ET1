@@ -39,7 +39,7 @@
          $InsertaUsuario = "INSERT INTO Usuario (Login, Password, Nombre, Apellidos, Email, FechaAlta) VALUES ('$login','$pass','$nombre','$apellidos','$email','$mysqldate')";
          $insercion = $db->consulta($InsertaUsuario) or die('error al ejecutar la insercion de usuario');
          echo 'El Login ' . $login . ' ha sido registrado en el sistema';
-         header( "url=../index.php" ); 
+         header('location:../index.php'); 
 
     }
     // devuelve una fila por lo tanto encontro ese login

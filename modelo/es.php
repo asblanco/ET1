@@ -26,6 +26,8 @@ $idioma["navbar_usuarios"] = "Usuarios";
 $idioma["navbar_roles"] = "Roles";
 $idioma["navbar_funcionalidades"] = "Funcionalidades";
 $idioma["navbar_paginas"] = "Páginas"; 
+$idioma["navbar_cerrar_sesion"] = "Cerrar Sesi&#243;n"; 
+
 
 //vista funcionalidad
 $idioma["anadir_funcionalidad"] = "Añadir funcionalidad";

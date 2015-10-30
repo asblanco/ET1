@@ -25,7 +25,9 @@ $idioma["menu_funcionalidades"] = "Features";
 $idioma["navbar_usuarios"] = "Users";
 $idioma["navbar_roles"] = "Roles";
 $idioma["navbar_funcionalidades"] = "Features";
-$idioma["navbar_paginas"] = "Pages"; 
+$idioma["navbar_paginas"] = "Pages";
+$idioma["navbar_cerrar_sesion"] = "Logout";
+
 
 //vista funcionalidad
 $idioma["anadir_funcionalidad"] = "Add feature";

@@ -203,7 +203,7 @@ class Funcionalidad implements iModel {
     //Elimina de la base de datos segun la primary key pasada
     public function eliminar($pk){
         $db = new Database();
-        $db->consulta('DELETE FROM Funcionalidad WHERE NombreFun = ' . $pk) or die('Error al eliminar la funcionalidad');
+        $db->consulta('DELETE FROM Funcionalidad WHERE NombreFun = \'' .  $pk .  '\'') or die('Error al eliminar la funcionalidad');
         $db->desconectar();
     }
     

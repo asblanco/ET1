@@ -93,7 +93,8 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
 ('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.'),
 ('Gestor de apuestas', 'Gestiona las paginas de apuestas'),
-('Gestor de ventas', 'Gestiona las ventas de la pagina');
+('Gestor de ventas', 'Gestiona las ventas de la pagina'),
+('Animador', 'Anima a todo el equipo');
 
 -- --------------------------------------------------------
 

@@ -256,7 +256,7 @@ class Usuario implements iModel {
     //Elimina de la base de datos segun la primary key pasada
     public function eliminar($pk){
         $db = new Database();
-        $db->consulta('DELETE FROM Usuario WHERE Login = ' . $pk) or die('Error al eliminar el usuario');
+        $db->consulta('DELETE FROM Usuario WHERE Login = \'' .  $pk .  '\'') or die('Error al eliminar el usuario');
         $db->desconectar();
     }
     

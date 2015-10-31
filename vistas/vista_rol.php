@@ -41,44 +41,15 @@ include_once('../controladores/ctrl_rol.php');
             </div>
         </div>
         <br>
-        
-        <!-- Mostrar Roles -->
-        <?php 
-        foreach ($arrayRoles as $rol)  {
-            echo "<div class='col-md-8 col-md-offset-2 well'>
-            <a href='#' data-toggle='modal' data-target='#removeModal'> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
-            <div class='col-md-6'>
-                <div class='titulo'> {$rol['NombreRol']} 
-            <a href='vista_rol_mod.php'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
-                </div>
-                <p class='descripcion'> {$rol['DescRol']} </p>
-            </div>
-            <div class='col-md-3'>
-                <h4>Usuarios</h4>";
-                // array asociativo de los usuarios ligados al rol actual del bucle
-                $arrayUsuarios = $roles->arrayA($rol['NombreRol']);
-                foreach ($arrayUsuarios as $usu ){
-                    echo "<p> {$usu['Login']} </p>";
-                }
                 
-            echo "
-            </div>
-            <div class='col-md-2'>
-                <h4>Funcionalidades</h4>";
-                // array asociativo de las funcionalidades ligadas al rol actual del bucle
-                $arrayFuncionalidades = $roles->arrayB($rol['NombreRol']);
-                foreach ($arrayFuncionalidades as $func ){
-                    echo "<p> {$func['NombreFun']} </p>";
-                }
-            echo "        
-            </div>
-        </div>";
-        }
+        <?php 
+        if(isset($_GET['confirmar'])){
+            $roles::eliminar($_GET['confirmar']);
+            header('location:vista_rol.php');
+        } else if (isset($_GET['borrar'])){
         ?>
-        
-        
         <!-- Remove Modal Page -->
-        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal show" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -88,16 +59,59 @@ include_once('../controladores/ctrl_rol.php');
                 
             <!-- Contenido de la página login modal -->
               <div class="modal-body">
-                 <p><?php echo $idioma["seguro_borrar_rol"]; ?></p>
+                 <p><?php echo $idioma["seguro_borrar_rol"]; echo $_GET['borrar'];?> ?</p>
               </div>
                 
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $idioma["NO_borrar_rol"]; ?></button>
-                <button type="button" class="btn btn-primary"><?php echo $idioma["SI_borrar_rol"]; ?></button>
+                <button type="button" class="btn btn-default" onclick ="location='vista_rol.php'"><?php echo $idioma["NO_borrar_rol"]; ?></button>
+                  <a class="btn btn-primary" href="vista_rol.php?confirmar=<?php echo $_GET['borrar'];?>"><?php echo $idioma["SI_borrar_rol"]; ?></a>
               </div>
             </div>
           </div>
         </div>
+         <?php
+        		}
+									?>
+        
+        <!-- Mostrar Roles -->
+        <?php 
+        foreach ($arrayRoles as $rol)  {
+        ?>
+        <div class='col-md-8 col-md-offset-2 well'>
+            <a href="vista_rol.php?borrar=<?php echo $rol['NombreRol'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <div class='col-md-6'>
+                <div class='titulo'> <?php echo $rol['NombreRol'] ?>
+            <a href="vista_rol_mod.php?rol=<?php echo $rol['NombreRol']?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
+                </div>
+                <p class='descripcion'> <?php echo $rol['DescRol'] ?> </p>
+            </div>
+            <div class='col-md-3'>
+                <h4>Usuarios</h4>
+                <?php
+                // array asociativo de los usuarios ligados al rol actual del bucle
+                $arrayUsuarios = $roles->arrayA($rol['NombreRol']);
+                foreach ($arrayUsuarios as $usu ){
+                    echo "<p> {$usu['Login']} </p>";
+                }
+                 ?>
+           
+            </div>
+            <div class='col-md-2'>
+                <h4>Funcionalidades</h4>
+                <?php
+                // array asociativo de las funcionalidades ligadas al rol actual del bucle
+                $arrayFuncionalidades = $roles->arrayB($rol['NombreRol']);
+                foreach ($arrayFuncionalidades as $func ){
+                    echo "<p> {$func['NombreFun']} </p>";
+                }
+                 ?>   
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+
+        
     </body>
 </html>
 

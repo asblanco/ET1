@@ -189,7 +189,7 @@ class Rol implements iModel {
     //Elimina de la base de datos segun la primary key pasada
     public function eliminar($pk){
         $db = new Database();
-        $db->consulta('DELETE FROM Pagina WHERE Url = ' . $pk) or die('Error al eliminar la pagina');
+        $db->consulta('DELETE FROM Pagina WHERE Url = \'' .  $pk .  '\'') or die('Error al eliminar la pagina');
         $db->desconectar();
     }
     

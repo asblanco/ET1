@@ -4,24 +4,27 @@
 	box-sizing: border-box;
 }
 
+body {
+    background-color: rgba(0,0,0,0.03);
+}
+
 /*-----------BARRA DE NAVEGACION-------------*/
 nav{
-	display: block;
-	background-color: #3D5CD2; 
-	overflow: hidden;
+    display: block;
+    background-color: #3900B4;
+    overflow: hidden;
 }
 
-.navbar{
-	border-radius: 0px;
-	border: none;
-}
 
 .navbar{
-	font-size: 1.1em;
+    border-radius: 0px;
+    border: none;  
+    font-size: 1.1em;
+    margin-bottom: 10px;
 }
 
 .navbar-brand {
-    color: #AECDFF;
+    color: white;
     font-size: 1.3em;
 }
 
@@ -36,7 +39,6 @@ nav ul>li, span{
 nav ul>li>a, span>a{
 	display: block;
 	line-height: 50px;
-	padding: 0 20 0 20;
 	text-decoration: none;
 	color: white;
 	text-transform: uppercase;
@@ -45,7 +47,7 @@ nav ul>li>a, span>a{
 }
 
 .nav > li > a:hover{
-    background-color: #5B81FF;
+    background-color: black;
 }
 
 .nav a:hover, .nav a:focus{
@@ -55,10 +57,6 @@ nav ul>li>a, span>a{
 span{
 	position: absolute;
 	right: 20px;
-}
-
-.active{
-    background-color: #9900FF;
 }
 
 .ico-idioma {
@@ -72,27 +70,30 @@ span{
     padding-top: 5px;
 }
 
-/*---------CONTENIDO (BOTONES)----------*/
+/*--------- BOTONES MENU ----------*/
 
-div.content{
-	margin-top: 50px;
+.content {
+    margin-top: 10px;
+    margin-left: 2%;
 }
 
 div.boton {
 	float: left;
 	width: 48%;
 	
-	margin: 1%;
-	background-color: #EFF2ED;
+	margin: 1vmin;
+	color: black;
+ border: 2px solid black;
+ background-color: white;
+ text-shadow: 2px 2px 8px #FFFFFF;
 	border-radius: 5px;
-	border: 1px solid #C0C2BF;
 	text-align: center;
 	font-size: 2em;
 	text-transform: uppercase;
 }
 
 div.boton>a{
-	display: block;
+	display: inline-block;
 	width: 100%;
 	line-height: 200px;
 	text-decoration: none;
@@ -100,9 +101,12 @@ div.boton>a{
 	font-family: Helvetica;
 }
 
-div.boton>a:hover{
-	background-color: #D9D7DB;
+.boton>a:hover{
+    color: white;
+    border: 2px solid #3900B4;
+    background-color: #3900B4;
 }
+
 
 /*--------- Roles ----------*/
 .titulo {
@@ -110,8 +114,7 @@ div.boton>a:hover{
 }
 
 .well{
-    background-color: rgba(0,0,204,0.09);
-    border: none;
+    background-color: rgba(255,255,255,1);
 }
 
 .edit-icon {
@@ -128,8 +131,8 @@ div.boton>a:hover{
     border-radius: 5px;
 }
 
-.panel-default > .panel-heading{
-    background-color: rgba(0,0,204,0.09);
+.panel > .panel-heading{
+    background-color: rgba(0,0,0,0.09);
     font-weight: bold;
 }
 
@@ -159,4 +162,12 @@ div.boton>a:hover{
 .btn-child {
     display: table;
     margin: 0 auto;
+}
+
+.btn-lg, .btn-lg:visited {
+    background-color: #0101DF;
+}
+
+.btn-lg:hover, .btn-lg:active:focus {
+    background-color: #110D92;
 }

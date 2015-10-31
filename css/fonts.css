@@ -7,3 +7,9 @@
     font-family: "OpenSans-Bold";
     color: black;
 }
+
+.navBarFont {
+    font-family: "OpenSans-Bold";
+    color: white;
+    font-size: 14px;
+}

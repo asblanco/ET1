@@ -22,6 +22,7 @@ include_once "../modelo/es.php";
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fonts.css">
 </head>
 
 <header>
@@ -40,16 +41,16 @@ include_once "../modelo/es.php";
         <!-- Navegacion -->
         <div class="collapse navbar-collapse" id="navBar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="../vistas/vista_usu.php"><?php echo $idioma["navbar_usuarios"]; ?></a></li>
-            <li><a href="../vistas/vista_rol.php"><?php echo $idioma["navbar_roles"]; ?></a></li> 
-            <li><a href="../vistas/vista_func.php"><?php echo $idioma["navbar_funcionalidades"]; ?></a></li> 
-            <li><a href="../vistas/vista_pag.php"><?php echo $idioma["navbar_paginas"]; ?></a></li>  
+            <li><a class="navBarFont" href="../vistas/vista_usu.php"><?php echo $idioma["navbar_usuarios"]; ?></a></li>
+            <li><a class="navBarFont" href="../vistas/vista_rol.php"><?php echo $idioma["navbar_roles"]; ?></a></li> 
+            <li><a class="navBarFont" href="../vistas/vista_func.php"><?php echo $idioma["navbar_funcionalidades"]; ?></a></li> 
+            <li><a class="navBarFont" href="../vistas/vista_pag.php"><?php echo $idioma["navbar_paginas"]; ?></a></li>  
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
            <li><a id="ico-idioma-padding" href="../controladores/ctrl_cambio_idioma_espanol.php"><img class="ico-idioma" src="../img/ES.png"></a></li>  
            <li><a id="ico-idioma-padding" href="../controladores/ctrl_cambio_idioma_ingles.php"><img class="ico-idioma" src="../img/EN.png"></a></li>  
-            <li><a href="../controladores/ctrl_log_out.php">
+            <li><a class="navBarFont" href="../controladores/ctrl_log_out.php">
                 <div class="glyphicon glyphicon-log-out"></div>
                 <?php echo $idioma["navbar_cerrar_sesion"]; ?></a></li>  
           </ul>

@@ -18,21 +18,13 @@ include_once "../modelo/es.php";
     include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
 }
 
-
-?>
-
-
-<?php
-
 if(!$_SESSION){
 session_start();
 header('Location:../vistas/login.php');
 
 }
 
-?>
-
-<?php include_once('../html/navBar.html'); 
+ include_once('../html/navBar.html'); 
 include_once('../controladores/ctrl_rol.php');
  ?>
 

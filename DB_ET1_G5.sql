@@ -43,7 +43,8 @@ INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
 ('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
 ('Consultar Usuario', 'Permite consultar usuarios de la aplicación.'),
 ('Modificar Usuario', 'Permite modificar usuarios de la aplicación.'),
-('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.');
+('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.'),
+('Crear apuesta', 'Permite crear nuevas apuestas');
 
 --
 -- Disparadores `Funcionalidad`
@@ -90,7 +91,9 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 --
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
-('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.');
+('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.'),
+('Gestor de apuestas', 'Gestiona las paginas de apuestas'),
+('Gestor de ventas', 'Gestiona las ventas de la pagina');
 
 -- --------------------------------------------------------
 
@@ -111,7 +114,8 @@ INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
 ('Administrador', 'Crear Usuario'),
 ('Administrador', 'Modificar Usuario'),
 ('Administrador', 'Consultar Usuario'),
-('Administrador', 'Eliminar Usuario') ;
+('Administrador', 'Eliminar Usuario'),
+('Gestor de apuestas', 'Crear apuesta');
 
 
 -- --------------------------------------------------------

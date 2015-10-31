@@ -46,7 +46,7 @@ $idioma["anadir_func_crear"] = "Create";
 //vista rol
 $idioma["anadir_rol"] = "Add rol";
 $idioma["advertencia_borrar_rol"] = "Warning";
-$idioma["seguro_borrar_rol"] = "¿Are you sure about delete this element?";
+$idioma["seguro_borrar_rol"] = "¿Are you sure about delete role ";
 $idioma["NO_borrar_rol"] = "NO";
 $idioma["SI_borrar_rol"] = "YES";
 

@@ -71,6 +71,9 @@ $idioma["modificar_rol_usuarios"] = "Usuarios";
 $idioma["modificar_rol_funcionalidades"] = "Funcionalidades";
 $idioma["modificar_rol_crear"] = "Crear";
 $idioma["modificar_rol_guardar"] = "Guardar Rol";
+$idioma["modificar_rol_addUsu"] = "Selecciona usuarios";
+$idioma["modificar_rol_addUsu_OK"] = "OK";
+$idioma["modificar_rol_addUsu_cancel"] = "Cancelar";
 
 
 //vista usuario

@@ -15,8 +15,6 @@ interface iModel {
     public function exists ($pk);
     //Devuelve un array asociativo de la tabla de la clase
     public function listar();
-    //Muestra los datos de la $pk indicada. Devuelve una array asociativo
-    public function consultar ($pk);
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     //Devuelve true si modifico correctamente
     public function modificar ($pk, $objeto);
@@ -30,6 +28,8 @@ interface iModel {
     public function arrayA ($pk);
     //Devuelve un array asociativo de la tabla de relacion con otra clase. Se debe indicar que tabla
     public function arrayB ($pk);
+    //Devuelve el objeto $pk con sus datos.
+    public function consultar ($pk);
 }
 
 ?>

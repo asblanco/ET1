@@ -92,7 +92,7 @@ class Usuario implements iModel {
     public function modificar ($pk, $objeto) {
         $db = new Database();
         //Guardar los datos de $pk
-        $datos = consultar($pk);
+        $datos = $objeto->consultar($pk);
 		
 		$oldLogin= $datos['loginClase'];
         $newLogin = $objeto->loginClase;
@@ -102,7 +102,7 @@ class Usuario implements iModel {
         $newPassword = $objeto->password;
 		
 			if ($oldPassword != $newPassword){
-            $sql = 'UPDATE Usuario SET Password='. $newPassword . ' WHERE Login = \'' . $oldLogin .  '\'' ;
+            $sql = 'UPDATE Usuario SET Password=\''. $newPassword . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar la password');
         }
@@ -208,7 +208,7 @@ class Usuario implements iModel {
         }
         
         
-        $existeNombre = exists($newLogin);
+        $existeNombre = $this->exists($newLogin);
         if($newLogin != "" && $existeNombre == false){
             //Comparar los datos con $objeto y modificar los que sean necesarios
             if ($oldLogin != $newLogin){

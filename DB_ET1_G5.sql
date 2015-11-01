@@ -140,8 +140,11 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 --
 
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14');
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14'),
 -- password admin
+('prueba', 'c893bad68927b457dbed39460e6afd62', 'Prueba', 'Prueba', 'prueba@gm.com', '2015-11-01');
+-- password prueba 
+
 
 -- --------------------------------------------------------
 
@@ -170,7 +173,8 @@ CREATE TABLE IF NOT EXISTS `Usu_Rol` (
 --
 
 INSERT INTO `Usu_Rol` (`Login`, `NombreRol`) VALUES
-('admin', 'Administrador');
+('admin', 'Administrador'),
+('prueba', 'Administrador');
 
 --
 -- Índices para tablas volcadas

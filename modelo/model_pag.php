@@ -83,7 +83,7 @@ class Pagina implements iModel {
         $oldDesc = $datos['descripcion'];
         $newDesc = $objeto->descripcion;
         if ($oldDesc != $newDesc){
-            $sql = 'UPDATE Pagina SET DescPag='. $newDesc . ' WHERE Url = \'' . $oldUrl .  '\'' ;
+            $sql = 'UPDATE Pagina SET DescPag=\'' . $newDesc . '\' WHERE Url = \'' . $oldUrl .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar la descripcion');
         }
@@ -140,7 +140,7 @@ class Pagina implements iModel {
            
         
         
-        $existeUrl = exists($newUrl);
+        $existeUrl = $this->exists($newUrl);
         if($newUrl != "" && $existeUrl == false){
             //Comparar los datos con $objeto y modificar los que sean necesarios
             if ($oldName != $newName){

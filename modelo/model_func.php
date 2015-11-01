@@ -71,14 +71,14 @@ class Funcionalidad implements iModel {
     public function modificar ($pk, $objeto) {
         $db = new Database();
         //Guardar los datos de $pk en la clase actual
-        $datos = consultar($pk);
+        $datos = $objeto->consultar($pk);
         $oldName = $datos['funName'];
         $newName = $objeto->funName;
         
         $oldDesc = $datos['descripcion'];
         $newDesc = $objeto->descripcion;
         if ($oldDesc != $newDesc){
-            $sql = 'UPDATE Funcionalidad SET DescFun='. $newDesc . ' WHERE NombreFun = \'' . $oldName .  '\'' ;
+            $sql = 'UPDATE Funcionalidad SET DescFun=\''. $newDesc . '\' WHERE NombreFun = \'' . $oldName .  '\'' ;
 
             if ($db->consulta($sql) === TRUE) {
                 echo "Guardado correctamente";
@@ -152,11 +152,11 @@ class Funcionalidad implements iModel {
         }
         
         
-        $existeNombre = exists($newName);
+        $existeNombre = $this->exists($newName);
         if($newName != "" && $existeNombre == false){
             //Comparar los datos con $objeto y modificar los que sean necesarios
             if ($oldName != $newName){
-                $sql = 'UPDATE Funcionalidad SET NombreFun=' . $newName . ' WHERE NombreFun = \'' . $oldName .  '\'';
+                $sql = 'UPDATE Funcionalidad SET NombreFun=\'' . $newName . '\' WHERE NombreFun = \'' . $oldName .  '\'';
 
                 if ($db->consulta($sql) === TRUE) {
                     echo "Guardado correctamente";

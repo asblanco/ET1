@@ -10,11 +10,10 @@ Fecha: 26/10/2015
 include_once 'interface.php';
 //Clase rol con las funciones de iRol implementadas
 class Rol implements iModel {
-    private $rolName;
-    private $descripcion;
-    private $usuarios = array();
-    private $funcionalidades = array();
-    public $numRoles = 0;
+    public $rolName;
+    public $descripcion;
+    public $usuarios = array();
+    public $funcionalidades = array();
     public function __construct($rolName="", $desc="", $usu=array(), $func=array()) {
         $this->rolName=$rolName;
         $this->descripcion=$desc;
@@ -40,6 +39,23 @@ class Rol implements iModel {
         }
     }
     
+    private function getDesc ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT DescRol FROM Rol WHERE NombreRol = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $desc = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $desc;
+    }
+    
     //Devuelve un array asociativo de la tabla de la clase
     public function listar(){
         $db = new Database();
@@ -50,41 +66,26 @@ class Rol implements iModel {
         $this->numRoles = 0;
         while ($row_rol = mysqli_fetch_assoc($sqlRol)) {
             $arrayRol[] = $row_rol;
-            $this->numRoles++;
         }
         
         $db->desconectar();
         return $arrayRol;
     }
     
-    //Devuelve la descripcion de la $pk indicada. Devuelve una array asociativo
-    public function consultar ($pk){
-        $db = new Database();
-        
-        $query = 'SELECT DescRol FROM Rol WHERE NombreRol = \'' . $pk .  '\'';
-        $sqlQuery = $db->consulta($query);
-        $arrayDatos = array();
-        
-        while ($row_rol = mysqli_fetch_assoc($sqlQuery)) {
-            $arrayDatos[] = $row_rol;
-        }
-        
-        $db->desconectar();
-        return $arrayDatos;
-    }
-    
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
         //Guardar los datos de $pk
-        $datos = consultar($pk);
-        $oldName = $datos['rolName'];
-        $newName = $objeto->rolName;
+        $modRol = $objeto->consultar($pk);
         
-        $oldDesc = $datos['descripcion'];
+        $oldName = $modRol->rolName;
+        $newName = $objeto->rolName;
+        $oldDesc = $modRol->descripcion;
+        $newDesc = $objeto->descripcion;
+     
         $newDesc = $objeto->descripcion;
         if ($oldDesc != $newDesc){
-            $sql = 'UPDATE Rol SET DescRol='. $newDesc . ' WHERE NombreRol = \'' . $oldName .  '\'' ;
+            $sql = 'UPDATE Rol SET DescRol= \''. $newDesc . '\' WHERE NombreRol = \'' . $oldName .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar la descripcion');
         }
@@ -126,7 +127,7 @@ class Rol implements iModel {
         $sqlOldFunc = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $pk .  '\'');
         $arrayOldFunc = array();
         while ($row_func = mysqli_fetch_assoc($sqlOldFunc))
-            $arrayOldFunc[] = $row_Func;
+            $arrayOldFunc[] = $row_func;
         
         //Crear el array asociativo con las nuevas funcionalidades
         $arrayNewFunc = $objeto->funcionalidades;
@@ -135,7 +136,6 @@ class Rol implements iModel {
         foreach ($arrayNewFunc as $new){
             $resultado = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $new['NombreFun'] .  '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nueva
-            
             if( mysqli_num_rows($resultado) == 0 ){
                 $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$new['NombreFun'].')');
             }
@@ -150,22 +150,21 @@ class Rol implements iModel {
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarla
             if( $cont == 0 ){
-                $db->consulta('DELETE FROM Rol_Fun WHERE NombreFun = \'' . $old['NombreFun'] . '\'');
+                $db->consulta('DELETE FROM Rol_Fun WHERE NombreFun = \'' . $old['NombreFun'] . '\' AND NombreRol = \'' . $pk . '\'');
             }
         }
         
+        $result = true;
         
-        $existeNombre = exists($newName);
-        if($newName != "" && $existeNombre == false){
-            //Comparar los datos con $objeto y modificar los que sean necesarios
-            if ($oldName != $newName){
-                $sql = 'UPDATE Rol SET NombreRol=' . $newName . ' WHERE NombreRol = \'' . $oldName .  '\'';
-
-                $result = $db->consulta($sql);
-            }
+        $existeNombre = $this->exists($newName);
+        //Si el nombre nuevo no esta vacio y no existe en la BD
+        if(strcmp($newName, "")!== 0 && $existeNombre == false){
+            $result = false;
+            $sql = 'UPDATE Rol SET NombreRol= \'' . $newName . '\' WHERE Rol.NombreRol = \'' . $oldName .  '\'';
+            $result = $db->consulta($sql) or trigger_error(mysqli_error()." in ".$sql);
         }
         
-        if ($result === TRUE)
+        if ($result == TRUE)
             return true;
         else return false;
         
@@ -235,6 +234,24 @@ class Rol implements iModel {
         
         $db->desconectar();
         return $arrayFunc;
+    }
+    
+    //Devuelve el objeto $pk con sus datos.
+    public function consultar ($pk){
+        $db = new Database();
+        
+        //Obtener la descripcion
+        $rolDesc = $this->getDesc($pk);
+        //Obtener los usuarios
+        $arrayUsu = $this->arrayA($pk);
+        //Obtener las funcionalidades
+        $arrayFunc = $this->arrayB($pk);
+        
+        //Crear la clase Rol con los datos de $pk
+        $rol = new Rol($pk, $rolDesc, $arrayUsu, $arrayFunc);
+        
+        $db->desconectar();
+        return $rol;
     }
 }
 ?>

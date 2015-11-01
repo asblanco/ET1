@@ -64,7 +64,7 @@ class Funcionalidad implements iModel {
         }
         
         $db->desconectar();
-        return $arrayDatos();
+        return $arrayDatos;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -172,7 +172,7 @@ class Funcionalidad implements iModel {
     //Crea el objeto pasado en la tabla de la base de datos
     public function crear($objeto){
         $db = new Database();
-        if (exists() == false) 
+        if ($objeto->exists($objeto->funName) == false) 
         {
             //Inserta la funcionalidad en la db
             $InsertaFun = "INSERT INTO Funcionalidad (NombreFun, DescFun) VALUES ('$objeto->funName','$objeto->descripcion')";
@@ -193,7 +193,7 @@ class Funcionalidad implements iModel {
                     $db->consulta($queryPag) or die('Error al insertar las funcionalidades');
                 }
             }     
-            
+            return true;
         } else return false;
         
         $db->desconectar();

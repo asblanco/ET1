@@ -8,7 +8,6 @@ Fecha: /10/2015
 
 <?php
     $idioma = $_GET["lang"];
-
     if(!$idioma){
         unset($idioma);
         header('Location:../vistas/registro.php?lang=es');
@@ -94,15 +93,17 @@ Fecha: /10/2015
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
+                   <!-- Pasar el idioma que selecciona el usuario -->
+                   <input hidden="hidden" id="language" name='language' value="<?php echo $_GET['lang']; ?>">
                    
                     <!-- Botones -->
                     <div class="row">
                         <div class="col-xs-6 col-sm-3 col-md-3">
-                            <a href="login.php"><button type="button" class="btn btn-default">Cancelar</button></a>
+                            <a href="login.php"><button type="button" class="btn btn-default"><?php echo $idioma["cancelar"]; ?></button></a>
                         </div>
                         <div class="col-sm-1 col-md-1"></div>
                         <div class="col-xs-6 col-sm-8 col-md-8">
-                            <button type="submit" class="btn-login" onclick="cifrar()" name='accion' value=<?php echo $idioma["reg_valor"]; ?>>Guardar</button>
+                            <button type="submit" class="btn-login" onclick="cifrar()" name='accion' value=<?php echo $idioma["reg_valor"]; ?>><?php echo $idioma["reg_guardar"]; ?></button>
                         </div>
                     </div>
                 </form>

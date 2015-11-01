@@ -15,22 +15,25 @@ include_once 'interface.php';
 //Clase usuario con las funciones de iUsuario implementadas
 class Usuario implements iModel {
 	
-	private $loginClase;
+    private $loginClase;
     private $nombre;
-	private $apellidos;
-	private $fechaAlta;
-	private $email;
+    private $apellidos;
+    private $fechaAlta;
+    private $email;
     private $password;
+    private $idioma;
     private $roles = array();
     private $paginas = array();
     public $numUsuarios = 0;
-    public function __construct($loginClase="" , $nombre="", $apellidos="" , $email="" , $password="" , $rol=array(), $pag=array()) {
-        
-		$this->loginClase = $loginClase;
-		$this->nombre = $nombre;
+    
+    public function __construct($loginClase="" , $nombre="", $apellidos="" , $fechaAlta="", $email="" , $password="" , $idioma="es", $rol=array(), $pag=array()) {
+        $this->loginClase = $loginClase;
+        $this->nombre = $nombre;
         $this->apellidos = $apellidos;
-		$this->email = $email;
-		$this->fechaAlta =date("d-m-Y");
+        $this->fechaAlta = $fechaAlta;
+        $this->email = $email;
+        $this->password = $password;
+        $this->idioma = $idioma;
         $this->roles = $rol;
         $this->paginas= $pag;
     }
@@ -40,7 +43,7 @@ class Usuario implements iModel {
         $db = new Database();
         
         //Comprueba si ya existe ese usuario
-        $consultaUsuario = 'SELECT * FROM Uusario WHERE Login = \'' .  $pk .  '\'';
+        $consultaUsuario = 'SELECT * FROM Usuario WHERE Login = \'' .  $pk .  '\'';
         $resultado = $db->consulta($consultaUsuario) or die('Error al ejecutar la consulta de usuario');
         
         // Si el numero de filas es 0 significa que no encontro el usuario
@@ -82,7 +85,7 @@ class Usuario implements iModel {
         }
         
         $db->desconectar();
-        return $arrayDatos();
+        return $arrayDatos;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -224,12 +227,12 @@ class Usuario implements iModel {
     //Crea el objeto pasado en la tabla de la base de datos, si devuelve fue bien devuelve true
     public function crear($objeto){
         $db = new Database();
-        if (exists($objeto->loginClase) == false) 
+        if ($objeto->exists($objeto->loginClase) == false) 
         {
              //Inserta el usuario en la tabla usuario
-            $insertaUsu = "INSERT INTO Usuario (Login, Password, Nombre, Apellidos , Email , FechaAlta) 
-				VALUES ('$objeto->loginClase','$objeto->password','$objeto->nombre','$objeto->apellidos','$objeto->email','$objeto->fechaAlta')";
-            $db->consulta($InsertaUsu) or die('Error al crear el Usuario');
+            $insertaUsu = "INSERT INTO Usuario (Login, Password, Nombre, Apellidos , Email , FechaAlta, Idioma) 
+				VALUES ('$objeto->loginClase','$objeto->password','$objeto->nombre','$objeto->apellidos','$objeto->email','$objeto->fechaAlta','$objeto->idioma')";
+            $db->consulta($insertaUsu) or die('Error al crear el Usuario');
             
             //Comprueba si esta relacionado con algun rol
             if($objeto->roles != array()){
@@ -241,13 +244,14 @@ class Usuario implements iModel {
             }
             
             //Comprueba si esta relacionado con alguna pagina
-            if($objeto->$arrayB != array()){
-                foreach ($objeto->$arrayB as $pag){
+            if($objeto->paginas != array()){
+                foreach ($objeto->paginas as $pag){
                     $newPag = $pag['Url'];
                     $queryPag = 'INSERT INTO Usu_Pag (Login, Url) VALUES ('.$objeto->loginClase.','.$newPag.')';
                     $db->consulta($queryPag) or die('Error al insertar las paginas');
                 }
-            }     
+            }
+            return true;
         } else return false;
         
         $db->desconectar();

@@ -108,7 +108,7 @@ div.boton>a{
 }
 
 
-/*--------- Roles ----------*/
+/*--------- Todas las paginas ----------*/
 .titulo {
     font-size: 22pt;
 }
@@ -171,3 +171,6 @@ div.boton>a{
 .btn-lg:hover, .btn-lg:active:focus {
     background-color: #110D92;
 }
+
+/*Los text area solo se amplien hacia abajo*/
+textarea { resize: vertical; }

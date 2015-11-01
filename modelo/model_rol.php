@@ -57,19 +57,20 @@ class Rol implements iModel {
         return $arrayRol;
     }
     
-    //Muestra los datos de la $pk indicada. Devuelve una array asociativo
+    //Devuelve la descripcion de la $pk indicada. Devuelve una array asociativo
     public function consultar ($pk){
         $db = new Database();
         
         $query = 'SELECT DescRol FROM Rol WHERE NombreRol = \'' . $pk .  '\'';
+        $sqlQuery = $db->consulta($query);
         $arrayDatos = array();
         
-        while ($row_rol = mysqli_fetch_assoc($db->consulta($query))) {
+        while ($row_rol = mysqli_fetch_assoc($sqlQuery)) {
             $arrayDatos[] = $row_rol;
         }
         
         $db->desconectar();
-        return $arrayDatos();
+        return $arrayDatos;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -174,7 +175,7 @@ class Rol implements iModel {
     //Crea el objeto pasado en la tabla de la base de datos, si devuelve fue bien devuelve true
     public function crear($objeto){
         $db = new Database();
-        if (exists($objeto->rolName) == false) 
+        if ($objeto->exists($objeto->rolName) == false) 
         {
              //Inserta el rol en la tabla Rol
             $insertaRol = "INSERT INTO Rol (NombreRol, DescRol) VALUES ('$objeto->rolName','$objeto->descripcion')";
@@ -194,7 +195,8 @@ class Rol implements iModel {
                     $queryFun = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$newFun['NombreFun'].')';
                     $db->consulta($queryFun) or die('Error al insertar las funcionalidades');
                 }
-            }     
+            }
+            return true;
         } else return false;
         
         $db->desconectar();

@@ -24,8 +24,8 @@ header('Location:../vistas/login.php');
 
 }
 
- include_once('../html/navBar.html'); 
-include_once('../controladores/ctrl_rol.php');
+    include_once('../html/navBar.html'); 
+    include_once('../controladores/ctrl_rol.php');
  ?>
 
 <html lang="en">
@@ -81,7 +81,7 @@ include_once('../controladores/ctrl_rol.php');
             <a href="vista_rol.php?borrar=<?php echo $rol['NombreRol'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
                 <div class='titulo'> <?php echo $rol['NombreRol'] ?>
-            <a href="vista_rol_mod.php?rol=<?php echo $rol['NombreRol']?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
+                    <a href="vista_rol_mod.php?rol=<?php echo $rol['NombreRol']?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
                 </div>
                 <p class='descripcion'> <?php echo $rol['DescRol'] ?> </p>
             </div>

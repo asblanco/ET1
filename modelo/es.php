@@ -8,6 +8,8 @@ $idioma["valor_login"] = "Aceptar";
 
 //registro
 $idioma["registrarse"] = "Registrarse";
+$idioma["reg_guardar"] = "Guardar";
+$idioma["cancelar"] = "Cancelar";
 $idioma["reg_usuario"] = "Usuario";
 $idioma["reg_pass"] = "Contraseña";
 $idioma["reg_nombre"] = "Nombre";
@@ -68,9 +70,6 @@ $idioma["modificar_rol_descripcion"] = "Descripci&oacuten:";
 $idioma["modificar_rol_usuarios"] = "Usuarios";
 $idioma["modificar_rol_funcionalidades"] = "Funcionalidades";
 $idioma["modificar_rol_crear"] = "Crear";
-$idioma["modificar_rol_editar"] = "Editar";
-$idioma["modificar_rol_ver"] = "Ver";
-$idioma["modificar_rol_eliminar"] = "Eliminar";
 $idioma["modificar_rol_guardar"] = "Guardar Rol";
 
 

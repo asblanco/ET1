@@ -10,35 +10,27 @@ Fecha: 25/10/2015
 
 
 <?php
-session_start();
+    session_start();
 
+    if(!$_SESSION["idioma_usuario"]){
+        include_once "../modelo/es.php";
+    }else{
+        include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
+    }
 
-if(!$_SESSION["idioma_usuario"]){
-include_once "../modelo/es.php";
+    if(!$_SESSION){
+        session_start();
+        header('Location:../vistas/login.php');
+    }
     
-}else{
-    include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
-}
-
-
+    include('../html/navBar.html'); 
+    include_once('../controladores/ctrl_rol_mod.php');
 ?>
-
-
-<?php
-
-if(!$_SESSION){
-session_start();
-header('Location:../vistas/login.php');
-
-}
-
-?>
-
-<?php include('../html/navBar.html'); ?>
 
 <html lang="en">
     <!-- Contenido Principal -->
     <body>
+      <form method="post">
         <div class="col-md-8 col-md-offset-2">
             <!-- Nombre y descripcion -->
             <div class="panel panel-default">
@@ -46,12 +38,12 @@ header('Location:../vistas/login.php');
               <div class="panel-body">
                 <div class="form-group">
                     <label for="rol"><?php echo $idioma["modificar_rol_nombre"]; ?></label>
-                    <input type="text" class="form-control" id="rol">
+                    <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $rolName; ?>">
                 </div>
                   
                 <div class="form-group">
                     <label for="comment"><?php echo $idioma["modificar_rol_descripcion"]; ?></label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" name="comment"><?php echo $rolDesc ?></textarea>
                 </div>
               </div>
             </div>
@@ -66,18 +58,13 @@ header('Location:../vistas/login.php');
                </div>
               <!-- List group -->
               <ul class="list-group list-onHover">
-                <li class="list-group-item">
-                    Manolo Perez
-                    <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                </li>
-                <li class="list-group-item">
-                    Carlos Francisco
-                    <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                </li>
-                <li class="list-group-item">
-                    Juan
-                    <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                </li>
+                <?php 
+                  foreach ($usuarios as $usu){ ?>
+                    <li class="list-group-item">
+                        <?php echo $usu['Login'] ?>
+                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
+                    </li>
+                <?php } ?>
               </ul>
             </div>
             
@@ -91,31 +78,27 @@ header('Location:../vistas/login.php');
                 </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover">
-                    <li class="list-group-item">
-                        <?php echo $idioma["modificar_rol_editar"]; ?>
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                    <li class="list-group-item">
-                        <?php echo $idioma["modificar_rol_ver"]; ?>
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                    <li class="list-group-item">
-                        <?php echo $idioma["modificar_rol_eliminar"]; ?>
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
+                    <?php 
+                      foreach ($funcionalidades as $func){ ?>
+                        <li class="list-group-item">
+                            <?php echo $func['NombreFun'] ?>
+                            <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div> 
             
             <!-- Boton guardar -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <a href="vista_rol.php" class="btn btn-info btn-lg">
+                    <a href="vista_rol.php" class="btn btn-info btn-lg" type="submit">
                          <?php echo $idioma["modificar_rol_guardar"]; ?>
                         <div class="glyphicon glyphicon-save"></div>
                     </a>
                 </div>
             </div>
-        </div>    
+        </div>
+      </form>
     </body>
 </html>
 

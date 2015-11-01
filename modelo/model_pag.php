@@ -9,7 +9,7 @@ Fecha: 29/10/2015
 <?php
 include_once 'interface.php';
 //Clase paginas con las funciones de iModel implementadas
-class Rol implements iModel {
+class Pagina implements iModel {
     private $url;
     private $descripcion;
     private $usuarios = array();
@@ -69,7 +69,7 @@ class Rol implements iModel {
         }
         
         $db->desconectar();
-        return $arrayDatos();
+        return $arrayDatos;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -160,7 +160,7 @@ class Rol implements iModel {
     //Crea el objeto pasado en la tabla de la base de datos, si fue bien devuelve true
     public function crear($objeto){
         $db = new Database();
-        if (exists($objeto->url) == false) 
+        if ($objeto->exists($objeto->url) == false) 
         {
              //Inserta esa pagina en la tabla Pagina
             $insertaPag = "INSERT INTO Pagina (Url, DescPag) VALUES ('$objeto->url','$objeto->descripcion')";
@@ -181,6 +181,7 @@ class Rol implements iModel {
                     $db->consulta($queryFun) or die('Error al insertar la funcionalidad');
                 }
             }     
+            return true;
         } else return false;
         
         $db->desconectar();

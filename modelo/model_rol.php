@@ -91,21 +91,18 @@ class Rol implements iModel {
         }
         
     //Actualizar usuarios asociados al rol
-        //Crear un array asociativo con los usuarios sin modificar
-        $sqlOldUsu = $db->consulta('SELECT Login FROM Usu_Rol WHERE NombreRol = \'' . $pk .  '\'');
-        $arrayOldUsu = array();
-        while ($row_usu = mysqli_fetch_assoc($sqlOldUsu))
-            $arrayOldUsu[] = $row_usu;
+        //Array asociativo con los usuarios antes de modificar
+        $arrayOldUsu = $objeto->arrayA($pk);
         
-        //Crear el array asociativo con los nuevos usuarios
+        //Crear el array con los usuarios modificados
         $arrayNewUsu = $objeto->usuarios;
         
         //Comparar si hay nuevos usuarios recorriendo $newUsuarios
         foreach ($arrayNewUsu as $new){
-            $resultado = $db->consulta('SELECT Login FROM Usu_Rol WHERE Login = \'' . $new['Login'] .  '\'');
+            $resultado = $db->consulta('SELECT Login FROM Usu_Rol WHERE Login = \'' . $new .  '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nuevo
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$new['Login'].','.$objeto->rolName.')');
+                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('. $new .','.$objeto->rolName.')');
             }
         }
         
@@ -114,7 +111,7 @@ class Rol implements iModel {
             //Comprobar si el usuario está en $arrayNewUsu
             $cont=0;
             foreach($arrayNewUsu as $new){
-                if($new['Login'] == $old['Login']) $cont++;
+                if($new == $old['Login']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
             if( $cont == 0 ){
@@ -124,20 +121,17 @@ class Rol implements iModel {
         
     //Actualizar funcionalidades asociadas al rol
         //Crear un array asociativo con las funcionalidades sin modificar
-        $sqlOldFunc = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $pk .  '\'');
-        $arrayOldFunc = array();
-        while ($row_func = mysqli_fetch_assoc($sqlOldFunc))
-            $arrayOldFunc[] = $row_func;
+        $arrayOldFunc = $objeto->arrayB($pk);
         
         //Crear el array asociativo con las nuevas funcionalidades
         $arrayNewFunc = $objeto->funcionalidades;
         
         //Comparar si hay nuevas funcionalidades recorriendo $arrayNewFunc
         foreach ($arrayNewFunc as $new){
-            $resultado = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $new['NombreFun'] .  '\'');
+            $resultado = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $new .  '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nueva
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$new['NombreFun'].')');
+                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('. $objeto->rolName .','. $new .')');
             }
         }
         
@@ -146,7 +140,7 @@ class Rol implements iModel {
             //Comprobar si la funcionalidad está en $arrayNewFunc
             $cont=0;
             foreach($arrayNewFunc as $new){
-                if($new['NombreFun'] == $old['NombreFun']) $cont++;
+                if($new == $old['NombreFun']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarla
             if( $cont == 0 ){

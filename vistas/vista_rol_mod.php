@@ -91,9 +91,11 @@ Fecha: 25/10/2015
               <ul class="list-group list-onHover">
                 <?php 
                   foreach ($rol->usuarios as $usu){ ?>
-                    <li class="list-group-item" id="usuSelected">
+                    <li class="list-group-item">
                         <?php echo $usu['Login'] ?>
-                        <a href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
+                        <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
+                    <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
+                    <input hidden="hidden" type="text" name="newUsu[]" value="<?php echo $usu['Login']; ?>">
                     </li>
                 <?php } ?>
               </ul>
@@ -111,10 +113,13 @@ Fecha: 25/10/2015
                 <ul class="list-group list-onHover">
                     <?php 
                       foreach ($rol->funcionalidades as $func){ ?>
-                        <li class="list-group-item" name="funcSelected">
+                        <li class="list-group-item">
                             <?php echo $func['NombreFun'] ?>
-                            <a href="#" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
+                            <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
+                        <!-- Elemento oculto para pasar el array con las funcionalidades modificados por POST -->
+                            <input hidden="hidden" type="text" name="newFunc[]" value="<?php echo $func['NombreFun']; ?>">
                         </li>
+                        
                     <?php } ?>
                 </ul>
             </div> 
@@ -132,12 +137,16 @@ Fecha: 25/10/2015
         
     <script>
         function removeUsu() {
-            var x = document.getElementById("usuSelected");
-            x.remove(x.selectedIndex);
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
         }
         function removeFunc() {
-            var x = document.getElementsByTagName("funcSelected");
-            x.remove(x.selectedIndex);
+//            var x = document.getElementById("funcSelected");
+//            x.remove(x.selectedIndex);
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
         }
         
     </script>

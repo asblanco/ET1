@@ -7,8 +7,6 @@ Fecha: 26/10/2015
 ============================================================================
 -->
 
-
-
 <?php
 include_once 'interface.php';
 
@@ -94,11 +92,11 @@ class Usuario implements iModel {
         //Guardar los datos de $pk
         $datos = $objeto->consultar($pk);
 		
-		$oldLogin= $datos['loginClase'];
+	       	$oldLogin= $datos['loginClase'];
         $newLogin = $objeto->loginClase;
 		
 		
-		$oldPassword = $datos['password'];
+	       	$oldPassword = $datos['password'];
         $newPassword = $objeto->password;
 		
 			if ($oldPassword != $newPassword){

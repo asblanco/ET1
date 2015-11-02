@@ -24,41 +24,14 @@ Fecha: 25/10/2015
     include_once('../controladores/ctrl_rol.php');
     //Obtiene el nombre del rol a modificar de la URL
     $rolName = $_GET['rol'];
-    //Obtiene los datos del rol
-    $rol = new Rol();
-    $rol = $rol->consultar($rolName); 
+    //Obtiene los datos del rol en un array asociativo
+    $r = new Rol();
+    $rol = $r->consultar($rolName); 
 ?>
 
 <html lang="en">
     <!-- Contenido Principal -->
-    <body>
-        
-        <!-- Add Usuarios Modal Page -->
-        <div class="modal fade" id="addUsu" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="myModalLabel"><?php echo $idioma["modificar_rol_addUsu"]; ?></h4>
-              </div>
-                
-            <!-- Contenido de la página login modal -->
-              <div class="modal-body">
-                  <?php 
-                  //Include al modelo de usuarios para listar los no relacionador con el rol
-                  include('../modelo/model_usu.php');  ?>
-                  
-              </div>
-                
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick ="location='vista_rol_mod.php?rol=<?php echo $_GET['rol']; ?>'"><?php echo $idioma["modificar_rol_addUsu_cancel"]; ?></button>
-                  <a class="btn btn-primary" href="vista_rol_mod.php?rol=<?php echo $_GET['rol']; ?>"><?php echo $idioma["modificar_rol_addUsu_OK"]; ?></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        
+    <body>    
       <form action='../controladores/ctrl_rol_mod.php' method="post">
         <div class="col-md-8 col-md-offset-2">
             <!-- Nombre y descripcion -->
@@ -74,7 +47,7 @@ Fecha: 25/10/2015
                   
                 <div class="form-group">
                     <label for="comment"><?php echo $idioma["modificar_rol_descripcion"]; ?></label>
-                    <textarea class="form-control" rows="5" name="comment"><?php echo $rol->descripcion ?></textarea>
+                    <textarea class="form-control" rows="5" name="comment"><?php echo $rol['descripcion'] ?></textarea>
                 </div>
               </div>
             </div>
@@ -84,13 +57,26 @@ Fecha: 25/10/2015
               <div class="panel-heading">
               <?php echo $idioma["modificar_rol_usuarios"]; ?>
                     <div class="pull-right">
-                    <a href="#" data-toggle='modal' data-target='#addUsu'><div class="glyphicon glyphicon-plus"></div></a>
+                      <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($users as $u){ ?>
+                                  <li><a href="#" class="small" data-value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
                   </div>
                </div>
               <!-- List group -->
               <ul class="list-group list-onHover">
                 <?php 
-                  foreach ($rol->usuarios as $usu){ ?>
+                  foreach ($rol['usuarios'] as $usu){ ?>
                     <li class="list-group-item">
                         <?php echo $usu['Login'] ?>
                         <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
@@ -112,7 +98,7 @@ Fecha: 25/10/2015
                 <!-- List group -->
                 <ul class="list-group list-onHover">
                     <?php 
-                      foreach ($rol->funcionalidades as $func){ ?>
+                      foreach ($rol['funcionalidades'] as $func){ ?>
                         <li class="list-group-item">
                             <?php echo $func['NombreFun'] ?>
                             <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
@@ -142,8 +128,6 @@ Fecha: 25/10/2015
             })
         }
         function removeFunc() {
-//            var x = document.getElementById("funcSelected");
-//            x.remove(x.selectedIndex);
             $('.rm').click(function(){
               $(this).parents('li').remove();
             })

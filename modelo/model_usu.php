@@ -36,6 +36,24 @@ class Usuario implements iModel {
         $this->paginas= $pag;
     }
     
+    
+    private function getNombre ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT Nombre FROM Usuario WHERE Login = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $nombre = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $nombre;
+    }
+    
     //Comprueba si existe
     public function exists ($pk) {
         $db = new Database();

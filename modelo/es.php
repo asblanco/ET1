@@ -34,7 +34,7 @@ $idioma["navbar_cerrar_sesion"] = "Cerrar Sesi&#243;n";
 //vista funcionalidad
 $idioma["anadir_funcionalidad"] = "Añadir funcionalidad";
 $idioma["advertencia_borrar_funcionalidad"] = "Advertencia";
-$idioma["seguro_borrar_funcionalidad"] = "¿Est&#225; seguro de eliminar la funcionalidad?";
+$idioma["seguro_borrar_funcionalidad"] = "¿Est&#225; seguro de eliminar la funcionalidad ";
 $idioma["NO_borrar_funcionalidad"] = "NO";
 $idioma["SI_borrar_funcionalidad"] = "SI";
 

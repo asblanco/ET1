@@ -14,12 +14,61 @@ class Pagina implements iModel {
     private $descripcion;
     private $usuarios = array();
     private $funcionalidad;
-    public $numPags = 0;
+    
     public function __construct($url="", $desc="", $usu=array(), $func="") {
         $this->url=$url;
         $this->descripcion=$desc;
         $this->usuarios = $usu;
         $this->funcionalidad= $func;
+    }
+    
+    private function getDesc ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT DescPag FROM Pagina WHERE Url = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $desc = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $desc;
+    }
+    
+    //Array de usuarios
+    private function getUsuarios ($pk){
+        $db = new Database();
+        
+        $sqlUsu = $db->consulta('SELECT Login, Url FROM Usu_Pag WHERE Url = \'' . $pk . '\'');
+        $arrayUsu = array();
+        
+        while ($row_usu = mysqli_fetch_assoc($sqlUsu))
+            $arrayUsu[] = $row_usu;
+        
+        $db->desconectar();
+        return $arrayUsu;
+    }
+    
+    //La funcionalidad de la pagina
+    private function getFunc ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT NombreFun FROM Pagina WHERE Url = \'' . $pk . '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $func = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $func;
     }
     
     //Comprueba si existe
@@ -46,11 +95,9 @@ class Pagina implements iModel {
         
         $sqlPag = $db->consulta("SELECT Url, DescPag, NombreFun FROM Pagina");
         $arrayPag = array();
-        //Numero de paginas 
-        $this->numPags = 0;
+        
         while ($row_pag = mysqli_fetch_assoc($sqlPag)) {
             $arrayPag[] = $row_pag;
-            $this->numPags++;
         }
         
         $db->desconectar();
@@ -61,15 +108,18 @@ class Pagina implements iModel {
     public function consultar ($pk){
         $db = new Database();
         
-        $query = 'SELECT DescPag, NombreFun FROM Pagina WHERE Url = \'' . $pk .  '\'';
-        $arrayDatos = array();
+        //Obtener la descripcion
+        $pagDesc = $this->getDesc($pk);
+        //Obtener los usuarios
+        $arrayPag = $this->getUsuarios($pk);
+        //Obtener la funcionalidad
+        $func = $this->getFunc($pk);
         
-        while ($row_pag = mysqli_fetch_assoc($db->consulta($query))) {
-            $arrayDatos[] = $row_pag;
-        }
+        //Crear array asoc con los datos de $pk
+        $pag = array("Url"=>"$pk", "descripcion"=>"$funDesc", "paginas"=>$arrayPag, "funcionalidad"=>$func);
         
         $db->desconectar();
-        return $arrayDatos;
+        return $pag;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -192,34 +242,6 @@ class Pagina implements iModel {
         $db = new Database();
         $db->consulta('DELETE FROM Pagina WHERE Url = \'' .  $pk .  '\'') or die('Error al eliminar la pagina');
         $db->desconectar();
-    }
-    
-    //Transformar y devuelve la tabla Usu_Pag de una Pagina especificada en un array
-    public function arrayA ($pk){
-        $db = new Database();
-        
-        $sqlUsu = $db->consulta('SELECT Login, Url FROM Usu_Pag WHERE Url = \'' . $pk . '\'');
-        $arrayUsu = array();
-        
-        while ($row_usu = mysqli_fetch_assoc($sqlUsu))
-            $arrayUsu[] = $row_usu;
-        
-        $db->desconectar();
-        return $arrayUsu;
-    }
-    
-    //Transforma y devuelve la Funcionalidad de una Pagina especificada en un array
-    public function arrayB ($pk){
-        $db = new Database();
-        
-        $sqlFunc = $db->consulta('SELECT Url, NombreFun FROM Pagina WHERE Url = \'' . $pk . '\'');
-        $arrayFunc = array();
-        
-        while ($row_func = mysqli_fetch_assoc($sqlFunc))
-            $arrayFunc[] = $row_func;
-        
-        $db->desconectar();
-        return $arrayFunc;
     }
 }
 ?>

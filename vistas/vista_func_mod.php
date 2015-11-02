@@ -25,6 +25,7 @@ Fecha: /10/2015
 
     }
     include('../html/navBar.html');
+    include_once('../controladores/ctrl_func.php');
 ?>
 
 <html lang="en">    

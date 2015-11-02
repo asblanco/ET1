@@ -10,15 +10,61 @@ Fecha: 26/10/2015
 include_once 'interface.php';
 //Clase rol con las funciones de iRol implementadas
 class Rol implements iModel {
-    public $rolName;
-    public $descripcion;
-    public $usuarios = array();
-    public $funcionalidades = array();
+    private $rolName;
+    private $descripcion;
+    private $usuarios = array();
+    private $funcionalidades = array();
+    
     public function __construct($rolName="", $desc="", $usu=array(), $func=array()) {
         $this->rolName=$rolName;
         $this->descripcion=$desc;
         $this->usuarios = $usu;
         $this->funcionalidades= $func;
+    }
+    
+    private function getDesc ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT DescRol FROM Rol WHERE NombreRol = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $desc = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $desc;
+    }
+    
+    //Transformar y devuelve la tabla Usu_Rol de un Rol especificado en un array
+    private function getUsu ($pk){
+        $db = new Database();
+        
+        $sqlUsu = $db->consulta('SELECT Login, NombreRol FROM Usu_Rol WHERE NombreRol = \'' . $pk . '\'');
+        $arrayUsu = array();
+        
+        while ($row_usu = mysqli_fetch_assoc($sqlUsu))
+            $arrayUsu[] = $row_usu;
+        
+        $db->desconectar();
+        return $arrayUsu;
+    }
+    
+    //Transformar y devuelve la tabla Rol_Fun de un Rol especificado en un array
+    private function getFunc ($pk){
+        $db = new Database();
+        
+        $sqlFunc = $db->consulta('SELECT NombreRol, NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $pk . '\'');
+        $arrayFunc = array();
+        
+        while ($row_func = mysqli_fetch_assoc($sqlFunc))
+            $arrayFunc[] = $row_func;
+        
+        $db->desconectar();
+        return $arrayFunc;
     }
     
     //Comprueba si existe
@@ -39,24 +85,7 @@ class Rol implements iModel {
         }
     }
     
-    private function getDesc ($pk){
-        $db = new Database();
-        
-        $query = 'SELECT DescRol FROM Rol WHERE NombreRol = \'' . $pk .  '\'';
-        $result = $db->consulta($query);
-
-        /* array numérico */
-        $row = $result->fetch_array(MYSQLI_NUM);
-        $desc = $row[0];
-
-        /* liberar la serie de resultados */
-        $result->free();
-        $db->desconectar();
-        
-        return $desc;
-    }
-    
-    //Devuelve un array asociativo de la tabla de la clase
+    //Devuelve un array asociativo de la tabla de la clase, nombre y descripcion
     public function listar(){
         $db = new Database();
         
@@ -70,6 +99,24 @@ class Rol implements iModel {
         
         $db->desconectar();
         return $arrayRol;
+    }
+    
+    //Devuelve un array asociativo de $pk con sus datos.
+    public function consultar ($pk){
+        $db = new Database();
+        
+        //Obtener la descripcion
+        $rolDesc = $this->getDesc($pk);
+        //Obtener los usuarios
+        $arrayUsu = $this->getUsu($pk);
+        //Obtener las funcionalidades
+        $arrayFunc = $this->getFunc($pk);
+        
+        //Crear array asoc con los datos de $pk
+        $rol = array("rolName"=>"$pk", "descripcion"=>"$rolDesc", "usuarios"=>$arrayUsu, "funcionalidades"=>$arrayFunc);
+        
+        $db->desconectar();
+        return $rol;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -200,52 +247,6 @@ class Rol implements iModel {
         $db = new Database();
         $db->consulta('DELETE FROM Rol WHERE NombreRol = \'' .  $pk .  '\'') or die('Error al eliminar el rol');
         $db->desconectar();
-    }
-    
-    //Transformar y devuelve la tabla Usu_Rol de un Rol especificado en un array
-    public function arrayA ($pk){
-        $db = new Database();
-        
-        $sqlUsu = $db->consulta('SELECT Login, NombreRol FROM Usu_Rol WHERE NombreRol = \'' . $pk . '\'');
-        $arrayUsu = array();
-        
-        while ($row_usu = mysqli_fetch_assoc($sqlUsu))
-            $arrayUsu[] = $row_usu;
-        
-        $db->desconectar();
-        return $arrayUsu;
-    }
-    
-    //Transformar y devuelve la tabla Rol_Fun de un Rol especificado en un array
-    public function arrayB ($pk){
-        $db = new Database();
-        
-        $sqlFunc = $db->consulta('SELECT NombreRol, NombreFun FROM Rol_Fun WHERE NombreRol = \'' . $pk . '\'');
-        $arrayFunc = array();
-        
-        while ($row_func = mysqli_fetch_assoc($sqlFunc))
-            $arrayFunc[] = $row_func;
-        
-        $db->desconectar();
-        return $arrayFunc;
-    }
-    
-    //Devuelve el objeto $pk con sus datos.
-    public function consultar ($pk){
-        $db = new Database();
-        
-        //Obtener la descripcion
-        $rolDesc = $this->getDesc($pk);
-        //Obtener los usuarios
-        $arrayUsu = $this->arrayA($pk);
-        //Obtener las funcionalidades
-        $arrayFunc = $this->arrayB($pk);
-        
-        //Crear la clase Rol con los datos de $pk
-        $rol = new Rol($pk, $rolDesc, $arrayUsu, $arrayFunc);
-        
-        $db->desconectar();
-        return $rol;
     }
 }
 ?>

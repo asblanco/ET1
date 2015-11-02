@@ -76,6 +76,8 @@ header('Location:../vistas/login.php');
         <!-- Mostrar Roles -->
         <?php 
         foreach ($arrayRoles as $rol)  {
+            //Array asoc de los datos del rol del bucle
+            $rolX = $roles->consultar($rol['NombreRol']);
         ?>
         <div class='col-md-8 col-md-offset-2 well'>
             <a href="vista_rol.php?borrar=<?php echo $rol['NombreRol'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
@@ -89,7 +91,7 @@ header('Location:../vistas/login.php');
                 <h4>Usuarios</h4>
                 <?php
                 // array asociativo de los usuarios ligados al rol actual del bucle
-                $arrayUsuarios = $roles->arrayA($rol['NombreRol']);
+                $arrayUsuarios = $rolX['usuarios'];
                 foreach ($arrayUsuarios as $usu ){
                     echo "<p> {$usu['Login']} </p>";
                 }
@@ -100,7 +102,7 @@ header('Location:../vistas/login.php');
                 <h4>Funcionalidades</h4>
                 <?php
                 // array asociativo de las funcionalidades ligadas al rol actual del bucle
-                $arrayFuncionalidades = $roles->arrayB($rol['NombreRol']);
+                $arrayFuncionalidades = $rolX['funcionalidades'];
                 foreach ($arrayFuncionalidades as $func ){
                     echo "<p> {$func['NombreFun']} </p>";
                 }
@@ -110,8 +112,6 @@ header('Location:../vistas/login.php');
         <?php
         }
         ?>
-
-        
     </body>
 </html>
 

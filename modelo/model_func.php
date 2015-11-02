@@ -16,6 +16,51 @@ class Funcionalidad implements iModel {
         $this->paginas= $pag;
     }
     
+    
+    private function getDesc ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT DescFun FROM Funcionalidad WHERE NombreFun = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $desc = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $desc;
+    }
+    
+    private function getRoles ($pk){
+        $db = new Database();
+        
+        $sqlRol = $db->consulta('SELECT NombreRol, NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $pk . '\'');
+        $arrayRol = array();
+        
+        while ($row_rol = mysqli_fetch_assoc($sqlRol))
+            $arrayRol[] = $row_rol;
+        
+        $db->desconectar();
+        return $arrayRol;
+    }
+    
+    //Transformar y devuelve la tabla Pagina de una Funcionalidad especificada en un array
+    private function getPaginas ($pk){
+        $db = new Database();
+        
+        $sqlPag = $db->consulta('SELECT Url FROM Pagina WHERE NombreFun = \'' . $pk . '\'');
+        $arrayPag = array();
+        
+        while ($row_Pag = mysqli_fetch_assoc($sqlPag))
+            $arrayPag[] = $row_Pag;
+        
+        $db->desconectar();
+        return $arrayPag;
+    }
+    
     //Comprueba si existe
     public function exists ($pk) {
         $db = new Database();
@@ -53,18 +98,21 @@ class Funcionalidad implements iModel {
     }
     
     //Muestra los datos de la $pk indicada. Devuelve una array asociativo
-    public function consultar ($pk){
+    public function consultar ($pk){        
         $db = new Database();
         
-        $query = 'SELECT DescFun FROM Funcionalidad WHERE NombreFun = \'' . $pk .  '\'';
-        $arrayDatos = array();
+        //Obtener la descripcion
+        $funDesc = $this->getDesc($pk);
+        //Obtener los roles
+        $arrayRol = $this->getRoles($pk);
+        //Obtener las paginas
+        $arrayPag = $this->getPaginas($pk);
         
-        while ($row_fun = mysqli_fetch_assoc($db->consulta($query))) {
-            $arrayDatos[] = $row_fun;
-        }
+        //Crear array asoc con los datos de $pk
+        $func = array("funName"=>"$pk", "descripcion"=>"$funDesc", "roles"=>$arrayRol, "paginas"=>$arrayPag);
         
         $db->desconectar();
-        return $arrayDatos;
+        return $func;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -205,34 +253,6 @@ class Funcionalidad implements iModel {
         $db = new Database();
         $db->consulta('DELETE FROM Funcionalidad WHERE NombreFun = \'' .  $pk .  '\'') or die('Error al eliminar la funcionalidad');
         $db->desconectar();
-    }
-    
-    //Transformar y devuelve la tabla Rol_Fun de una funcionalidad especificada en un array
-    public function arrayA ($pk){
-        $db = new Database();
-        
-        $sqlRol = $db->consulta('SELECT NombreRol, NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $pk . '\'');
-        $arrayRol = array();
-        
-        while ($row_rol = mysqli_fetch_assoc($sqlRol))
-            $arrayRol[] = $row_rol;
-        
-        $db->desconectar();
-        return $arrayRol;
-    }
-    
-    //Transformar y devuelve la tabla Pagina de una Funcionalidad especificada en un array
-    public function arrayB ($pk){
-        $db = new Database();
-        
-        $sqlPag = $db->consulta('SELECT Url FROM Pagina WHERE NombreFun = \'' . $pk . '\'');
-        $arrayPag = array();
-        
-        while ($row_Pag = mysqli_fetch_assoc($sqlPag))
-            $arrayPag[] = $row_Pag;
-        
-        $db->desconectar();
-        return $arrayPag;
     }
 }
 ?>

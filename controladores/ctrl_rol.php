@@ -18,6 +18,11 @@ Fecha: 25/10/2015
     //Array asociativo de la tabla roles, tiene NombreRol y DescRol
     $arrayRoles = $roles->listar();
 
+//Listar Usuarios en modificar y crear Rol
+    include '../modelo/model_usu.php';
+    $usu = new Usuario();
+    $users = $usu->listar();
+
     //Desconectar de la base de datos
     $db->desconectar();
 ?>

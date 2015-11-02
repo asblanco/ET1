@@ -15,6 +15,8 @@ interface iModel {
     public function exists ($pk);
     //Devuelve un array asociativo de la tabla de la clase
     public function listar();
+    //Devuelve un array asociativo de $pk con sus datos.
+    public function consultar ($pk);
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     //Devuelve true si modifico correctamente
     public function modificar ($pk, $objeto);
@@ -23,13 +25,7 @@ interface iModel {
     public function crear($objeto); 
     //Elimina de la base de datos segun la primary key pasada
     //Devuelve true si elimino correctamente
-    public function eliminar($pk);  
-    //Devuelve un array asociativo de la tabla de relacion con otra clase. Se debe indicar que tabla
-    public function arrayA ($pk);
-    //Devuelve un array asociativo de la tabla de relacion con otra clase. Se debe indicar que tabla
-    public function arrayB ($pk);
-    //Devuelve el objeto $pk con sus datos.
-    public function consultar ($pk);
+    public function eliminar($pk); 
 }
 
 ?>

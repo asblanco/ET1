@@ -106,8 +106,6 @@ class Pagina implements iModel {
     
     //Muestra los datos de la $pk indicada. Devuelve una array asociativo
     public function consultar ($pk){
-        $db = new Database();
-        
         //Obtener la descripcion
         $pagDesc = $this->getDesc($pk);
         //Obtener los usuarios
@@ -117,8 +115,7 @@ class Pagina implements iModel {
         
         //Crear array asoc con los datos de $pk
         $pag = array("Url"=>"$pk", "descripcion"=>"$funDesc", "paginas"=>$arrayPag, "funcionalidad"=>$func);
-        
-        $db->desconectar();
+
         return $pag;
     }
     

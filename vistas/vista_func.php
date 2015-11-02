@@ -82,7 +82,7 @@ include_once('../controladores/ctrl_func.php');
             <a href="vista_func.php?borrar=<?php echo $fun['NombreFun'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
                 <div class='titulo'> <?php echo $fun['NombreFun']; ?> 
-            <a href='vista_func_mod.php'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
+            <a href='vista_func_mod.php?func=<?php echo $fun['NombreFun']; ?>'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
                 </div>
                 <p class='descripcion'> <?php $fun['DescFun']; ?> </p>
             </div>

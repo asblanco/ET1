@@ -103,8 +103,6 @@ class Rol implements iModel {
     
     //Devuelve un array asociativo de $pk con sus datos.
     public function consultar ($pk){
-        $db = new Database();
-        
         //Obtener la descripcion
         $rolDesc = $this->getDesc($pk);
         //Obtener los usuarios
@@ -114,8 +112,7 @@ class Rol implements iModel {
         
         //Crear array asoc con los datos de $pk
         $rol = array("rolName"=>"$pk", "descripcion"=>"$rolDesc", "usuarios"=>$arrayUsu, "funcionalidades"=>$arrayFunc);
-        
-        $db->desconectar();
+
         return $rol;
     }
     

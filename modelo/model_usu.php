@@ -54,6 +54,92 @@ class Usuario implements iModel {
         return $nombre;
     }
     
+    private function getApellidos ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT Apellidos FROM Usuario WHERE Login = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $apellidos = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $apellidos;
+    }
+    
+    private function getFechaAlta ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT FechaAlta FROM Usuario WHERE Login = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $fechaAlta = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $fechaAlta;
+    }
+    
+    private function getEmail ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT Email FROM Usuario WHERE Login = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $email = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $email;
+    }
+    
+    private function getRoles ($pk){
+        $db = new Database();
+        
+        $sqlRol = $db->consulta('SELECT Login, NombreRol FROM Usu_Rol WHERE Login = \'' . $pk . '\'');
+        $arrayRol = array();
+        
+        while ($row_rol = mysqli_fetch_assoc($sqlRol))
+            $arrayRol[] = $row_rol;
+        
+        $db->desconectar();
+        return $arrayRol;
+    }
+    
+    private function getPaginas ($pk){
+        $db = new Database();
+        
+        $sqlPag = $db->consulta('SELECT Login, Url FROM Usu_Pag WHERE Login = \'' . $pk . '\'');
+        $arrayPag = array();
+        
+        while ($row_pag = mysqli_fetch_assoc($sqlPag))
+            $arrayPag[] = $row_pag;
+        
+        $db->desconectar();
+        return $arrayPag;
+    }
+    
+    private function setPassword($oldPass, $newPass, $pk){
+        //Si oldPass coincide con la de la de $pk en la BD, hace UPDATE con newPass
+    }
+    
+    public function setIdioma ($newIdioma, $pk){
+        //Si newIdioma no es el que ya está, hace UPDATE
+        //Este metodo se deberia llamar cada vez que se cambia el idioma en la navBar
+    }
+    
     //Comprueba si existe
     public function exists ($pk) {
         $db = new Database();
@@ -91,17 +177,23 @@ class Usuario implements iModel {
     
     //Muestra los datos de la $pk indicada. Devuelve una array asociativo
     public function consultar ($pk){
-        $db = new Database();
+        //Obtener el nombre
+        $usuNombre = $this->getNombre($pk);
+        //Obtener los apellidos
+        $usuApellidos = $this->getApellidos($pk);
+        //Obtener la fecha de alta
+        $usuFecha = $this->getFechaAlta($pk);
+        //Obtener el email
+        $usuEmail = $this->getEmail($pk);
+        //Obtener los roles
+        $arrayRol = $this->getRoles($pk);
+        //Obtener las paginas
+        $arrayPag = $this->getPaginas($pk);
         
-        $query = 'SELECT  Nombre, Apellidos , Email , FechaAlta FROM Usuario WHERE Login = \'' . $pk .  '\'';
-        $arrayDatos = array();
+        //Crear array asoc con los datos de $pk
+        $rol = array("loginClase"=>"$pk", "nombre"=>"$usuNombre", "apellidos"=>"$usuApellidos", "fechaAlta"=>"$usuFecha", "email"=>"$usuEmail", "roles"=>$arrayRol, "paginas"=>$arrayPag );
         
-        while ($row_usuario = mysqli_fetch_assoc($db->consulta($query))) {
-            $arrayDatos[] = $row_usuario;
-        }
-        
-        $db->desconectar();
-        return $arrayDatos;
+        return $rol;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
@@ -278,34 +370,6 @@ class Usuario implements iModel {
         $db = new Database();
         $db->consulta('DELETE FROM Usuario WHERE Login = \'' .  $pk .  '\'') or die('Error al eliminar el usuario');
         $db->desconectar();
-    }
-    
-    //Transformar y devuelve la tabla Usu_Rol de un Usuario especificado en un array
-    public function arrayA ($pk){
-        $db = new Database();
-        
-        $sqlRol = $db->consulta('SELECT Login, NombreRol FROM Usu_Rol WHERE Login = \'' . $pk . '\'');
-        $arrayRol = array();
-        
-        while ($row_rol = mysqli_fetch_assoc($sqlRol))
-            $arrayRol[] = $row_rol;
-        
-        $db->desconectar();
-        return $arrayRol;
-    }
-    
-    //Transformar y devuelve la tabla Usu_Pag de un Usuario especificado en un array
-    public function arrayB ($pk){
-        $db = new Database();
-        
-        $sqlPag = $db->consulta('SELECT Login, Url FROM Usu_Pag WHERE Login = \'' . $pk . '\'');
-        $arrayPag = array();
-        
-        while ($row_pag = mysqli_fetch_assoc($sqlPag))
-            $arrayPag[] = $row_pag;
-        
-        $db->desconectar();
-        return $arrayPag;
     }
 }
 ?>

@@ -22,8 +22,8 @@ Fecha: /10/2015
     if(!$_SESSION){
     session_start();
     header('Location:../vistas/login.php');
-
     }
+
     include('../html/navBar.html');
     include_once('../controladores/ctrl_func.php');
 ?>

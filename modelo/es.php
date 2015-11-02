@@ -79,7 +79,7 @@ $idioma["modificar_rol_addUsu_cancel"] = "Cancelar";
 //vista usuario
 $idioma["anadir_usuario"] = "Añadir usuario";
 $idioma["advertencia_borrar_usuario"] = "Advertencia";
-$idioma["seguro_borrar_usuario"] = "¿Est&#225; seguro de eliminar este usuario?";
+$idioma["seguro_borrar_usuario"] = "¿Est&#225; seguro de eliminar el usuario ";
 $idioma["NO_borrar_usuario"] = "NO";
 $idioma["SI_borrar_usuario"] = "SI";
 

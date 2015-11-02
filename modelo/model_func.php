@@ -99,8 +99,6 @@ class Funcionalidad implements iModel {
     
     //Muestra los datos de la $pk indicada. Devuelve una array asociativo
     public function consultar ($pk){        
-        $db = new Database();
-        
         //Obtener la descripcion
         $funDesc = $this->getDesc($pk);
         //Obtener los roles
@@ -110,8 +108,7 @@ class Funcionalidad implements iModel {
         
         //Crear array asoc con los datos de $pk
         $func = array("funName"=>"$pk", "descripcion"=>"$funDesc", "roles"=>$arrayRol, "paginas"=>$arrayPag);
-        
-        $db->desconectar();
+
         return $func;
     }
     

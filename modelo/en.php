@@ -45,6 +45,15 @@ $idioma["anadir_func_nombre"] = "Name:";
 $idioma["anadir_func_descripcion"] = "Description:";
 $idioma["anadir_func_crear"] = "Create";
 
+//mofidicar funcionalidad
+$idioma["modificar_funcionalidad_func"] = "Feature";
+$idioma["modificar_funcionalidad_nombre"] = "Name:";
+$idioma["modificar_funcionalidad_descripcion"] = "Description:";
+$idioma["modificar_funcionalidad_paginas"] = "Pages";
+$idioma["modificar_funcionaliidad_roles"] = "Roles";
+$idioma["modificar_funcionalidad_crear"] = "Create";
+$idioma["modificar_funcionalidad_guardar"] = "Save Feature";
+
 //vista rol
 $idioma["anadir_rol"] = "Add rol";
 $idioma["advertencia_borrar_rol"] = "Warning";

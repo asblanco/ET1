@@ -9,9 +9,6 @@ Fecha: 25/10/2015
 <?php
     include_once "../modelo/model_rol.php";
 
-    //Conectar con la base de datos
-    $db = new Database();
-
     $modRol = new Rol();
 
     //Nuevos datos
@@ -43,7 +40,4 @@ Fecha: 25/10/2015
     }else {
         echo "Fallo en la actualizacion del rol";
     }
-
-    //Desconectar de la base de datos
-    $db->desconectar();
 ?>

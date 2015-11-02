@@ -39,7 +39,7 @@ $idioma["NO_borrar_funcionalidad"] = "NO";
 $idioma["SI_borrar_funcionalidad"] = "SI";
 
 
-//aadir funalidad
+//anadir funcionalidad
 $idioma["anadir_func_funcionalidad"] = "Funcionalidad";
 $idioma["anadir_func_nombre"] = "Nombre:";
 $idioma["anadir_func_descripcion"] = "Descripci&oacuten:";
@@ -54,7 +54,7 @@ $idioma["NO_borrar_rol"] = "NO";
 $idioma["SI_borrar_rol"] = "SI";
 
 
-//aadir rol
+//anadir rol
 $idioma["anadir_rol_rol"] = "Rol";
 $idioma["anadir_rol_nombre"] = "Nombre:";
 $idioma["anadir_rol_descripcion"] = "Descripci&oacuten:";
@@ -84,7 +84,7 @@ $idioma["NO_borrar_usuario"] = "NO";
 $idioma["SI_borrar_usuario"] = "SI";
 
 
-//aadir ususario
+//anadir ususario
 $idioma["anadir_usuario_usuario"] = "Usuario";
 $idioma["anadir_usuario_nombre"] = "Nombre:";
 $idioma["anadir_usuario_roles"] = "Roles";
@@ -102,4 +102,27 @@ $idioma["modificar_usuario_paginas"] = "Paginas";
 $idioma["modificar_usuario_permisos"] = "Permisos";
 $idioma["modificar_usuario_guardar"] = "Guardar Usuario";
 
+//vista pagina
+$idioma["anadir_pagina"] = "Añadir p&#225gina";
+$idioma["advertencia_borrar_pagina"] = "Advertencia";
+$idioma["seguro_borrar_pagina"] = "¿Est&#225; seguro de eliminar la pagina ";
+$idioma["NO_borrar_pagina"] = "NO";
+$idioma["SI_borrar_pagina"] = "SI";
+
+
+//anadir pagina
+$idioma["anadir_pagina_pagina"] = "Usuario";
+$idioma["anadir_pagina_nombre"] = "Nombre:";
+$idioma["anadir_pagina_roles"] = "Roles";
+$idioma["anadir_pagina_paginas"] = "Paginas";
+$idioma["anadir_pagina_permisos"] = "Permisos";
+$idioma["anadir_pagina_crear"] = "Crear";
+
+
+//mofidicar pagina
+$idioma["modificar_pagina_url"] = "Url";
+$idioma["modificar_pagina_descripcion"] = "Descripci&oacuten:";
+$idioma["modificar_pagina_usuarios"] = "Usuarios";
+$idioma["modificar_pagina_funcionalidad"] = "Funcionalidad";
+$idioma["modificar_pagina_guardar"] = "Guardar Pagina";
 ?>

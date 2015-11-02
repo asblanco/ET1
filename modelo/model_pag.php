@@ -107,14 +107,14 @@ class Pagina implements iModel {
     //Muestra los datos de la $pk indicada. Devuelve una array asociativo
     public function consultar ($pk){
         //Obtener la descripcion
-        $pagDesc = $this->getDesc($pk);
+        $funcDesc = $this->getDesc($pk);
         //Obtener los usuarios
         $arrayPag = $this->getUsuarios($pk);
         //Obtener la funcionalidad
         $func = $this->getFunc($pk);
         
         //Crear array asoc con los datos de $pk
-        $pag = array("Url"=>"$pk", "descripcion"=>"$funDesc", "paginas"=>$arrayPag, "funcionalidad"=>$func);
+        $pag = array("Url"=>"$pk", "descripcion"=>"$funcDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
 
         return $pag;
     }

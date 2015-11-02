@@ -9,9 +9,6 @@ Fecha: 25/10/2015
 <?php
     include_once "../modelo/model_rol.php";
 
-    //Conectar con la bd
-    $db = new Database();
-
     //Conectar con el modelo de Rol
     $roles = new Rol();
     
@@ -22,7 +19,4 @@ Fecha: 25/10/2015
     include '../modelo/model_usu.php';
     $usu = new Usuario();
     $users = $usu->listar();
-
-    //Desconectar de la base de datos
-    $db->desconectar();
 ?>

@@ -62,19 +62,28 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `Pagina` (
-  `Url` varchar(65) NOT NULL COMMENT 'url',
-  `DescPag` varchar(65) DEFAULT NULL COMMENT 'descripcion de pagina',
+  `Url` varchar(65) NOT NULL,
+  `DescPag` varchar(65) DEFAULT NULL,
   `NombreFun` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Volcado de datos para la tabla `Pagina`
+--
+
+INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`) VALUES
+('Pagina1', 'Esta pagina es de ejemplo', 'Crear Usuario');
+
+--
 -- Disparadores `Pagina`
 --
+
 DELIMITER //
 CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
  FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
 //
 DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -156,6 +165,14 @@ CREATE TABLE IF NOT EXISTS `Usu_Pag` (
   `Login` varchar(65) NOT NULL,
   `Url` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `Usu_Rol`
+--
+
+INSERT INTO `Usu_Pag` (`Login`, `Url`) VALUES
+('admin', 'Pagina1');
+
 
 -- --------------------------------------------------------
 

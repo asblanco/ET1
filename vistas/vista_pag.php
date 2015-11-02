@@ -23,6 +23,7 @@ Fecha: /10/2015
     }
 
     include('../html/navBar.html'); 
+    include_once('../controladores/ctrl_pag.php');
 ?>
 
 <html lang="en">
@@ -32,106 +33,84 @@ Fecha: /10/2015
         <div class="btn-parent">
             <div class="btn-child"> <!-- centran el boton -->
                 <a href="vista_pag_add.php" class="btn btn-info btn-lg">
-                    A&ntilde;adir P&aacute;gina
+                   <?php echo $idioma["anadir_pagina"]; ?>
                     <div class="glyphicon glyphicon-plus"></div>
                 </a>
             </div>
         </div>
         <br>
-        
-        
-        <!-- Pagina1 1 -->
-        <div class="col-md-8 col-md-offset-2 well">
-            <a href="#" data-toggle="modal" data-target="#removeModal"> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
-            <div class="col-md-15">
-                <div class="titulo">Pagina 1</div>
-                <br>
-                <p class="tamanho">Tamaño:</p>
-                <p class="tipo">Tipo:</p>
-                <div class="col-md-4 col-md-offset-1 well">
-                    <div class="titulo">Usuarios</div>
-                    <br>
-                    <p class="usuario">Usuario 1</p>
-                    <p class="usuario">Usuario 2</p>
-                    <p class="usuario">Usuario 3</p>
-                    <p class="usuario">Usuario 4</p>
-                </div>
                 
-                <div class="col-md-4 col-md-offset-2 well">
-                    <div class="titulo">Funcionalidades</div>
-                    <br>
-                    <p class="funcionalidad">Funcionalidad 1</p>
-                    <p class="funcionalidad">Funcionalidad 2</p>
-                    <p class="funcionalidad">Funcionalidad 3</p>
-                    <p class="funcionalidad">Funcionalidad 4</p>
-                </div>
-               <br></br><br></br><br></br><br></br><br></br><br></br><br>
-                <div class="btn-child"> <!-- centran el boton -->
-                    
-                    <a href="vista_pag_mod.php" class="btn btn-info btn-lg">
-                        Modificar
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-                <!-- Pagina 2 -->
-        <div class="col-md-8 col-md-offset-2 well">
-            <a href="#" data-toggle="modal" data-target="#removeModal"> <div class="remove-icon glyphicon glyphicon-remove"></div></a>
-            <div class="col-md-15">
-                <div class="titulo">Pagina 2</div>
-                <br>
-                <p class="tamanho">Tamaño:</p>
-                <p class="tipo">Tipo:</p>
-                <div class="col-md-4 col-md-offset-1 well">
-                    <div class="titulo">Usuarios</div>
-                    <br>
-                    <p class="usuario">Usuario 1</p>
-                    <p class="usuario">Usuario 2</p>
-                    <p class="usuario">Usuario 3</p>
-                    <p class="usuario">Usuario 4</p>
-                </div>
-                
-                <div class="col-md-4 col-md-offset-2 well">
-                    <div class="titulo">Funcionalidades</div>
-                    <br>
-                    <p class="funcionalidad">Funcionalidad 1</p>
-                    <p class="funcionalidad">Funcionalidad 2</p>
-                    <p class="funcionalidad">Funcionalidad 3</p>
-                    <p class="funcionalidad">Funcionalidad 4</p>
-                </div>
-               <br></br><br></br><br></br><br></br><br></br><br></br><br>
-                <div class="btn-child"> <!-- centran el boton -->
-                    
-                    <a href="vista_pag_mod.php" class="btn btn-info btn-lg">
-                        Modificar
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php 
+        if(isset($_GET['confirmar'])){
+            $paginas::eliminar($_GET['confirmar']);
+            header('location:vista_pag.php');
+        } else if (isset($_GET['borrar'])){
+        ?>
         <!-- Remove Modal Page -->
-        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal show" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="myModalLabel">Advertencia</h4>
+                <h4 id="myModalLabel"><?php echo $idioma["advertencia_borrar_pagina"]; ?></h4>
               </div>
                 
             <!-- Contenido de la página login modal -->
               <div class="modal-body">
-                 <p>¿Est&#225; seguro de eliminar la funcionalidad?</p>
+                 <p><?php echo $idioma["seguro_borrar_pagina"]; echo $_GET['borrar'];?> ?</p>
               </div>
                 
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary">Si</button>
+                <button type="button" class="btn btn-default" onclick ="location='vista_pag.php'"><?php echo $idioma["NO_borrar_pagina"]; ?></button>
+                  <a class="btn btn-primary" href="vista_pag.php?confirmar=<?php echo $_GET['borrar'];?>"><?php echo $idioma["SI_borrar_pagina"]; ?></a>
               </div>
             </div>
           </div>
         </div>
+         <?php
+        		}
+									?>
+        
+        <!-- Mostrar Paginas -->
+        <?php 
+        foreach ($arrayPaginas as $pag)  {
+            //Array asoc de los datos de la pagina del bucle
+            $pagX = $paginas->consultar($pag['Url']);
+        ?>
+        <div class='col-md-8 col-md-offset-2 well'>
+            <a href="vista_pag.php?borrar=<?php echo $pag['Url'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <div class='col-md-6'>
+                <div class='titulo'> <?php echo $pag['Url'] ?>
+                    <a href="vista_pag_mod.php?pag=<?php echo $pag['Url'];?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
+                </div>
+                <p class='descripcion'> <?php echo $pag['DescPag']; ?> </p>
+            </div>
+            <div class='col-md-3'>
+                <h4>Usuarios</h4>
+                <?php
+                // array asociativo de los usuarios ligados a la pagina actual del bucle
+                $arrayUsuarios = $pagX['usuarios'];
+                foreach ($arrayUsuarios as $usu ){
+                    echo "<p> {$usu['Login']} </p>";
+                }
+                 ?>
+           
+            </div>
+            <div class='col-md-2'>
+                <h4>Funcionalidad</h4>
+                <?php
+                //Funcionalidad ligada a la pagina actual del bucle
+                $func = $pagX['funcionalidad'];
+                 ?>
+                <p><?php echo $func; ?></p>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
     </body>
 </html>
+
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>

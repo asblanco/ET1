@@ -22,20 +22,14 @@ include_once "../modelo/es.php";
 }
 
 
-?>
-
-
-<?php
-
 if(!$_SESSION){
 session_start();
 header('Location:../vistas/login.php');
 
 }
 
-?>
+ include('../html/navBar.html'); ?>
 
-<?php include('../html/navBar.html'); ?>
 <html lang="en">
     <div id="includedContent"></div>
     
@@ -90,29 +84,6 @@ header('Location:../vistas/login.php');
                     </li>
                     <li class="list-group-item">
                         Pagina3
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                </ul>
-            </div> 
-			
-			  <div class="panel panel-default">
-              <div class="panel-heading"><?php echo $idioma["modificar_usuario_permisos"]; ?>
-                  <div class="pull-right">
-                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
-                  </div>
-                </div>
-                <!-- List group -->
-                <ul class="list-group list-onHover">
-                    <li class="list-group-item">
-                        Permiso1
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                    <li class="list-group-item">
-                        Permiso2
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                    <li class="list-group-item">
-                        Permiso3
                         <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
                     </li>
                 </ul>

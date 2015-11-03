@@ -114,7 +114,7 @@ class Pagina implements iModel {
         $func = $this->getFunc($pk);
         
         //Crear array asoc con los datos de $pk
-        $pag = array("Url"=>"$pk", "descripcion"=>"$funcDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
+        $pag = array("url"=>"$pk", "descripcion"=>"$funcDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
 
         return $pag;
     }
@@ -122,7 +122,7 @@ class Pagina implements iModel {
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
-        //Guardar los datos de $pk
+        //Guardar los datos de $pk en un array
         $datos = consultar($pk);
         $oldUrl = $datos['url'];
         $newUrl = $objeto->url;
@@ -169,20 +169,19 @@ class Pagina implements iModel {
         
     //Actualizar funcionalidades asociadas a la pagina
         //Crear una variable con la funcionalidad sin modificar
-        $OldFunc = $db->consulta('SELECT NombreFun FROM Pagina WHERE Url = \'' . $pk .  '\'');
-        
+        $OldFunc = $datos['funcionalidad'];
         
         //Crear variable con la nueva funcionalidad
         $NewFunc = $objeto->funcionalidad;
         
         //Comparar si hay nueva funcionalidad comparando $NewFunc y $OldFunc
-        if ($NewFunc != $OldFunc){
-            $db->consulta('UPDATE Pagina SET NombreFun=' . $newFunc . ' WHERE Url = \'' . $pk .  '\'');
+        if ($NewFunc != $OldFunc && $NewFunc!=""){
+            $db->consulta('UPDATE Pagina SET NombreFun=\'' . $newFunc . '\' WHERE Url = \'' . $pk .  '\'');
         }
         
         //Comparar si hay funcionalidad a eliminar 
-        if ($newFunc==NULL){
-            $db->consulta('DELETE FROM Pagina WHERE Url = \'' . $pk .  '\'');
+        if ($newFunc==""){
+            $db->consulta('DELETE NombreFun FROM Pagina WHERE Url = \'' . $pk .  '\'');
         }
            
         
@@ -215,19 +214,17 @@ class Pagina implements iModel {
             
             //Comprueba si esta relacionada con algun usuario
             if($objeto->usuarios != array()){
-                foreach ($objeto->$arrayA as $newUsu){
+                foreach ($objeto->usuarios as $newUsu){
                     $queryUsu = 'INSERT INTO Usu_Pag (Login, Url) VALUES ('.$newUsu['Login'].','.$objeto->url.')';
                     $db->consulta($queryUsu) or die('Error al insertar los usuarios');
                 }
             }
             
             //Comprueba si esta relacionada con alguna funcionalidad
-            if($objeto->$arrayB != array()){
-                foreach ($objeto->$arrayB as $newFun){
-                    $queryFun = 'INSERT INTO Pagina (NombreFun) VALUES ('.$newFun['NombreFun'].') WHERE Url ='.$objeto->rolName.'';
-                    $db->consulta($queryFun) or die('Error al insertar la funcionalidad');
-                }
-            }     
+            $newFunc = $objeto->funcionalidad;
+            $queryFun = 'INSERT INTO Pagina (NombreFun) VALUES ('.$newFunc.') WHERE Url ='.$objeto->url.'';
+            $db->consulta($queryFun) or die('Error al insertar la funcionalidad');
+     
             return true;
         } else return false;
         

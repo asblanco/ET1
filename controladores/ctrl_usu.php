@@ -8,15 +8,14 @@ Fecha: 28/10/2015
 <?php
     include_once "../modelo/model_usu.php";
 
-    //Conectar con la bd
-    $db = new Database();
-
-    //Conectar con el modelo de usuarios
-    $usuarios = new Usuario();
+    //Conectar con el modelo de Usuario
+    $users = new Usuario();
     
-    //Array asociativo de la tabla roles, tiene NombreRol y DescRol
-    $arrayUsuarios = $usuarios->listar();
+    //Array asociativo de la tabla Usuarios, tiene Login, Nombre, etc..
+    $arrayUsuarios = $users->listar();
 
-    //Desconectar de la base de datos
-    $db->desconectar();
+//Listar Roles en modificar y crear Usuario
+    include '../modelo/model_rol.php';
+    $rol = new Rol();
+    $roles = $rol->listar();
 ?>

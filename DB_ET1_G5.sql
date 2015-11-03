@@ -1,5 +1,9 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.12deb2
+-- http://www.phpmyadmin.net
+--
 -- Servidor: localhost
--- Tiempo de generación: 20-10-2015 a las 17:56:33
+-- Tiempo de generación: 03-11-2015 a las 12:12:31
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -40,11 +44,11 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 --
 
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
-('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
 ('Consultar Usuario', 'Permite consultar usuarios de la aplicación.'),
-('Modificar Usuario', 'Permite modificar usuarios de la aplicación.'),
+('Crear apuesta', 'Permite crear nuevas apuestas'),
+('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
 ('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.'),
-('Crear apuesta', 'Permite crear nuevas apuestas');
+('Modificar Usuario', 'Permite modificar usuarios de la aplicación.');
 
 --
 -- Disparadores `Funcionalidad`
@@ -64,20 +68,20 @@ DELIMITER ;
 CREATE TABLE IF NOT EXISTS `Pagina` (
   `Url` varchar(65) NOT NULL,
   `DescPag` varchar(65) DEFAULT NULL,
-  `NombreFun` varchar(65) NOT NULL
+  `NombreFun` varchar(65) NOT NULL,
+  `NombrePag` varchar(65) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Pagina`
 --
 
-INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`) VALUES
-('Pagina1', 'Esta pagina es de ejemplo', 'Crear Usuario');
+INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
+('Pagina1', 'Esta pagina es de ejemplo', 'Crear Usuario', 'PaginaDePrueba');
 
 --
 -- Disparadores `Pagina`
 --
-
 DELIMITER //
 CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
  FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
@@ -101,9 +105,9 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
 ('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.'),
+('Animador', 'Anima a todo el equipo'),
 ('Gestor de apuestas', 'Gestiona las paginas de apuestas'),
-('Gestor de ventas', 'Gestiona las ventas de la pagina'),
-('Animador', 'Anima a todo el equipo');
+('Gestor de ventas', 'Gestiona las ventas de la pagina');
 
 -- --------------------------------------------------------
 
@@ -121,12 +125,11 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 --
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
-('Administrador', 'Crear Usuario'),
-('Administrador', 'Modificar Usuario'),
 ('Administrador', 'Consultar Usuario'),
+('Gestor de apuestas', 'Crear apuesta'),
+('Administrador', 'Crear Usuario'),
 ('Administrador', 'Eliminar Usuario'),
-('Gestor de apuestas', 'Crear apuesta');
-
+('Administrador', 'Modificar Usuario');
 
 -- --------------------------------------------------------
 
@@ -148,12 +151,9 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 -- Volcado de datos para la tabla `Usuario`
 --
 
-INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14'),
--- password admin
-('prueba', 'c893bad68927b457dbed39460e6afd62', 'Prueba', 'Prueba', 'prueba@gm.com', '2015-11-01');
--- password prueba 
-
+INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`, `Idioma`) VALUES
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14', 'es'),
+('prueba', 'c893bad68927b457dbed39460e6afd62', 'Prueba', 'Prueba', 'prueba@gm.com', '2015-11-01', 'es');
 
 -- --------------------------------------------------------
 
@@ -167,12 +167,11 @@ CREATE TABLE IF NOT EXISTS `Usu_Pag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `Usu_Rol`
+-- Volcado de datos para la tabla `Usu_Pag`
 --
 
 INSERT INTO `Usu_Pag` (`Login`, `Url`) VALUES
 ('admin', 'Pagina1');
-
 
 -- --------------------------------------------------------
 
@@ -269,7 +268,6 @@ ADD CONSTRAINT `FK_Pagina` FOREIGN KEY (`Url`) REFERENCES `Pagina` (`Url`) ON DE
 ALTER TABLE `Usu_Rol`
 ADD CONSTRAINT `FK_Rol` FOREIGN KEY (`NombreRol`) REFERENCES `Rol` (`NombreRol`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FK_Usuario` FOREIGN KEY (`Login`) REFERENCES `Usuario` (`Login`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

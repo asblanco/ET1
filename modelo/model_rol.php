@@ -22,6 +22,10 @@ class Rol implements iModel {
         $this->funcionalidades= $func;
     }
     
+    private function getName ($objeto) {
+        return $objeto->rolName;
+    }
+    
     private function getDesc ($pk){
         $db = new Database();
         
@@ -119,12 +123,12 @@ class Rol implements iModel {
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
-        //Guardar los datos de $pk
+        //Array de los datos de $pk
         $modRol = $objeto->consultar($pk);
         
-        $oldName = $modRol->rolName;
+        $oldName = $modRol['rolName'];
         $newName = $objeto->rolName;
-        $oldDesc = $modRol->descripcion;
+        $oldDesc = $modRol['descripcion'];
         $newDesc = $objeto->descripcion;
      
         $newDesc = $objeto->descripcion;
@@ -136,7 +140,7 @@ class Rol implements iModel {
         
     //Actualizar usuarios asociados al rol
         //Array asociativo con los usuarios antes de modificar
-        $arrayOldUsu = $objeto->arrayA($pk);
+        $arrayOldUsu = $this->getUsu($pk);
         
         //Crear el array con los usuarios modificados
         $arrayNewUsu = $objeto->usuarios;
@@ -165,7 +169,7 @@ class Rol implements iModel {
         
     //Actualizar funcionalidades asociadas al rol
         //Crear un array asociativo con las funcionalidades sin modificar
-        $arrayOldFunc = $objeto->arrayB($pk);
+        $arrayOldFunc = $this->getFunc($pk);
         
         //Crear el array asociativo con las nuevas funcionalidades
         $arrayNewFunc = $objeto->funcionalidades;

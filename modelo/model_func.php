@@ -115,8 +115,8 @@ class Funcionalidad implements iModel {
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
-        //Guardar los datos de $pk en la clase actual
-        $datos = $objeto->consultar($pk);
+        //Array con los datos de $pk
+        $datos = $this->consultar($pk);
         $oldName = $datos['funName'];
         $newName = $objeto->funName;
         
@@ -125,19 +125,12 @@ class Funcionalidad implements iModel {
         if ($oldDesc != $newDesc){
             $sql = 'UPDATE Funcionalidad SET DescFun=\''. $newDesc . '\' WHERE NombreFun = \'' . $oldName .  '\'' ;
 
-            if ($db->consulta($sql) === TRUE) {
-                echo "Guardado correctamente";
-            } else {
-                echo "Error actualizando la descripcion: " . $this->db->error;
-            }  
+            $db->consulta($sql) or die('Error al modificar la descripcion'); 
         }
 
-        //Actualizar páginas con esa funcionalidad
+    //Actualizar páginas con esa funcionalidad
         //Crear un array asociativo con las páginas sin modificar
-        $sqlOldPag = $db->consulta('SELECT Url FROM Pagina WHERE NombreFun = \'' . $pk .  '\'');
-        $arrayOldPag = array();
-        while ($row_pag = mysqli_fetch_assoc($sqlOldPag))
-            $arrayOldPag[] = $row_pag;
+        $arrayOldPag = $this->getPaginas($pk);
         
         //Crear el array asociativo con las nuevas páginas
         $arrayNewPag = $objeto->paginas;
@@ -156,20 +149,17 @@ class Funcionalidad implements iModel {
             //Comprobar si el usuario está en $arrayNewUsu
             $cont=0;
             foreach($arrayNewPag as $new){
-                if($new['Url'] == $old['Url']) $cont++;
+                if($new == $old['Url']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
             if( $cont == 0 ){
-                $db->consulta('DELETE NombreFun FROM Pagina WHERE Url = \'' . $old['Url'] . '\'');
+                $db->consulta('DELETE NombreFun FROM Pagina WHERE Url = \'' . $old['Url'] . '\' AND NombreFun = \'' . $pk . '\'');
             }
         }
         
         //Actualizar roles con esa funcionalidad
         //Crear un array asociativo con los roles sin modificar
-        $sqlOldRol = $db->consulta('SELECT NombreRol FROM Rol WHERE NombreFun = \'' . $pk .  '\'');
-        $arrayOldRol = array();
-        while ($row_rol = mysqli_fetch_assoc($sqlOldRol))
-            $arrayOldRol[] = $row_rol;
+        $arrayOldRol = $this->getRoles($pk);
         
         //Crear el array asociativo con los nuevos roles
         $arrayNewRol = $objeto->roles;

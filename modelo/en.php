@@ -86,19 +86,14 @@ $idioma["modificar_rol_addUsu_cancel"] = "Cancel";
 //vista usuario
 $idioma["anadir_usuario"] = "Add user";
 $idioma["advertencia_borrar_usuario"] = "Warning";
-$idioma["seguro_borrar_usuario"] = "Are you sure about delete this user?";
+$idioma["seguro_borrar_usuario"] = "Are you sure abour delete this user?";
 $idioma["NO_borrar_usuario"] = "NO";
 $idioma["SI_borrar_usuario"] = "YES";
 
 
-//añadir rol
+//aadir rol
 $idioma["anadir_usuario_usuario"] = "User";
-$idioma["modificar_usuario_login"] = "Login";
 $idioma["anadir_usuario_nombre"] = "Name:";
-$idioma["modificar_usuario_apellidos"] = "Surname";
-$idioma["modificar_usuario_email"] = "Email";
-$idioma["modificar_usuario_password"] = "Passsword";
-$idioma["modificar_usuario_idioma"] = "Language";
 $idioma["anadir_usuario_roles"] = "Roles";
 $idioma["anadir_usuario_paginas"] = "Pages";
 $idioma["anadir_usuario_permisos"] = "Permissions";
@@ -108,7 +103,7 @@ $idioma["anadir_usuario_crear"] = "Create";
 //mofidicar usuario
 $idioma["modificar_usuario_usuario"] = "User";
 $idioma["modificar_usuario_nombre"] = "Name:";
-$idioma["modificar_usuario_roles"] = "Roles";
+$idioma["modificar_usuario_descripcion"] = "Description:";
 $idioma["modificar_usuario_usuarios"] = "Users";
 $idioma["modificar_usuario_paginas"] = "Pages";
 $idioma["modificar_usuario_permisos"] = "Permissions";

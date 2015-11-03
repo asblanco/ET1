@@ -106,13 +106,8 @@ $idioma["anadir_usuario_crear"] = "Crear";
 
 //mofidicar usuario
 $idioma["modificar_usuario_usuario"] = "Usuario";
-$idioma["modificar_usuario_login"] = "Login";
 $idioma["modificar_usuario_nombre"] = "Nombre:";
-$idioma["modificar_usuario_apellidos"] = "Apellidos";
-$idioma["modificar_usuario_email"] = "Email";
-$idioma["modificar_usuario_password"] = "Contraseña";
-$idioma["modificar_usuario_idioma"] = "Idioma";
-$idioma["modificar_usuario_roles"] = "Roles";
+$idioma["modificar_usuario_descripcion"] = "Descripci&oacuten:";
 $idioma["modificar_usuario_usuarios"] = "Usuarios";
 $idioma["modificar_usuario_paginas"] = "Paginas";
 $idioma["modificar_usuario_permisos"] = "Permisos";

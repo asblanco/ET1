@@ -1,105 +1,155 @@
-<!DOCTYPE html>
 <!--
 ===========================================================================
-Modifica los usuarios
-Creado por: Andrea Araujo Cuquejo, Elías Martínez Blanco
-Fecha: 23/10/2015
+Modifica un usuario
 ============================================================================
 -->
-
-<!--Importar las cabeceras y la barra de navegacion-->
-
-
 <?php
-session_start();
+    session_start();
 
+    if(!$_SESSION["idioma_usuario"]){
+        include_once "../modelo/es.php";
+    }else{
+        include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
+    }
 
-if(!$_SESSION["idioma_usuario"]){
-include_once "../modelo/es.php";
+    if(!$_SESSION){
+        session_start();
+        header('Location:../vistas/login.php');
+    }
     
-}else{
-    include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
-}
-
-
-if(!$_SESSION){
-session_start();
-header('Location:../vistas/login.php');
-
-}
-
- include('../html/navBar.html'); ?>
+    include('../html/navBar.html'); 
+    //Para poder visualizar los datos
+    include_once('../controladores/ctrl_usu.php');
+    //Obtiene el login a modificar de la URL
+    $login = $_GET['usu'];
+    //Obtiene los datos del usuario en un array asociativo
+    $u = new Usuario();
+    $usu = $u->consultar($login); 
+?>
 
 <html lang="en">
-    <div id="includedContent"></div>
-    
     <!-- Contenido Principal -->
-    <body>
+    <body>    
+      <form action='../controladores/ctrl_usu_mod.php' method="post">
         <div class="col-md-8 col-md-offset-2">
+            <!-- Login, nombre, etc.. -->
             <div class="panel panel-default">
               <div class="panel-heading"><?php echo $idioma["modificar_usuario_usuario"]; ?></div>
               <div class="panel-body">
-                <p><?php echo $idioma["modificar_usuario_nombre"]; ?>  <input type="text" name="nombreRol" value="Administrador"></p>
+                <div class="form-group">
+                    <label for="usu"><?php echo $idioma["modificar_usuario_login"]; ?></label>
+                    <input type="text" class="form-control" name="usu" value="<?php echo $login; ?>">
+                    <!-- Campo oculto para pasar el login del usuario al ctrl de modificar -->
+                    <input hidden="hidden" type="text" name="oldName" value="<?php echo $login; ?>">
+                </div>
+                  
+                <div class="form-group">
+                    <label for="comment"><?php echo $idioma["modificar_usuario_nombre"]; ?></label>
+                    <textarea class="form-control" rows="1" name="comment"><?php echo $usu['nombre'] ?></textarea>
+                </div>
+                  
+                <div class="form-group">
+                    <label for="comment"><?php echo $idioma["modificar_usuario_apellidos"]; ?></label>
+                    <textarea class="form-control" rows="1" name="comment"><?php echo $usu['apellidos'] ?></textarea>
+                </div>
+                  
+                <div class="form-group">
+                    <label for="comment"><?php echo $idioma["modificar_usuario_email"]; ?></label>
+                    <textarea class="form-control" rows="1" name="email"><?php echo $usu['email'] ?></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment"><?php echo $idioma["modificar_usuario_password"]; ?></label>
+                    <textarea class="form-control" rows="1" name="pass"><?php echo $usu['password'] ?></textarea>
+                </div>
+                  
               </div>
             </div>
             
+            <!-- Lista de roles asociados al usuario -->
             <div class="panel panel-default">
-              <div class="panel-heading"><?php echo $idioma["modificar_usuario_usuarios"]; ?>
+              <div class="panel-heading">
+              <?php echo $idioma["modificar_usuario_roles"]; ?>
                     <div class="pull-right">
-                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
+                      <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($roles as $r){ ?>
+                                  <li><a href="#" class="small" data-value="<?php echo $r['NombreRol']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $r['NombreRol']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
                   </div>
                </div>
               <!-- List group -->
               <ul class="list-group list-onHover">
-                <li class="list-group-item">
-                    Rol1
-                    <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                </li>
-                <li class="list-group-item">
-                    Rol2
-                    <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                </li>
-                <li class="list-group-item">
-                    Rol3
-                    <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                </li>
+                <?php 
+                  foreach ($usu['roles'] as $rol){ ?>
+                    <li class="list-group-item">
+                        <?php echo $rol['NombreRol'] ?>
+                        <a class="rm" href="#" onclick="removeRol()"><div class="glyphicon glyphicon-trash"></div></a>
+                    <!-- Elemento oculto para pasar el array con los roles modificados por POST -->
+                    <input hidden="hidden" type="text" name="newRol[]" value="<?php echo $rol['NombreRol']; ?>">
+                    </li>
+                <?php } ?>
               </ul>
             </div>
             
+            <!-- Lista de paginas asociadas al usuario -->
             <div class="panel panel-default">
-              <div class="panel-heading"><?php echo $idioma["modificar_usuario_paginas"]; ?>
+              <div class="panel-heading">
+              <?php echo $idioma["modificar_usuario_paginas"]; ?>
                   <div class="pull-right">
                     <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
                   </div>
                 </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover">
-                    <li class="list-group-item">
-                        Pagina1
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                    <li class="list-group-item">
-                        Pagina2
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
-                    <li class="list-group-item">
-                        Pagina3
-                        <a href="#"><div class="glyphicon glyphicon-trash"></div></a>
-                    </li>
+                    <?php 
+                      foreach ($usu['paginas'] as $pag){ ?>
+                        <li class="list-group-item">
+                            <?php echo $pag['nombrePag'] ?>
+                            <a href="#" class="rm" onclick="removePag()"><div class="glyphicon glyphicon-trash"></div></a>
+                        <!-- Elemento oculto para pasar el array con las paginas modificados por POST -->
+                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['NombrePag']; ?>">
+                        </li>
+                        
+                    <?php } ?>
                 </ul>
             </div> 
             
             <!-- Boton guardar -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <a href="vista_usu.php" class="btn btn-info btn-lg">
-                        <?php echo $idioma["modificar_usuario_guardar"]; ?>
-                        <div class="glyphicon glyphicon-save"></div>
-                    </a>
+                    <button type="submit" class="btn btn-info btn-lg" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
+                    <div class="glyphicon glyphicon-save"></div>
+                    </button>
                 </div>
             </div>
-        </div>    
-    </body>
+        </div>
+      </form>
+        
+    <script>
+        function removeRol() {
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        function removePag() {
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        
+    </script>
+        
+    </body> 
 </html>
 
 <!--Importar los jquery, bootstrap.js y el footer-->

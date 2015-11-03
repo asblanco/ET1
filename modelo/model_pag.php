@@ -11,12 +11,14 @@ include_once 'interface.php';
 //Clase paginas con las funciones de iModel implementadas
 class Pagina implements iModel {
     private $url;
+    private $nombrePag;
     private $descripcion;
     private $usuarios = array();
     private $funcionalidad;
     
-    public function __construct($url="", $desc="", $usu=array(), $func="") {
+    public function __construct($url="",$nombrePag="", $desc="", $usu=array(), $func="") {
         $this->url=$url;
+        $this->nombrePag=$nombrePag;
         $this->descripcion=$desc;
         $this->usuarios = $usu;
         $this->funcionalidad= $func;
@@ -26,6 +28,23 @@ class Pagina implements iModel {
         $db = new Database();
         
         $query = 'SELECT DescPag FROM Pagina WHERE Url = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $desc = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $desc;
+    }
+    
+    private function getNombrePag ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT NombrePag FROM Pagina WHERE Url = \'' . $pk .  '\'';
         $result = $db->consulta($query);
 
         /* array numérico */
@@ -93,7 +112,7 @@ class Pagina implements iModel {
     public function listar(){
         $db = new Database();
         
-        $sqlPag = $db->consulta("SELECT Url, DescPag, NombreFun FROM Pagina");
+        $sqlPag = $db->consulta("SELECT Url, NombrePag, DescPag, NombreFun FROM Pagina");
         $arrayPag = array();
         
         while ($row_pag = mysqli_fetch_assoc($sqlPag)) {
@@ -106,6 +125,8 @@ class Pagina implements iModel {
     
     //Muestra los datos de la $pk indicada. Devuelve una array asociativo
     public function consultar ($pk){
+        //Obtener el nombre
+        $nomPag = $this->getNombrePag($pk);
         //Obtener la descripcion
         $funcDesc = $this->getDesc($pk);
         //Obtener los usuarios
@@ -114,7 +135,7 @@ class Pagina implements iModel {
         $func = $this->getFunc($pk);
         
         //Crear array asoc con los datos de $pk
-        $pag = array("url"=>"$pk", "descripcion"=>"$funcDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
+        $pag = array("url"=>"$pk", "nombre"=>$nomPag, "descripcion"=>"$funcDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
 
         return $pag;
     }
@@ -126,6 +147,14 @@ class Pagina implements iModel {
         $datos = consultar($pk);
         $oldUrl = $datos['url'];
         $newUrl = $objeto->url;
+        
+        $oldNom = $datos['nombrePag'];
+        $newNom = $objeto->nombrePag;
+        if ($oldNom != $newNom){
+            $sql = 'UPDATE Pagina SET NombrePag=\'' . $newNom . '\' WHERE Url = \'' . $oldUrl .  '\'' ;
+
+            $db->consulta($sql) or die('Error al modificar la descripcion');
+        }
         
         $oldDesc = $datos['descripcion'];
         $newDesc = $objeto->descripcion;
@@ -150,7 +179,7 @@ class Pagina implements iModel {
             $resultado = $db->consulta('SELECT Login FROM Usu_Pag WHERE Login = \'' . $new['Login'] .  '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nuevo
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Pag (Login, NombrePag) VALUES ('.$new['Login'].','.$objeto->url.')');
+                $db->consulta('INSERT INTO Usu_Pag (Login, Url) VALUES ('.$new['Login'].','.$objeto->url.')');
             }
         }
         
@@ -209,7 +238,7 @@ class Pagina implements iModel {
         if ($objeto->exists($objeto->url) == false) 
         {
              //Inserta esa pagina en la tabla Pagina
-            $insertaPag = "INSERT INTO Pagina (Url, DescPag) VALUES ('$objeto->url','$objeto->descripcion')";
+            $insertaPag = "INSERT INTO Pagina (Url, NombrePag, DescPag) VALUES ('$objeto->url','$objeto->nombrePag','$objeto->descripcion')";
             $db->consulta($InsertaPag) or die('Error al crear la pagina');
             
             //Comprueba si esta relacionada con algun usuario

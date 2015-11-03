@@ -69,11 +69,11 @@ include_once('../controladores/ctrl_usu.php');
         		}
 									?>
         
-        <!-- Mostrar Roles -->
+        <!-- Mostrar Usuarios -->
         <?php 
         foreach ($arrayUsuarios as $usu)  {
-            //Array asoc de los datos del rol del bucle
-            $usuX = $usuarios->consultar($usu['Login']);
+            //Array asoc de los datos del usuario del bucle
+            $usuX = $users->consultar($usu['Login']);
         ?>
         <div class='col-md-8 col-md-offset-2 well'>
             <a href="vista_usu.php?borrar=<?php echo $usu['Login'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>

@@ -7,7 +7,7 @@ Fecha: 03/11/2015
 -->
 
 <?php
-    include_once "../modelo/model_rol.php";
+    include_once "../modelo/model_usu.php";
 
     $modUsu = new Usuario();
 

@@ -8,7 +8,7 @@ Fecha: 28/10/2015
 <?php
     include_once "../modelo/model_usu.php";
 
-    //Conectar con el modelo de Rol
+    //Conectar con el modelo de Usuario
     $users = new Usuario();
     
     //Array asociativo de la tabla Usuarios, tiene Login, Nombre, etc..

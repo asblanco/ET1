@@ -13,11 +13,14 @@ Fecha: 03/11/2015
 
     //Nuevos datos
     $oldUsuLogin = $_POST['oldLogin'];
-    $newUsuLogin = $_POST['usu'];
+    $newUsuLogin = $_POST['newLogin'];
     $newUsuName = $_POST['nombre'];
     $newUsuSurname = $_POST['apellidos'];
     $newUsuEmail = $_POST['email'];
-    $newUsuPassword = $_POST['pass'];
+    $oldUsuPassword = $_POST['oldPass'];
+    $newUsuPassword = $_POST['newPass'];
+    $fechaAlta = $_POST['fechaAlta'];
+    $idioma= $_POST['idioma'];
     $roles = array();
     $pags = array();
 
@@ -37,7 +40,7 @@ Fecha: 03/11/2015
       }
     }
 
-    $newUsu = new Usuario($newUsuLogin, $newRolDesc, $roles, $pags);
+    $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $fechaAlta, $newUsuEmail, $newUsuPassword, $idioma);
     if ($modUsu->modificar($oldUsuLogin, $newUsu) == true){
         header('location:../vistas/vista_usu.php'); 
     }else {

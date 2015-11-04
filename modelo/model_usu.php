@@ -133,6 +133,7 @@ class Usuario implements iModel {
     
     private function setPassword($oldPass, $newPass, $pk){
         //Si oldPass coincide con la de la de $pk en la BD, hace UPDATE con newPass
+        
     }
     
     public function setIdioma ($newIdioma, $pk){
@@ -196,7 +197,7 @@ class Usuario implements iModel {
         return $rol;
     }
     
-    //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado
+    //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objeto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
         //Guardar los datos de $pk

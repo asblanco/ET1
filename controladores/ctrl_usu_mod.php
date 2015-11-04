@@ -60,7 +60,7 @@ Fecha: 03/11/2015
             echo "Fallo en la actualizacion del usuario";
         }
     }
-    //Si la contraseña antigua no es igual a la de la BD o la contraseña antigua esta vacia
+    //Si la contraseña antigua no es igual a la de la BD
     else if (strcmp($password, $oldUsuPassword) !== 0){
         echo "La contraseña actual introducida no corresponde con la del usuario.";
     }

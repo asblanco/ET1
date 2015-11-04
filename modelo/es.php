@@ -43,6 +43,8 @@ $idioma["SI_borrar_funcionalidad"] = "SI";
 $idioma["anadir_func_funcionalidad"] = "Funcionalidad";
 $idioma["anadir_func_nombre"] = "Nombre:";
 $idioma["anadir_func_descripcion"] = "Descripci&oacuten:";
+$idioma["anadir_func_usuarios"] = "Usuarios";
+$idioma["anadir_func_roles"] = "Roles";
 $idioma["anadir_func_crear"] = "Crear";
 
 

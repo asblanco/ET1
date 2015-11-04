@@ -153,10 +153,10 @@ class Usuario implements iModel {
             $db = new Database();
         
             $pass = $this->getPassword($pk);
-        
+
             if(strcmp($oldPass, $pass)!== 0){ return false;}
             //Si la contraseña nueva no es la cadena vacia en MD5
-            else if (strcmp($newPass, "d41d8cd98f00b204e9800998ecf8427e")!== 0){
+            else if (strcmp($newPass, "")!== 0){
                 $sql = 'UPDATE Usuario SET Password=\''. $newPass . '\' WHERE Usuario.Login = \'' . $pk .  '\'' ;
                 $db->consulta($sql) or die('Error al modificar la password');
                 $result = $db->consulta($sql);

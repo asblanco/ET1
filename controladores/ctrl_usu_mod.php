@@ -48,27 +48,32 @@ Fecha: 03/11/2015
       }
     }
 
-    $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $fechaAlta, $newUsuEmail, $newUsuPassword, $idioma);
     //Contraseña del usuarios de la BD
     $password = $modUsu->getPassword($oldUsuLogin);
     //d41d8cd98f00b204e9800998ecf8427e es cadena vacia en MD5
     //Si el campo contraseña esta vacio, modifica los datos
     if (strcmp($oldUsuPassword, "d41d8cd98f00b204e9800998ecf8427e")== 0){
+            $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $fechaAlta, $newUsuEmail, "", $idioma);
         if ($modUsu->modificar($oldUsuLogin, $newUsu) == true){
             header('location:../vistas/vista_usu.php'); 
         }else {
             echo "Fallo en la actualizacion del usuario";
         }
     }
-    //Si la contraseña antigua no es igual a la de la BD
+    //Si la contraseña antigua no es igual a la de la BD o la contraseña antigua esta vacia
     else if (strcmp($password, $oldUsuPassword) !== 0){
         echo "La contraseña actual introducida no corresponde con la del usuario.";
-    }else{
-        if ($modUsu->modificar($oldUsuLogin, $newUsu) == true){
-            header('location:../vistas/vista_usu.php'); 
-        }else {
-            echo "Fallo en la actualizacion del usuario";
-        }
     }
+        //Si la nueva contraseña esta vacia dar error
+        else if (strcmp($newUsuPassword, "d41d8cd98f00b204e9800998ecf8427e")== 0){
+            echo "La nueva contraseña no puede estar vacia.";}
+            else {
+                $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $fechaAlta, $newUsuEmail, $newUsuPassword, $idioma);
+                if ($modUsu->modificar($oldUsuLogin, $newUsu) == true){
+                    header('location:../vistas/vista_usu.php'); 
+                }else {
+                    echo "Fallo en la actualizacion del usuario";
+                }
+            }
 
 ?>

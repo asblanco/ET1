@@ -100,7 +100,6 @@ $idioma["anadir_usuario_usuario"] = "Usuario";
 $idioma["anadir_usuario_nombre"] = "Nombre:";
 $idioma["anadir_usuario_roles"] = "Roles";
 $idioma["anadir_usuario_paginas"] = "Paginas";
-$idioma["anadir_usuario_permisos"] = "Permisos";
 $idioma["anadir_usuario_crear"] = "Crear";
 
 
@@ -127,11 +126,11 @@ $idioma["SI_borrar_pagina"] = "SI";
 
 
 //anadir pagina
+$idioma["anadir_pagina_pag"] = "Pagina";
 $idioma["anadir_pagina_pagina"] = "Usuario";
 $idioma["anadir_pagina_nombre"] = "Nombre:";
 $idioma["anadir_pagina_roles"] = "Roles";
 $idioma["anadir_pagina_paginas"] = "Paginas";
-$idioma["anadir_pagina_permisos"] = "Permisos";
 $idioma["anadir_pagina_crear"] = "Crear";
 
 

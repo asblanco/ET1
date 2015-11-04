@@ -95,8 +95,7 @@ class Rol implements iModel {
         
         $sqlRol = $db->consulta("SELECT NombreRol, DescRol FROM Rol");
         $arrayRol = array();
-        //Numero de roles 
-        $this->numRoles = 0;
+        
         while ($row_rol = mysqli_fetch_assoc($sqlRol)) {
             $arrayRol[] = $row_rol;
         }

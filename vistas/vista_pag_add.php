@@ -31,7 +31,7 @@ include('../html/navBar.html');
         <div class="col-md-8 col-md-offset-2"> <!-- centra el contenido -->
             <!-- Nombre y descripcion -->
             <div class="panel panel-default">
-              <div class="panel-heading">Página</div>
+              <div class="panel-heading"><?php echo $idioma["anadir_pagina_pag"]; ?></div>
                 <blockquote>
                     <br>
                     Selecciona la página:
@@ -69,7 +69,7 @@ include('../html/navBar.html');
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
                     <a href="vista_rol.php" class="btn btn-info btn-lg">
-                        Crear
+                        <?php echo $idioma["anadir_pagina_crear"];?>
                         <div class="glyphicon glyphicon-ok"></div>
                     </a>
                 </div>

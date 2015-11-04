@@ -22,20 +22,12 @@ include_once "../modelo/es.php";
 }
 
 
-?>
-
-
-<?php
-
 if(!$_SESSION){
 session_start();
 header('Location:../vistas/login.php');
 
 }
-
-?>
-
-<?php include('../html/navBar.html'); ?>
+ include('../html/navBar.html'); ?>
 
 <html lang="en">
     <div id="includedContent"></div>
@@ -64,14 +56,6 @@ header('Location:../vistas/login.php');
             
             <div class="panel panel-default">
               <div class="panel-heading"><?php echo $idioma["anadir_usuario_paginas"]; ?>
-                  <div class="pull-right">
-                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
-                  </div>
-                </div>
-            </div> 
-			
-		    <div class="panel panel-default">
-              <div class="panel-heading"><?php echo $idioma["anadir_usuario_permisos"]; ?>
                   <div class="pull-right">
                     <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
                   </div>

@@ -114,10 +114,10 @@ Modifica un usuario
                     <?php 
                       foreach ($usu['paginas'] as $pag){ ?>
                         <li class="list-group-item">
-                            <?php echo $pag['nombrePag'] ?>
+                            <?php echo $pag['Url'] ?>
                             <a href="#" class="rm" onclick="removePag()"><div class="glyphicon glyphicon-trash"></div></a>
                         <!-- Elemento oculto para pasar el array con las paginas modificados por POST -->
-                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['NombrePag']; ?>">
+                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['Url']; ?>">
                         </li>
                         
                     <?php } ?>

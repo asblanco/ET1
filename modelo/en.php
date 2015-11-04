@@ -53,6 +53,7 @@ $idioma["modificar_funcionalidad_paginas"] = "Pages";
 $idioma["modificar_funcionaliidad_roles"] = "Roles";
 $idioma["modificar_funcionalidad_crear"] = "Create";
 $idioma["modificar_funcionalidad_guardar"] = "Save Feature";
+$idioma["modificar_funcionalidad_addUsu"] = "Select users";
 
 //vista rol
 $idioma["anadir_rol"] = "Add rol";
@@ -91,27 +92,47 @@ $idioma["NO_borrar_usuario"] = "NO";
 $idioma["SI_borrar_usuario"] = "YES";
 
 
-//añadir rol
+//añadir usuario
 $idioma["anadir_usuario_usuario"] = "User";
-$idioma["modificar_usuario_login"] = "Login";
 $idioma["anadir_usuario_nombre"] = "Name:";
-$idioma["modificar_usuario_apellidos"] = "Surname";
-$idioma["modificar_usuario_email"] = "Email";
-$idioma["modificar_usuario_password"] = "Passsword";
-$idioma["modificar_usuario_idioma"] = "Language";
 $idioma["anadir_usuario_roles"] = "Roles";
 $idioma["anadir_usuario_paginas"] = "Pages";
-$idioma["anadir_usuario_permisos"] = "Permissions";
 $idioma["anadir_usuario_crear"] = "Create";
 
 
 //mofidicar usuario
 $idioma["modificar_usuario_usuario"] = "User";
 $idioma["modificar_usuario_nombre"] = "Name:";
+$idioma["modificar_usuario_login"] = "Login";
+$idioma["modificar_usuario_apellidos"] = "Surname";
+$idioma["modificar_usuario_email"] = "Email";
+$idioma["modificar_usuario_password"] = "Passsword";
+$idioma["modificar_usuario_idioma"] = "Language";
 $idioma["modificar_usuario_roles"] = "Roles";
 $idioma["modificar_usuario_usuarios"] = "Users";
 $idioma["modificar_usuario_paginas"] = "Pages";
-$idioma["modificar_usuario_permisos"] = "Permissions";
 $idioma["modificar_usuario_guardar"] = "Save user";
 
+//vista pagina
+$idioma["anadir_pagina"] = "Add page";
+$idioma["advertencia_borrar_pagina"] = "Warning";
+$idioma["seguro_borrar_pagina"] = "Are you sure to delete page ";
+$idioma["NO_borrar_pagina"] = "NO";
+$idioma["SI_borrar_pagina"] = "YES";
+
+//anadir pagina
+$idioma["anadir_pagina_pag"] = "Page";
+$idioma["anadir_pagina_pagina"] = "User";
+$idioma["anadir_pagina_nombre"] = "Name:";
+$idioma["anadir_pagina_roles"] = "Roles";
+$idioma["anadir_pagina_paginas"] = "Pages";
+$idioma["anadir_pagina_crear"] = "Create";
+
+
+//mofidicar pagina
+$idioma["modificar_pagina_url"] = "Url";
+$idioma["modificar_pagina_descripcion"] = "Description:";
+$idioma["modificar_pagina_usuarios"] = "Users";
+$idioma["modificar_pagina_funcionalidad"] = "Feature";
+$idioma["modificar_pagina_guardar"] = "Save page";
 ?>

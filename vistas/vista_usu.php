@@ -40,7 +40,7 @@ include_once('../controladores/ctrl_usu.php');
                 
         <?php 
         if(isset($_GET['confirmar'])){
-            $usuarios::eliminar($_GET['confirmar']);
+            $users::eliminar($_GET['confirmar']);
             header('location:vista_usu.php');
         } else if (isset($_GET['borrar'])){
         ?>
@@ -102,7 +102,7 @@ include_once('../controladores/ctrl_usu.php');
                 // array asociativo de las paginas ligadas al usuario actual del bucle
                 $arrayPaginas = $usuX['paginas'];
                 foreach ($arrayPaginas as $pag ){
-                    echo "<p> {$pag['Url']} </p>";
+                    echo "<p> {$pag['NombrePag']} </p>";
                 }
                  ?>   
             </div>

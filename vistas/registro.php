@@ -68,7 +68,7 @@ Fecha: /10/2015
                    <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label for="password"><?php echo $idioma["reg_pass"]; ?></label>
-                            <input  id="password" type="password" name='password' class="form-control" placeholder="Password" id="password" required data-validation-required-message="Please enter your password.">
+                            <input  id="password" type="password" name='password' class="form-control" placeholder="Password" required data-validation-required-message="Please enter your password.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>

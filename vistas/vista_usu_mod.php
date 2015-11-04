@@ -145,8 +145,7 @@ Modifica un usuario
         
         
     <script src="../js/jquery.min.js"></script>
-    <script src="../js/login.js"></script>
-    <script>src="../js/md5.js" type="text/javascript"> </script>
+    <script src="../js/md5.js" type="text/javascript"> </script>
         
     <script>
         function removeRol() {
@@ -159,19 +158,12 @@ Modifica un usuario
               $(this).parents('li').remove();
             })
         }
-            
-        function cifrarOld(){
-            var input_oldPass = document.getElementById("oldPass");
-            input_oldPass.value = hex_md5(input_oldPass.value);
-            }
-        function cifrarNew(){
-            var input_newPass = document.getElementById("newPass");
-            input_newPass.value = hex_md5(input_newPass.value);
-            }
         
         function cifrar(){
-            cifrarOld();
-            cifrarNew();
+            var input_oldPass = document.getElementById("oldPass");
+            input_oldPass.value = hex_md5(input_oldPass.value);
+            var input_newPass = document.getElementById("newPass");
+            input_newPass.value = hex_md5(input_newPass.value);
         }
         
     </script>

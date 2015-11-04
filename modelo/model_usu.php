@@ -22,7 +22,6 @@ class Usuario implements iModel {
     private $idioma;
     private $roles = array();
     private $paginas = array();
-    public $numUsuarios = 0;
     
     public function __construct($loginClase="" , $nombre="", $apellidos="" , $fechaAlta="", $email="" , $password="" , $idioma="es", $rol=array(), $pag=array()) {
         $this->loginClase = $loginClase;
@@ -105,6 +104,23 @@ class Usuario implements iModel {
         return $email;
     }
     
+    public function getPassword ($pk){
+        $db = new Database();
+        
+        $query = 'SELECT Password FROM Usuario WHERE Login = \'' . $pk .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $pass = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        
+        return $pass;
+    }
+    
     private function getRoles ($pk){
         $db = new Database();
         
@@ -131,23 +147,23 @@ class Usuario implements iModel {
         return $arrayPag;
     }
     
-    public function setPassword($oldPass, $newPass, $pk){
+    //Devuelve true o false si realizo el cambio correctamente o no
+    private function setPassword($oldPass, $newPass, $pk){
         //Si oldPass coincide con la de la de $pk en la BD, hace UPDATE con newPass
-		  
             $db = new Database();
         
-            $sqlPass = 'SELECT Password FROM Usuario WHERE Login = \'' . $pk .  '\'' ;
-            $pass = $db->consulta($sqlPass);
-            if($oldPass!=$pass) return false;
+            $pass = $this->getPassword($pk);
         
-            $sql = 'UPDATE Usuario SET Password=\''. $newPass . '\' WHERE Login = \'' . $pk .  '\'' ;
-            $db->consulta($sql) or die('Error al modificar la password');
-            $result = $db->consulta($sql);
-            if ($result === TRUE){
-                return true;
-            }else return false;
-        
+            if(strcmp($oldPass, $pass)!== 0){ return false;}
+            //Si la contraseña nueva no es la cadena vacia en MD5
+            else if (strcmp($newPass, "d41d8cd98f00b204e9800998ecf8427e")!== 0){
+                $sql = 'UPDATE Usuario SET Password=\''. $newPass . '\' WHERE Usuario.Login = \'' . $pk .  '\'' ;
+                $db->consulta($sql) or die('Error al modificar la password');
+                $result = $db->consulta($sql);
                 $db->desconectar();
+
+                return $result;
+            }else return true;
     }
     
     public function setIdioma ($newIdioma, $pk){
@@ -200,13 +216,15 @@ class Usuario implements iModel {
         $usuFecha = $this->getFechaAlta($pk);
         //Obtener el email
         $usuEmail = $this->getEmail($pk);
+        //Obtener contraseña
+        $usuPass = $this->getPassword($pk);
         //Obtener los roles
         $arrayRol = $this->getRoles($pk);
         //Obtener las paginas
         $arrayPag = $this->getPaginas($pk);
         
         //Crear array asoc con los datos de $pk
-        $rol = array("loginClase"=>"$pk", "nombre"=>"$usuNombre", "apellidos"=>"$usuApellidos", "fechaAlta"=>"$usuFecha", "email"=>"$usuEmail", "roles"=>$arrayRol, "paginas"=>$arrayPag );
+        $rol = array("loginClase"=>"$pk", "nombre"=>"$usuNombre", "apellidos"=>"$usuApellidos", "fechaAlta"=>"$usuFecha", "email"=>"$usuEmail", "password"=>$usuPass, "roles"=>$arrayRol, "paginas"=>$arrayPag );
         
         return $rol;
     }
@@ -217,22 +235,22 @@ class Usuario implements iModel {
         //Guardar los datos de $pk
         $datos = $objeto->consultar($pk);
 		
-	       	$oldLogin= $datos['loginClase'];
+	    $oldLogin= $datos['loginClase'];
         $newLogin = $objeto->loginClase;
-		
 		
         $oldNombre = $datos['nombre'];
         $newNombre = $objeto->nombre;
 		
-			if ($oldNombre != $newNombre){
+		if ($oldNombre != $newNombre){
             $sql = 'UPDATE Usuario SET Nombre=\''. $newNombre . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar el nombre');
         }
+        
 		$oldApellidos = $datos['apellidos'];
         $newApellidos = $objeto->apellidos;
 		
-			if ($oldApellidos != $newApellidos){
+		if ($oldApellidos != $newApellidos){
             $sql = 'UPDATE Usuario SET Apellidos=\''. $newApellidos . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar los apellidos');
@@ -241,7 +259,7 @@ class Usuario implements iModel {
 		$oldEmail = $datos['email'];
         $newEmail = $objeto->email;
 		
-			if ($oldEmail != $newEmail){
+		if ($oldEmail != $newEmail){
             $sql = 'UPDATE Usuario SET Email=\''. $newEmail . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar el email');
@@ -326,11 +344,14 @@ class Usuario implements iModel {
             }
             return true;
         }
-        return true;
         
+        $oldPass = $datos['password'];
+        $newPass = $objeto->password;
         
+        $result = $this->setPassword($oldPass, $newPass, $pk);
         
         $db->desconectar();
+        return $result;
     }
     
     //Crea el objeto pasado en la tabla de la base de datos, si devuelve fue bien devuelve true

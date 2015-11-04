@@ -204,12 +204,11 @@ class Rol implements iModel {
             $sql = 'UPDATE Rol SET NombreRol= \'' . $newName . '\' WHERE Rol.NombreRol = \'' . $oldName .  '\'';
             $result = $db->consulta($sql) or trigger_error(mysqli_error()." in ".$sql);
         }
+        $db->desconectar();
         
         if ($result == TRUE)
             return true;
         else return false;
-        
-        $db->desconectar();
     }
     
     //Crea el objeto pasado en la tabla de la base de datos, si devuelve fue bien devuelve true

@@ -132,7 +132,7 @@ class Usuario implements iModel {
     }
     
     public function setPassword($oldPass, $newPass, $pk){
-        //Si oldPass no coincide con la de la de $pk en la BD, hace UPDATE con newPass
+        //Si oldPass coincide con la de la de $pk en la BD, hace UPDATE con newPass
 		  
             $db = new Database();
         
@@ -140,15 +140,12 @@ class Usuario implements iModel {
             $pass = $db->consulta($sqlPass);
             if($oldPass!=$pass) return false;
         
-			if ($oldPass != $newPass){
             $sql = 'UPDATE Usuario SET Password=\''. $newPass . '\' WHERE Login = \'' . $pk .  '\'' ;
             $db->consulta($sql) or die('Error al modificar la password');
             $result = $db->consulta($sql);
-                if ($result === TRUE)
-                    return true;
-                else return false;
-            }
-            return true;
+            if ($result === TRUE){
+                return true;
+            }else return false;
         
                 $db->desconectar();
     }

@@ -37,7 +37,7 @@ Modifica un usuario
               <div class="panel-heading"><?php echo $idioma["modificar_usuario_usuario"]; ?></div>
               <div class="panel-body">
                 <div class="form-group">
-                    <label for="usu"><?php echo $idioma["modificar_usuario_login"]; ?></label>
+                    <label for="login"><?php echo $idioma["modificar_usuario_login"]; ?></label>
                     <input type="text" class="form-control" name="newLogin" value="<?php echo $login; ?>">
                     <!-- Campo oculto para pasar el login del usuario al ctrl de modificar -->
                     <input hidden="hidden" type="text" name="oldLogin" value="<?php echo $login; ?>">
@@ -46,28 +46,28 @@ Modifica un usuario
                 </div>
                   
                 <div class="form-group">
-                    <label for="comment"><?php echo $idioma["modificar_usuario_nombre"]; ?></label>
+                    <label for="nombre"><?php echo $idioma["modificar_usuario_nombre"]; ?></label>
                     <textarea class="form-control" rows="1" name="nombre"><?php echo $usu['nombre'] ?></textarea>
                 </div>
                   
                 <div class="form-group">
-                    <label for="comment"><?php echo $idioma["modificar_usuario_apellidos"]; ?></label>
+                    <label for="apellidos"><?php echo $idioma["modificar_usuario_apellidos"]; ?></label>
                     <textarea class="form-control" rows="1" name="apellidos"><?php echo $usu['apellidos'] ?></textarea>
                 </div>
                   
                 <div class="form-group">
-                    <label for="comment"><?php echo $idioma["modificar_usuario_email"]; ?></label>
+                    <label for="email"><?php echo $idioma["modificar_usuario_email"]; ?></label>
                     <textarea class="form-control" rows="1" name="email"><?php echo $usu['email'] ?></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label for="comment"><?php echo $idioma["modificar_usuario_actual_password"]; ?></label>
-                    <textarea class="form-control" rows="1" id="oldPass" name="oldPass"></textarea>
+                    <label for="oldPass"><?php echo $idioma["modificar_usuario_actual_password"]; ?></label>
+                    <input type="password" class="form-control" id="oldPass" name="oldPass">
                 </div>
                   
                 <div class="form-group">
-                    <label for="comment"><?php echo $idioma["modificar_usuario_nueva_password"]; ?></label>
-                    <textarea class="form-control" rows="1" id="newPass" name="newPass"></textarea>
+                    <label for="newPass"><?php echo $idioma["modificar_usuario_nueva_password"]; ?></label>
+                    <input type="password" class="form-control" id="newPass" name="newPass">
                 </div>
                   
                   

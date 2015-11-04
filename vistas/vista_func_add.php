@@ -1,10 +1,13 @@
 <!--
 ===========================================================================
 Añade una nueva funcionalidad
-Creado por: 
-Fecha: /10/2015
+Creado por: David Ansia Fernández
+Fecha: 31/10/2015
 ============================================================================
 -->
+
+<!--Importar las cabeceras y la barra de navegacion-->
+
 
 <?php
     session_start();
@@ -22,21 +25,19 @@ Fecha: /10/2015
     header('Location:../vistas/login.php');
 
     }
-    
-    //Barra de navegacion
-    include('../html/navBar.html');
+     include('../html/navBar.html');
 ?>
 
 <html lang="en">
     <!-- Contenido Principal -->
-        <body>
+    <body>
         <div class="col-md-8 col-md-offset-2"> <!-- centra el contenido -->
             <!-- Nombre y descripcion -->
             <div class="panel panel-default">
               <div class="panel-heading"><?php echo $idioma["anadir_func_funcionalidad"]; ?></div>
               <div class="panel-body">
                 <div class="form-group">
-                    <label for="funcionalidad"><?php echo $idioma["anadir_func_nombre"]; ?></label>
+                    <label for="func"><?php echo $idioma["anadir_func_nombre"]; ?></label>
                     <input type="text" class="form-control" id="funcionalidad">
                 </div>
                   
@@ -46,6 +47,24 @@ Fecha: /10/2015
                 </div>
               </div>
             </div>
+            
+            <!-- Nuevos usuarios asociados a la funcionalidad -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><?php echo $idioma["anadir_func_usuarios"]; ?>
+                    <div class="pull-right">
+                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
+                  </div>
+               </div>
+            </div>
+            
+            <!-- Nuevas roles roles a las funcionalidades -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><?php echo $idioma["anadir_func_roles"]; ?>
+                  <div class="pull-right">
+                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
+                  </div>
+                </div>
+            </div> 
             
             <!-- Boton crear -->
             <div class="btn-parent">

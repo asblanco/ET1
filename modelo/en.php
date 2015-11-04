@@ -43,6 +43,8 @@ $idioma["SI_borrar_funcionalidad"] = "YES";
 $idioma["anadir_func_funcionalidad"] = "Feature";
 $idioma["anadir_func_nombre"] = "Name:";
 $idioma["anadir_func_descripcion"] = "Description:";
+$idioma["anadir_func_usuarios"] = "Users";
+$idioma["anadir_func_roles"] = "Roles";
 $idioma["anadir_func_crear"] = "Create";
 
 //mofidicar funcionalidad

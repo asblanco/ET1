@@ -121,7 +121,7 @@ class Usuario implements iModel {
     private function getPaginas ($pk){
         $db = new Database();
         
-        $sqlPag = $db->consulta('SELECT Login, NombrePag FROM Usu_Pag, Pagina WHERE Login = \'' . $pk . '\'');
+        $sqlPag = $db->consulta('SELECT Login, Url FROM Usu_Pag WHERE Login = \'' . $pk . '\'');
         $arrayPag = array();
         
         while ($row_pag = mysqli_fetch_assoc($sqlPag))

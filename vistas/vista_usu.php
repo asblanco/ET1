@@ -102,7 +102,7 @@ include_once('../controladores/ctrl_usu.php');
                 // array asociativo de las paginas ligadas al usuario actual del bucle
                 $arrayPaginas = $usuX['paginas'];
                 foreach ($arrayPaginas as $pag ){
-                    echo "<p> {$pag['NombrePag']} </p>";
+                    echo "<p> {$pag['Url']} </p>";
                 }
                  ?>   
             </div>

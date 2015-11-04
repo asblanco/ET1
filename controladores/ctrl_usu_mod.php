@@ -24,6 +24,14 @@ Fecha: 03/11/2015
     $roles = array();
     $pags = array();
 
+    //Comprobamos que se hayan cubierto todos los campos
+    if ( empty($newUsuLogin) OR empty($newUsuName) OR empty($newUsuSurname) OR (!filter_var($newUsuEmail, FILTER_VALIDATE_EMAIL) AND empty($newUsuEmail))){
+                // Set a 400 (bad request) response code and exit.
+                header("HTTP/1.0 400 bad request");
+                echo '<p>Por favor, rellene correctamente todos los campos</p>';
+                exit;
+     }
+
     if(isset($_POST['newRol'])){
       if (is_array($_POST['newRol'])) {
         foreach($_POST['newRol'] as $value){
@@ -41,9 +49,13 @@ Fecha: 03/11/2015
     }
 
     $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $fechaAlta, $newUsuEmail, $newUsuPassword, $idioma);
-    if ($modUsu->modificar($oldUsuLogin, $newUsu) == true){
-        header('location:../vistas/vista_usu.php'); 
+    if ($modUsu->setPassword($oldUsuPassword, $newUsuPassword, $oldUsuLogin) == true){
+        if (($modUsu->modificar($oldUsuLogin, $newUsu) == true)){
+            header('location:../vistas/vista_usu.php'); 
+        }else {
+            echo "Fallo en la actualizacion del usuario";
+        }
     }else {
-        echo "Fallo en la actualizacion del usuario";
+        echo "Fallo en la actualizacion de la password";
     }
 ?>

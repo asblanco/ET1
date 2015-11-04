@@ -131,9 +131,26 @@ class Usuario implements iModel {
         return $arrayPag;
     }
     
-    private function setPassword($oldPass, $newPass, $pk){
-        //Si oldPass coincide con la de la de $pk en la BD, hace UPDATE con newPass
+    public function setPassword($oldPass, $newPass, $pk){
+        //Si oldPass no coincide con la de la de $pk en la BD, hace UPDATE con newPass
+		  
+            $db = new Database();
         
+            $sqlPass = 'SELECT Password FROM Usuario WHERE Login = \'' . $pk .  '\'' ;
+            $pass = $db->consulta($sqlPass);
+            if($oldPass!=$pass) return false;
+        
+			if ($oldPass != $newPass){
+            $sql = 'UPDATE Usuario SET Password=\''. $newPass . '\' WHERE Login = \'' . $pk .  '\'' ;
+            $db->consulta($sql) or die('Error al modificar la password');
+            $result = $db->consulta($sql);
+                if ($result === TRUE)
+                    return true;
+                else return false;
+            }
+            return true;
+        
+                $db->desconectar();
     }
     
     public function setIdioma ($newIdioma, $pk){
@@ -207,20 +224,11 @@ class Usuario implements iModel {
         $newLogin = $objeto->loginClase;
 		
 		
-	       	$oldPassword = $datos['password'];
-        $newPassword = $objeto->password;
-		
-			if ($oldPassword != $newPassword){
-            $sql = 'UPDATE Usuario SET Password=\''. $newPassword . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
-
-            $db->consulta($sql) or die('Error al modificar la password');
-        }
-		
         $oldNombre = $datos['nombre'];
         $newNombre = $objeto->nombre;
 		
 			if ($oldNombre != $newNombre){
-            $sql = 'UPDATE Usuario SET Nombre='. $newNombre . ' WHERE Login = \'' . $oldLogin .  '\'' ;
+            $sql = 'UPDATE Usuario SET Nombre=\''. $newNombre . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar el nombre');
         }
@@ -228,7 +236,7 @@ class Usuario implements iModel {
         $newApellidos = $objeto->apellidos;
 		
 			if ($oldApellidos != $newApellidos){
-            $sql = 'UPDATE Usuario SET Apellidos='. $newApellidos . ' WHERE Login = \'' . $oldLogin .  '\'' ;
+            $sql = 'UPDATE Usuario SET Apellidos=\''. $newApellidos . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar los apellidos');
         }
@@ -237,17 +245,9 @@ class Usuario implements iModel {
         $newEmail = $objeto->email;
 		
 			if ($oldEmail != $newEmail){
-            $sql = 'UPDATE Usuario SET Email='. $newEmail . ' WHERE Login = \'' . $oldLogin .  '\'' ;
+            $sql = 'UPDATE Usuario SET Email=\''. $newEmail . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar el email');
-        }
-		$oldFechaAlta = $datos['fechaAlta'];
-        $newFechaAlta = $objeto->fechaAlta;
-	
-				if ($oldFechaAlta != $newFechaAlta){
-            $sql = 'UPDATE Usuario SET fechaAlta='. $newFechaAlta . ' WHERE Login = \'' . $oldLogin .  '\'' ;
-
-            $db->consulta($sql) or die('Error al modificar la fecha');
         }
 
         
@@ -321,14 +321,17 @@ class Usuario implements iModel {
         if($newLogin != "" && $existeNombre == false){
             //Comparar los datos con $objeto y modificar los que sean necesarios
             if ($oldLogin != $newLogin){
-                $sql = 'UPDATE Usuario SET Login=' . $newLogin . ' WHERE Login = \'' . $oldLogin .  '\'';
+                $sql = 'UPDATE Usuario SET Login=\'' . $newLogin . '\' WHERE Login = \'' . $oldLogin .  '\'';
                 $result = $db->consulta($sql);
+                if ($result === TRUE)
+                    return true;
+                    else return false;
             }
-        }
-        
-        if ($result === TRUE)
             return true;
-        else return false;
+        }
+        return true;
+        
+        
         
         $db->desconectar();
     }

@@ -62,12 +62,12 @@ Modifica un usuario
                 
                 <div class="form-group">
                     <label for="comment"><?php echo $idioma["modificar_usuario_actual_password"]; ?></label>
-                    <textarea class="form-control" rows="1" name="oldPass"></textarea>
+                    <textarea class="form-control" rows="1" id="oldPass" name="oldPass"></textarea>
                 </div>
                   
                 <div class="form-group">
                     <label for="comment"><?php echo $idioma["modificar_usuario_nueva_password"]; ?></label>
-                    <textarea class="form-control" rows="1" name="newPass"></textarea>
+                    <textarea class="form-control" rows="1" id="newPass" name="newPass"></textarea>
                 </div>
                   
                   
@@ -135,13 +135,18 @@ Modifica un usuario
             <!-- Boton guardar -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <button type="submit" class="btn btn-info btn-lg" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
+                    <button type="submit" class="btn btn-info btn-lg" onclick="cifrar()" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
                     <div class="glyphicon glyphicon-save"></div>
                     </button>
                 </div>
             </div>
         </div>
       </form>
+        
+        
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/login.js"></script>
+    <script>src="../js/md5.js" type="text/javascript"> </script>
         
     <script>
         function removeRol() {
@@ -153,6 +158,20 @@ Modifica un usuario
             $('.rm').click(function(){
               $(this).parents('li').remove();
             })
+        }
+            
+        function cifrarOld(){
+            var input_oldPass = document.getElementById("oldPass");
+            input_oldPass.value = hex_md5(input_oldPass.value);
+            }
+        function cifrarNew(){
+            var input_newPass = document.getElementById("newPass");
+            input_newPass.value = hex_md5(input_newPass.value);
+            }
+        
+        function cifrar(){
+            cifrarOld();
+            cifrarNew();
         }
         
     </script>

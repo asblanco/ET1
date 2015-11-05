@@ -310,11 +310,11 @@ class Usuario implements iModel {
         
         //Comparar si hay nuevas paginas recorriendo $arrayNewPag
         foreach ($arrayNewPag as $new){
-            $resultado = $db->consulta('SELECT Url FROM Usu_Pag WHERE Url = \'' . $new['Url'] .  '\'');
+            $resultado = $db->consulta('SELECT Url FROM Usu_Pag WHERE Url = \'' . $new .  '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nueva
             
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Pag (Login, Url) VALUES ('.$objeto->loginClase.','.$new['Url'].')');
+                $db->consulta('INSERT INTO Usu_Pag (Login, Url) VALUES ('.$objeto->loginClase.','.$new.')');
             }
         }
         

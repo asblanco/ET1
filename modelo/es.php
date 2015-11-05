@@ -131,13 +131,10 @@ $idioma["SI_borrar_pagina"] = "SI";
 
 //anadir pagina
 $idioma["anadir_pagina_pag"] = "Pagina";
-$idioma["anadir_pagina_pagina"] = "Usuario";
-$idioma["anadir_pagina_nombre"] = "Nombre:";
-$idioma["anadir_pagina_roles"] = "Roles";
-$idioma["anadir_pagina_paginas"] = "Paginas";
 $idioma["anadir_pagina_crear"] = "Crear";
 $idioma["anadir_pagina_selecciona"] = "Selecciona la página:";
 $idioma["anadir_pagina_nombre_pag"] = "Nombre de la página:";
+$idioma["anadir_pagina_desc"] = "Descripci&oacuten:";
 $idioma["anadir_pagina_nombre_usuarios"] = "Usuarios";
 $idioma["anadir_pagina_nombre_func"] = "Funcionalidades";
 

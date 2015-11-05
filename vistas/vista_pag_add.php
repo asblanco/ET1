@@ -48,6 +48,10 @@ header('Location:../vistas/login.php');
                         <label for="rol"><?php echo $idioma["anadir_pagina_nombre_pag"]; ?></label>
                         <input type="text" class="form-control" name="nombre">
                     </div>
+                    <div class="form-group">
+                        <label for="rol"><?php echo $idioma["anadir_pagina_desc"]; ?></label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
                   </div>
                 </div>
                 

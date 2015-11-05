@@ -126,10 +126,6 @@ $idioma["SI_borrar_pagina"] = "YES";
 
 //anadir pagina
 $idioma["anadir_pagina_pag"] = "Page";
-$idioma["anadir_pagina_pagina"] = "User";
-$idioma["anadir_pagina_nombre"] = "Name:";
-$idioma["anadir_pagina_roles"] = "Roles";
-$idioma["anadir_pagina_paginas"] = "Pages";
 $idioma["anadir_pagina_crear"] = "Create";
 $idioma["anadir_pagina_selecciona"] = "Select page:";
 $idioma["anadir_pagina_nombre_pag"] = "Page name:";

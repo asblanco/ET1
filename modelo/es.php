@@ -140,9 +140,12 @@ $idioma["anadir_pagina_nombre_func"] = "Funcionalidades";
 
 
 //mofidicar pagina
+$idioma["modificar_pagina_pagina"] = "Pagina";
+$idioma["modificar_pagina_nombre"] = "Nombre:";
 $idioma["modificar_pagina_url"] = "Url";
 $idioma["modificar_pagina_descripcion"] = "Descripci&oacuten:";
 $idioma["modificar_pagina_usuarios"] = "Usuarios";
 $idioma["modificar_pagina_funcionalidad"] = "Funcionalidad";
 $idioma["modificar_pagina_guardar"] = "Guardar Pagina";
+?>
 ?>

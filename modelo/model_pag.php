@@ -238,7 +238,7 @@ class Pagina implements iModel {
         if ($objeto->exists($objeto->url) == false) 
         {
              //Inserta esa pagina en la tabla Pagina
-            $insertaPag = "INSERT INTO Pagina (Url, NombrePag, DescPag) VALUES ('$objeto->url','$objeto->nombrePag','$objeto->descripcion')";
+            $InsertaPag = "INSERT INTO Pagina (Url, NombrePag, DescPag) VALUES ('$objeto->url','$objeto->nombrePag','$objeto->descripcion')";
             $db->consulta($InsertaPag) or die('Error al crear la pagina');
             
             //Comprueba si esta relacionada con algun usuario

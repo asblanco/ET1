@@ -136,6 +136,10 @@ $idioma["anadir_pagina_nombre"] = "Nombre:";
 $idioma["anadir_pagina_roles"] = "Roles";
 $idioma["anadir_pagina_paginas"] = "Paginas";
 $idioma["anadir_pagina_crear"] = "Crear";
+$idioma["anadir_pagina_selecciona"] = "Selecciona la página:";
+$idioma["anadir_pagina_nombre_pag"] = "Nombre de la página:";
+$idioma["anadir_pagina_nombre_usuarios"] = "Usuarios";
+$idioma["anadir_pagina_nombre_func"] = "Funcionalidades";
 
 
 //mofidicar pagina

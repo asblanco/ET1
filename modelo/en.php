@@ -133,12 +133,12 @@ $idioma["anadir_pagina_desc"] = "Description:";
 $idioma["anadir_pagina_nombre_usuarios"] = "Users";
 $idioma["anadir_pagina_nombre_func"] = "Features";
 
-
-
 //mofidicar pagina
+$idioma["modificar_pagina_pagina"] = "Page";
+$idioma["modificar_pagina_nombre"] = "Name";
 $idioma["modificar_pagina_url"] = "Url";
 $idioma["modificar_pagina_descripcion"] = "Description:";
 $idioma["modificar_pagina_usuarios"] = "Users";
 $idioma["modificar_pagina_funcionalidad"] = "Feature";
-$idioma["modificar_pagina_guardar"] = "Save page";
+$idioma["modificar_pagina_guardar"] = "Save Page";
 ?>

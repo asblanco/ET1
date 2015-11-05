@@ -146,10 +146,10 @@ class Rol implements iModel {
         
         //Comparar si hay nuevos usuarios recorriendo $newUsuarios
         foreach ($arrayNewUsu as $new){
-            $resultado = $db->consulta('SELECT Login FROM Usu_Rol WHERE Login = \'' . $new .  '\'');
+            $resultado = $db->consulta('SELECT Login FROM Usu_Rol WHERE Login = \'' . $new .  '\' AND NombreRol = \'' . $pk . '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nuevo
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('. $new .','.$objeto->rolName.')');
+                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES (\''. $new .'\',\''. $pk .'\')');
             }
         }
         
@@ -175,10 +175,10 @@ class Rol implements iModel {
         
         //Comparar si hay nuevas funcionalidades recorriendo $arrayNewFunc
         foreach ($arrayNewFunc as $new){
-            $resultado = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $new .  '\'');
+            $resultado = $db->consulta('SELECT NombreFun FROM Rol_Fun WHERE NombreFun = \'' . $new .  '\' AND NombreRol = \'' . $pk . '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nueva
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('. $objeto->rolName .','. $new .')');
+                $db->consulta('INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES (\''. $pk .'\',\''. $new .'\')');
             }
         }
         

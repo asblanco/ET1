@@ -16,7 +16,11 @@ Fecha: 25/10/2015
     $arrayRoles = $roles->listar();
 
 //Listar Usuarios en modificar y crear Rol
-    include '../modelo/model_usu.php';
+    include_once '../modelo/model_usu.php';
     $usu = new Usuario();
     $users = $usu->listar();
+//Listar Funcionalidades en modificar y crear Rol
+    include_once '../modelo/model_func.php';
+    $funcRol = new Funcionalidad();
+    $funcRoles = $funcRol->listar();
 ?>

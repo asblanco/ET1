@@ -15,26 +15,26 @@ Fecha: 25/10/2015
     $oldRolName = $_POST['oldName'];
     $newRolName = $_POST['rol'];
     $newRolDesc = $_POST['comment'];
-    $users = array();
+    $newUsers = array();
     $func = array();
 
-    if(isset($_POST['newUsu'])){
-      if (is_array($_POST['newUsu'])) {
-        foreach($_POST['newUsu'] as $value){
-          $users[] = $value;
+    if(isset($_POST['newUsuRol'])){
+      if (is_array($_POST['newUsuRol'])) {
+        foreach($_POST['newUsuRol'] as $value){
+          $newUsers[] = $value;
         }
       }
     }
 
-    if(isset($_POST['newFunc'])){
-      if (is_array($_POST['newFunc'])) {
-        foreach($_POST['newFunc'] as $value){
+    if(isset($_POST['newFuncRol'])){
+      if (is_array($_POST['newFuncRol'])) {
+        foreach($_POST['newFuncRol'] as $value){
           $func[] = $value;
         }
       }
     }
 
-    $newRol = new Rol($newRolName, $newRolDesc, $users, $func);
+    $newRol = new Rol($newRolName, $newRolDesc, $newUsers, $func);
     if ($modRol->modificar($oldRolName, $newRol) == true){
         header('location:../vistas/vista_rol.php'); 
     }else {

@@ -64,7 +64,7 @@ Fecha: 25/10/2015
                           <ul class="dropdown-menu">
                               <?php 
                               foreach($users as $u){ ?>
-                                  <li><a href="#" class="small addUsu" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
+                                  <li><a href="#" class="small addUsu valor" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -75,13 +75,13 @@ Fecha: 25/10/2015
                </div>
               <!-- List group -->
               <ul class="list-group list-onHover addU">
-                <?php 
-                  foreach ($rol['usuarios'] as $usu){ ?>
+                <?php
+                  foreach ($rol['usuarios'] as $usu){ ?> 
                     <li class="list-group-item">
                         <?php echo $usu['Login'] ?>
                         <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
                     <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
-                    <input hidden="hidden" class="valor" type="text" name="newUsu[]" value="<?php echo $usu['Login']; ?>">
+                    <input hidden="hidden" type="text" name="newUsuRol[]" value="<?php echo $usu['Login']; ?>">
                     </li>
                 <?php } ?>
               </ul>
@@ -92,18 +92,31 @@ Fecha: 25/10/2015
               <div class="panel-heading">
               <?php echo $idioma["modificar_rol_funcionalidades"]; ?>
                   <div class="pull-right">
-                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($funcRoles as $f){ ?>
+                                  <li><a href="#" class="small addFunc" value="<?php echo $f['NombreFun']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f['NombreFun']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
                   </div>
                 </div>
                 <!-- List group -->
-                <ul class="list-group list-onHover">
+                <ul class="list-group list-onHover addF">
                     <?php 
                       foreach ($rol['funcionalidades'] as $func){ ?>
                         <li class="list-group-item">
                             <?php echo $func['NombreFun'] ?>
                             <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
                         <!-- Elemento oculto para pasar el array con las funcionalidades modificados por POST -->
-                            <input hidden="hidden" type="text" name="newFunc[]" value="<?php echo $func['NombreFun']; ?>">
+                            <input hidden="hidden" type="text" name="newFuncRol[]" value="<?php echo $func['NombreFun']; ?>">
                         </li>
                         
                     <?php } ?>
@@ -133,10 +146,6 @@ Fecha: 25/10/2015
             })
         }
         
-        function addUsu(){
-            
-        }
-        
     </script>
         
     </body> 
@@ -148,12 +157,13 @@ Fecha: 25/10/2015
 <script>
 $(document).ready(function(){
     $(".addUsu").click(function(){
-        var value = $( ".valor" ).val();
-        $(".addU").append(" <li class='list-group-item'>" + value +  " <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsu[]' value='usuario de prueba></li>");
+        var value = $(this).attr("value");
+        $(".addU").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
     });
 
-    $("#addFunc").click(function(){
-        $("ol").append("<li>Appended item</li>");
+    $(".addFunc").click(function(){
+        var value = $(this).attr("value");
+        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
     });
 });
 </script>

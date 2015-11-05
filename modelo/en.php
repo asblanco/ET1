@@ -129,6 +129,7 @@ $idioma["anadir_pagina_pag"] = "Page";
 $idioma["anadir_pagina_crear"] = "Create";
 $idioma["anadir_pagina_selecciona"] = "Select page:";
 $idioma["anadir_pagina_nombre_pag"] = "Page name:";
+$idioma["anadir_pagina_desc"] = "Description:";
 $idioma["anadir_pagina_nombre_usuarios"] = "Users";
 $idioma["anadir_pagina_nombre_func"] = "Features";
 

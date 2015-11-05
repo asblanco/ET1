@@ -147,5 +147,5 @@ $idioma["modificar_pagina_descripcion"] = "Descripci&oacuten:";
 $idioma["modificar_pagina_usuarios"] = "Usuarios";
 $idioma["modificar_pagina_funcionalidad"] = "Funcionalidad";
 $idioma["modificar_pagina_guardar"] = "Guardar Pagina";
-?>
+
 ?>

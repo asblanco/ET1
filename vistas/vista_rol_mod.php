@@ -64,7 +64,7 @@ Fecha: 25/10/2015
                           <ul class="dropdown-menu">
                               <?php 
                               foreach($users as $u){ ?>
-                                  <li><a href="#" class="small" data-value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
+                                  <li><a href="#" class="small addUsu" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -74,14 +74,14 @@ Fecha: 25/10/2015
                   </div>
                </div>
               <!-- List group -->
-              <ul class="list-group list-onHover">
+              <ul class="list-group list-onHover addU">
                 <?php 
                   foreach ($rol['usuarios'] as $usu){ ?>
                     <li class="list-group-item">
                         <?php echo $usu['Login'] ?>
                         <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
                     <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
-                    <input hidden="hidden" type="text" name="newUsu[]" value="<?php echo $usu['Login']; ?>">
+                    <input hidden="hidden" class="valor" type="text" name="newUsu[]" value="<?php echo $usu['Login']; ?>">
                     </li>
                 <?php } ?>
               </ul>
@@ -133,6 +133,10 @@ Fecha: 25/10/2015
             })
         }
         
+        function addUsu(){
+            
+        }
+        
     </script>
         
     </body> 
@@ -140,3 +144,16 @@ Fecha: 25/10/2015
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
+
+<script>
+$(document).ready(function(){
+    $(".addUsu").click(function(){
+        var value = $( ".valor" ).val();
+        $(".addU").append(" <li class='list-group-item'>" + value +  " <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsu[]' value='usuario de prueba></li>");
+    });
+
+    $("#addFunc").click(function(){
+        $("ol").append("<li>Appended item</li>");
+    });
+});
+</script>

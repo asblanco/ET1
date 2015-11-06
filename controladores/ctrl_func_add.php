@@ -1,107 +1,46 @@
 <!--
 ===========================================================================
-Añade una nueva funcionalidad
-Creado por: 
-Fecha: 25/10/2015
+Controlador para procesar un nuevo registro
+Creado por: David Ansia
+Fecha: 01/11/2015
 ============================================================================
 -->
 
 <?php
-session_start();
+    include '../modelo/connect_DB.php';
+    include '../modelo/model_func.php';
 
+	//Recogemos variables
+    $nombre= $_POST['nombre'];
+    $paginas= $_POST['paginas'];
+    $roles= $_POST['roles'];
+    $desc=$_POST['desc'];
+	
 
-if(!$_SESSION["idioma_usuario"]){
-include_once "../modelo/es.php";
-    
-}else{
-    include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
-}
+   //Conectamos con el gestor de la bd
+    $db = new Database();
+    $newFunc = new Funcionalidad();
 
+    //Comprobamos si ya existe la funcionalidad
+    $consultaSiFunc = $newFunc->exists($nombre);
+    if ($consultaSiFunc == true){
+        echo '<p>La funcionalidad ' . $nombre . ' ya existe en la bd</p>';
+    } else {
+        $insertFunc = new Funcionalidad ($nombre, $desc, $roles, $paginas);
+        header('Location: ../vistas/vista_func.php');
+        if ($newFunc->crear($insertFunc) == true){
+            echo 'La funcionalidad ' . $nombre . ' ha sido registrada en el sistema';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+ 
+        } else{
+            echo "Error al insertar la funcionalidad";
+        }
+    }
 
-if(!$_SESSION){
-session_start();
-header('Location:../vistas/login.php');
+?>
 
-}
- include_once '../modelo/connect_DB.php';
- include('../html/navBar.html');
-  ?>
-
-
-
-<html lang="en">
-    <!-- Contenido Principal -->
-    <body>
-            <div class="col-md-8 col-md-offset-2"> <!-- centra el contenido -->
-                <!-- Nombre y descripcion -->
-                <div class="panel panel-default">
-                  <div class="panel-heading"><?php echo $idioma["anadir_func_funcionalidad"]; ?></div>
-                     <form id="crear_func" action='../controladores/ctrl_func_add.php' method='POST' enctype="multipart/form-data">
-                  <div class="panel-body">
-                    <div class="form-group">
-                        <label for="rol"><?php echo $idioma["anadir_func_nombre"]; ?></label>
-                        <input type="text" placeholder="Escribe el nombre de la funcionalidad" class="form-control" name="nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="rol"><?php echo $idioma["anadir_func_desc"]; ?></label>
-                        <textarea class="form-control" placeholder="Aquí puedes escribir la descripcion de la funcionalidad" rows="5" id="comment" name="desc"></textarea>
-                    </div>
-                  </div>
-                </div>
-                
-                
-                <!-- Nuevas paginas asociadas a la func -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_func_paginas"]; ?>
-                      <div class="pull-right">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombrePag FROM Pagina");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo $row['NombrePag']." <input type='checkbox' name='pagina['NombrePag']' value='". $row['NombrePag'] ."'> ";
-                                }
-                                ?>
-                        </select>
-                        </div></a>
-                    </div>
-                </div>
-                
-                <!-- Nuevos roles asociadas a la func -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_func_roles"]; ?>
-                      <div class="pull-right">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombreRol FROM Rol");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo $row['NombreRol']." <input type='checkbox' name='rol['NombreRol']' value='". $row['NombreRol'] ."'> ";
-                                }
-                                ?>
-                        </select>
-                        </div></a>
-                    </div>
-                </div>
-                    
-                    <!-- Boton crear -->
-                    <div class="btn-parent">
-                        <div class="btn-child"> <!-- centran el boton -->
-                            <button type="submit" value="enviar" class="btn btn-info btn-lg">
-                                <?php echo $idioma["anadir_func_crear"];?>
-                                <div class="glyphicon glyphicon-ok"></div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-    </form>        
-        </body>
-    </html>
-    
-    <!--Importar los jquery, bootstrap.js y el footer-->
-    <?php include('../html/footer.html'); ?>
-    
+<!--
+<script type="text/javascript">
+setTimeout("window.location = '<?php echo $_SERVER['HTTP_REFERER'] ?>'", 4000);
+</script>
+-->

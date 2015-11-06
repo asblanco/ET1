@@ -99,7 +99,11 @@ $idioma["SI_borrar_usuario"] = "SI";
 
 //anadir ususario
 $idioma["anadir_usuario_usuario"] = "Usuario";
+$idioma["anadir_usuario_login"] = "Login";
 $idioma["anadir_usuario_nombre"] = "Nombre:";
+$idioma["anadir_usuario_apellidos"] = "Apellidos";
+$idioma["anadir_usuario_email"] = "Email";
+$idioma["anadir_usuario_password"] = "Contraseña";
 $idioma["anadir_usuario_roles"] = "Roles";
 $idioma["anadir_usuario_paginas"] = "Paginas";
 $idioma["anadir_usuario_crear"] = "Crear";

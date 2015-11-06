@@ -96,7 +96,11 @@ $idioma["SI_borrar_usuario"] = "YES";
 
 //añadir usuario
 $idioma["anadir_usuario_usuario"] = "User";
+$idioma["anadir_usuario_login"] = "Login";
 $idioma["anadir_usuario_nombre"] = "Name:";
+$idioma["anadir_usuario_apellidos"] = "Surname";
+$idioma["anadir_usuario_email"] = "Email";
+$idioma["anadir_usuario_password"] = "Password";
 $idioma["anadir_usuario_roles"] = "Roles";
 $idioma["anadir_usuario_paginas"] = "Pages";
 $idioma["anadir_usuario_crear"] = "Create";

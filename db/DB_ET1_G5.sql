@@ -83,7 +83,7 @@ INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
 --
 DELIMITER //
 CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
- FOR EACH ROW INSERT INTO Usu_Pag (Login, Url) VALUES ('admin', NEW.Url)
+ FOR EACH ROW INSERT INTO Usu_Pag (Login, Url, NombrePag) VALUES ('admin', NEW.Url, NEW.NombrePag)
 //
 DELIMITER ;
 

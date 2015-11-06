@@ -51,36 +51,7 @@ include_once('../controladores/ctrl_usu.php');
         </div>
         <br>
                 
-        <?php 
-        if(isset($_GET['confirmar'])){
-            $users::eliminar($_GET['confirmar']);
-            header('location:vista_usu.php');
-        } else if (isset($_GET['borrar'])){
-        ?>
-        <!-- Remove Modal Page -->
-        <div class="modal show" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="myModalLabel"><?php echo $idioma["advertencia_borrar_usuario"]; ?></h4>
-              </div>
-                
-            <!-- Contenido de la página login modal -->
-              <div class="modal-body">
-                 <p><?php echo $idioma["seguro_borrar_usuario"]; echo $_GET['borrar'];?> ?</p>
-              </div>
-                
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick ="location='vista_usu.php'"><?php echo $idioma["NO_borrar_usuario"]; ?></button>
-                  <a class="btn btn-primary" href="vista_usu.php?confirmar=<?php echo $_GET['borrar'];?>"><?php echo $idioma["SI_borrar_usuario"]; ?></a>
-              </div>
-            </div>
-          </div>
-        </div>
-         <?php
-        		}
-									?>
+        
         
         <!-- Mostrar Usuarios -->
         <?php 
@@ -89,7 +60,7 @@ include_once('../controladores/ctrl_usu.php');
             $usuX = $users->consultar($usu['Login']);
         ?>
         <div class='col-md-8 col-md-offset-2 well'>
-            <a href="vista_usu.php?borrar=<?php echo $usu['Login'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <a href="vista_usu_del.php?borrar=<?php echo $usu['Login'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
                 <div class='titulo'> <?php echo $usu['Login']; ?>
                     <a href="vista_usu_mod.php?usu=<?php echo $usu['Login'];?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>

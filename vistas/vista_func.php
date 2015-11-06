@@ -42,36 +42,7 @@ include_once('../controladores/ctrl_func.php');
         </div>
         <br>
         
-        <?php 
-        if(isset($_GET['confirmar'])){
-            $funcionalidades->eliminar($_GET['confirmar']);
-            header('location:vista_func.php');
-        } else if (isset($_GET['borrar'])){
-        ?>
-        <!-- Remove Modal Page -->
-        <div class="modal show" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="myModalLabel"><?php echo $idioma["advertencia_borrar_funcionalidad"]; ?></h4>
-              </div>
-                
-            <!-- Contenido de la página login modal -->
-              <div class="modal-body">
-                 <p><?php echo $idioma["seguro_borrar_funcionalidad"]; echo $_GET['borrar'];?> ?</p>
-              </div>
-                
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick ="location='vista_func.php'"><?php echo $idioma["NO_borrar_funcionalidad"]; ?></button>
-                  <a class="btn btn-primary" href="vista_func.php?confirmar=<?php echo $_GET['borrar'];?>"><?php echo $idioma["SI_borrar_funcionalidad"]; ?></a>
-              </div>
-            </div>
-          </div>
-        </div>
-         <?php
-        		}
-									?>
+        
         
         <!-- Mostrar Funcionalidades -->
         <?php 
@@ -79,7 +50,7 @@ include_once('../controladores/ctrl_func.php');
             //Array asoc de los datos de la funcionalidad del bucle
             $funcX = $funcionalidades->consultar($fun['NombreFun']);?>
           <div class='col-md-8 col-md-offset-2 well'>
-            <a href="vista_func.php?borrar=<?php echo $fun['NombreFun'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <a href="vista_func_del.php?borrar=<?php echo $fun['NombreFun'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
                 <div class='titulo'> <?php echo $fun['NombreFun']; ?> 
             <a href='vista_func_mod.php?func=<?php echo $fun['NombreFun']; ?>'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>

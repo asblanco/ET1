@@ -41,37 +41,6 @@ header('Location:../vistas/login.php');
             </div>
         </div>
         <br>
-                
-        <?php 
-        if(isset($_GET['confirmar'])){
-            $roles::eliminar($_GET['confirmar']);
-            header('location:vista_rol.php');
-        } else if (isset($_GET['borrar'])){
-        ?>
-        <!-- Remove Modal Page -->
-        <div class="modal show" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="myModalLabel"><?php echo $idioma["advertencia_borrar_rol"]; ?></h4>
-              </div>
-                
-            <!-- Contenido de la página login modal -->
-              <div class="modal-body">
-                 <p><?php echo $idioma["seguro_borrar_rol"]; echo $_GET['borrar'];?> ?</p>
-              </div>
-                
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick ="location='vista_rol.php'"><?php echo $idioma["NO_borrar_rol"]; ?></button>
-                  <a class="btn btn-primary" href="vista_rol.php?confirmar=<?php echo $_GET['borrar'];?>"><?php echo $idioma["SI_borrar_rol"]; ?></a>
-              </div>
-            </div>
-          </div>
-        </div>
-         <?php
-        		}
-									?>
         
         <!-- Mostrar Roles -->
         <?php 
@@ -80,7 +49,7 @@ header('Location:../vistas/login.php');
             $rolX = $roles->consultar($rol['NombreRol']);
         ?>
         <div class='col-md-8 col-md-offset-2 well'>
-            <a href="vista_rol.php?borrar=<?php echo $rol['NombreRol'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <a href="vista_rol_del.php?borrar=<?php echo $rol['NombreRol'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
                 <div class='titulo'> <?php echo $rol['NombreRol'] ?>
                     <a href="vista_rol_mod.php?rol=<?php echo $rol['NombreRol']?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>

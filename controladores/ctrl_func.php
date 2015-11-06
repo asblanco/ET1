@@ -17,6 +17,11 @@ Fecha: 28/10/2015
 
     //Listar Paginas en modificar 
     include '../modelo/model_pag.php';
+    $rol = new Rol();
+    $roles = $rol->listar();
+    
+    //Listar Paginas en modificar 
+    include '../modelo/model_pag.php';
     $pag = new Pagina();
     $paginas = $pag->listar();
 ?>

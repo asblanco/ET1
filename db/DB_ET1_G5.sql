@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-11-2015 a las 12:12:31
+-- Tiempo de generación: 06-11-2015 a las 22:12:39
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -44,9 +44,21 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 --
 
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
+('Consultar Funcionalidad', 'Permite consultar las funcionalidades existentes.'),
+('Consultar Pagina', 'Permite consultar las paginas existentes.'),
+('Consultar Rol', 'Permite consultar los roles existentes.'),
 ('Consultar Usuario', 'Permite consultar usuarios de la aplicación.'),
+('Crear Funcionalidad', 'Permite crear nuevas funcionalidades.'),
+('Crear Pagina', 'Permite subir paginas.'),
+('Crear Rol', 'Permite crear roles.'),
 ('Crear Usuario', 'Permite crear usuarios de la aplicación.'),
+('Eliminar Funcionalidad.', 'Permite eliminar funcionalidades.'),
+('Eliminar Pagina', 'Permite eliminar paginas existentes.'),
+('Eliminar Rol', 'Permite eliminar roles'),
 ('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.'),
+('Modificar Funcionalidad.', 'Permite modificar funcionalidades existentes.'),
+('Modificar Pagina', 'Permite modificar paginas'),
+('Modificar Rol', 'Permite modificar roles existentes.'),
 ('Modificar Usuario', 'Permite modificar usuarios de la aplicación.');
 
 --
@@ -76,7 +88,18 @@ CREATE TABLE IF NOT EXISTS `Pagina` (
 --
 
 INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
-('Pagina 1', 'Esta pagina es de ejemplo', 'Crear Usuario', 'PaginaDePrueba');
+('/vistas/vista_func.php', NULL, 'Consultar Funcionalidad', 'Vista Funcionalidad'),
+('/vistas/vista_func_add.php', NULL, 'Crear Funcionalidad', 'Crear Funcionalidad'),
+('/vistas/vista_func_mod.php', NULL, 'Modificar Funcionalidad.', 'Modificar Funcionalidad'),
+('/vistas/vista_pag.php', NULL, 'Consultar Pagina', 'Vista Pagina'),
+('/vistas/vista_pag_add.php', NULL, 'Crear Pagina', 'Crear Pagina'),
+('/vistas/vista_pag_mod.php', NULL, 'Modificar Pagina', 'Modificar Pagina'),
+('/vistas/vista_rol.php', NULL, 'Consultar Rol', 'Vista Rol'),
+('/vistas/vista_rol_add.php', NULL, 'Crear Rol', 'Crear Rol'),
+('/vistas/vista_rol_mod.php', NULL, 'Modificar Rol', 'Modificar Rol'),
+('/vistas/vista_usu.php', NULL, 'Consultar Usuario', 'Vista Usuarios'),
+('/vistas/vista_usu_mod.php', NULL, 'Modificar Usuario', 'Modificar Usuario'),
+('vistas/vista_usu_add.php', NULL, 'Crear Usuario', 'Crear Usuario');
 
 --
 -- Disparadores `Pagina`
@@ -121,9 +144,21 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 --
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
+('Administrador', 'Consultar Funcionalidad'),
+('Administrador', 'Consultar Pagina'),
+('Administrador', 'Consultar Rol'),
 ('Administrador', 'Consultar Usuario'),
+('Administrador', 'Crear Funcionalidad'),
+('Administrador', 'Crear Pagina'),
+('Administrador', 'Crear Rol'),
 ('Administrador', 'Crear Usuario'),
+('Administrador', 'Eliminar Funcionalidad.'),
+('Administrador', 'Eliminar Pagina'),
+('Administrador', 'Eliminar Rol'),
 ('Administrador', 'Eliminar Usuario'),
+('Administrador', 'Modificar Funcionalidad.'),
+('Administrador', 'Modificar Pagina'),
+('Administrador', 'Modificar Rol'),
 ('Administrador', 'Modificar Usuario');
 
 -- --------------------------------------------------------
@@ -148,9 +183,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`, `Idioma`) VALUES
 ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14', 'es'),
--- password: admin
 ('prueba', 'c893bad68927b457dbed39460e6afd62', 'Prueba', 'Prueba', 'prueba@gm.com', '2015-11-01', 'es');
--- password: prueba
 
 -- --------------------------------------------------------
 
@@ -161,7 +194,7 @@ INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `Fec
 CREATE TABLE IF NOT EXISTS `Usu_Pag` (
   `Login` varchar(65) NOT NULL,
   `Url` varchar(100) NOT NULL,
-  `NombrePag`varchar(65)
+  `NombrePag` varchar(65) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -169,7 +202,18 @@ CREATE TABLE IF NOT EXISTS `Usu_Pag` (
 --
 
 INSERT INTO `Usu_Pag` (`Login`, `Url`, `NombrePag`) VALUES
-('admin', 'Pagina 1', 'Pagina primera');
+('admin', '/vistas/vista_func.php', 'Vista Funcionalidad'),
+('admin', '/vistas/vista_func_add.php', 'Crear Funcionalidad'),
+('admin', '/vistas/vista_func_mod.php', 'Modificar Funcionalidad'),
+('admin', '/vistas/vista_pag.php', 'Consultar Pagina'),
+('admin', '/vistas/vista_pag_add.php', 'Crear Pagina'),
+('admin', '/vistas/vista_pag_mod.php', 'Modificar Pagina'),
+('admin', '/vistas/vista_rol.php', 'Vista Rol'),
+('admin', '/vistas/vista_rol_add.php', 'Crear Rol'),
+('admin', '/vistas/vista_rol_mod.php', 'Modificar Rol'),
+('admin', '/vistas/vista_usu.php', 'Vista Usuarios'),
+('admin', '/vistas/vista_usu_mod.php', 'Modificar Usuario'),
+('admin', 'vistas/vista_usu_add.php', 'Crear Usuario');
 
 -- --------------------------------------------------------
 

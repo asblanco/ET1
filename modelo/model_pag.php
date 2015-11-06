@@ -239,7 +239,7 @@ class Pagina implements iModel {
         {
              //Inserta esa pagina en la tabla Pagina
             $InsertaPag = "INSERT INTO Pagina (Url, NombrePag, DescPag, NombreFun) VALUES  ('$objeto->url','$objeto->nombrePag','$objeto->descripcion', '$objeto->funcionalidad')";
-           echo $InsertaPag;
+         
             $db->consulta($InsertaPag) or die('Error al crear la pagina');
             
             //Comprueba si esta relacionada con algun usuario

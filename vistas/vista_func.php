@@ -25,14 +25,6 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
-$db=new Database();
-$pag=new Paginas();
-$row = mysqli_fetch_array($pag->getUsuarios($_SERVER['PHP_SELF']))
-    foreach ($row as $value) {
-        if($_SESSION["login_usuario"] == $value ){
-            
-        }
-    }
 
 include('../html/navBar.html');
 include_once('../controladores/ctrl_func.php');

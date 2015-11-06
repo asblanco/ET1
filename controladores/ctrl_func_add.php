@@ -12,9 +12,9 @@ Fecha: 01/11/2015
 
 	//Recogemos variables
     $nombre= $_POST['nombre'];
-    $paginas= $_POST['Paginas'];
-    $roles= $_POST['Roles'];
-    $desc=$_POST['Roles'];
+    $paginas= $_POST['paginas'];
+    $roles= $_POST['roles'];
+    $desc=$_POST['desc'];
 	
 
    //Conectamos con el gestor de la bd
@@ -27,7 +27,7 @@ Fecha: 01/11/2015
         echo '<p>La funcionalidad ' . $nombre . ' ya existe en la bd</p>';
     } else {
         $insertFunc = new Funcionalidad ($nombre, $desc, $roles, $paginas);
-        echo 'bien';
+        header('Location: ../vistas/vista_func.php');
         if ($newFunc->crear($insertFunc) == true){
             echo 'La funcionalidad ' . $nombre . ' ha sido registrada en el sistema';
             header('Location: ' . $_SERVER['HTTP_REFERER']);

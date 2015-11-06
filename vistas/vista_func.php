@@ -26,13 +26,14 @@ header('Location:../vistas/login.php');
 
 }
 $db=new Database();
-$usu=new Usuario();
 $pag=new Paginas();
- while ($row = mysqli_fetch_array($pag->getUsuarios))
-                                {
-                                    echo '<option value="'.$row['NombreFun'].'">'.$row['NombreFun'].'</option>';
-                                }
-if($_SESSION["login_usuario"] )
+$row = mysqli_fetch_array($pag->getUsuarios($_SERVER['PHP_SELF']))
+    foreach ($row as $value) {
+        if($_SESSION["login_usuario"] == $value ){
+            
+        }
+    }
+
 include('../html/navBar.html');
 include_once('../controladores/ctrl_func.php');
 

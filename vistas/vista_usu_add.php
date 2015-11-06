@@ -28,6 +28,8 @@ header('Location:../vistas/login.php');
 
 }
  include_once '../modelo/connect_DB.php';
+include_once "../modelo/model_usu.php";
+$usu=new Usuario();
  include('../html/navBar.html'); ?>
 
 
@@ -89,24 +91,25 @@ header('Location:../vistas/login.php');
                     </div>
                 </div>
                 
-                <!-- Nuevos roles asociadas a la func -->
+                <!-- Nuevos roles asociados al usuarios -->
                 <div class="panel panel-default">
                     <div class="panel-heading"><?php echo $idioma["anadir_func_roles"]; ?>
                       <div class="pull-right">
-                        <select name="roles">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombreRol FROM Rol");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo "<option value=\"Roles\">" . $row['NombreRol'] . "</option>";
-                                }
-                                ?>
-                        </select>
+                        
                         </div></a>
                     </div>
+                    <!-- List group -->
+              <ul class="list-group list-onHover">
+                <?php 
+                  foreach ($usu['roles'] as $rol){ ?>
+                    <li class="list-group-item">
+                        <?php echo $rol['NombreRol'] ?>
+                        <a class="rm" href="#" onclick="removeRol()"><div class="glyphicon glyphicon-trash"></div></a>
+                    <!-- Elemento oculto para pasar el array con los roles modificados por POST -->
+                    <input hidden="hidden" type="text" name="newRol[]" value="<?php echo $rol['NombreRol']; ?>">
+                    </li>
+                <?php } ?>
+              </ul>
                 </div>
                     
                     <!-- Boton crear -->

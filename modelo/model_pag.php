@@ -144,11 +144,10 @@ class Pagina implements iModel {
     public function modificar ($pk, $objeto) {
         $db = new Database();
         //Guardar los datos de $pk en un array
-        $datos = consultar($pk);
+        $datos = $objeto->consultar($pk);
         $oldUrl = $datos['url'];
         $newUrl = $objeto->url;
-        
-        $oldNom = $datos['nombrePag'];
+        $oldNom = $datos['nombre'];
         $newNom = $objeto->nombrePag;
         if ($oldNom != $newNom){
             $sql = 'UPDATE Pagina SET NombrePag=\'' . $newNom . '\' WHERE Url = \'' . $oldUrl .  '\'' ;
@@ -172,7 +171,7 @@ class Pagina implements iModel {
             $arrayOldUsu[] = $row_usu;
         
         //Crear el array asociativo con los nuevos usuarios
-        $arrayNewUsu = $objeto->usuarios;
+        $arrayNewUsu = $objeto->getUsuarios($pk);
         
         //Comparar si hay nuevos usuarios recorriendo $newUsuarios
         foreach ($arrayNewUsu as $new){
@@ -196,24 +195,24 @@ class Pagina implements iModel {
             }
         }
         
-    //Actualizar funcionalidades asociadas a la pagina
+        //Actualizar funcionalidades asociadas a la pagina
         //Crear una variable con la funcionalidad sin modificar
-        $OldFunc = $datos['funcionalidad'];
+        
+        $oldFunc = $datos['funcionalidad'];
         
         //Crear variable con la nueva funcionalidad
-        $NewFunc = $objeto->funcionalidad;
+        $newFunc = $objeto->funcionalidad;
         
         //Comparar si hay nueva funcionalidad comparando $NewFunc y $OldFunc
-        if ($NewFunc != $OldFunc && $NewFunc!=""){
-            $db->consulta('UPDATE Pagina SET NombreFun=\'' . $newFunc . '\' WHERE Url = \'' . $pk .  '\'');
+            
+        if ($oldFunc != $newFunc){
+            $sql = 'UPDATE Pagina SET NombreFun=\'' . $newFunc . '\' WHERE Url = \'' . $oldUrl .  '\'';
+            
+            $db->consulta($sql) or die('Error al modificar la funcionalidad');
         }
         
         //Comparar si hay funcionalidad a eliminar 
-        if ($newFunc==""){
-            $db->consulta('DELETE NombreFun FROM Pagina WHERE Url = \'' . $pk .  '\'');
-        }
-           
-        
+              
         
         $existeUrl = $this->exists($newUrl);
         if($newUrl != "" && $existeUrl == false){
@@ -225,11 +224,10 @@ class Pagina implements iModel {
             }
         }
         
-        if ($result === TRUE)
-            return true;
-        else return false;
+        
         
         $db->desconectar();
+        return true;
     }
     
     //Crea el objeto pasado en la tabla de la base de datos, si fue bien devuelve true

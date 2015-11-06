@@ -40,8 +40,6 @@ Fecha: 01/11/2015
     $db = new Database();
     $newPag = new Pagina();
 
-    
-
     //Comprobamos si ya existe la pagina
     $consultaSiPag = $newPag->exists($nombre);
     if ($consultaSiPag == true){
@@ -64,18 +62,3 @@ setTimeout("window.location = '<?php echo $_SERVER['HTTP_REFERER'] ?>'", 4000);
 </script>
 
 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

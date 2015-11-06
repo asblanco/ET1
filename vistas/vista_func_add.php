@@ -52,7 +52,7 @@ header('Location:../vistas/login.php');
                 
                 <!-- Nuevas paginas asociadas a la func -->
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_func_paginas"]; ?>
+                    <div class="panel-heading"><?php echo $idioma["anadir_funcionalidad_pagina"]; ?>
                       <div class="pull-right">
                         <select name="paginas">
                         <?php 
@@ -100,11 +100,9 @@ header('Location:../vistas/login.php');
                         </div>
                     </div>
                 </div>
-    </form>        
+            </form>        
         </body>
     </html>
     
     <!--Importar los jquery, bootstrap.js y el footer-->
     <?php include('../html/footer.html'); ?>
-    
-

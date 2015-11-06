@@ -24,6 +24,9 @@ Fecha: 03/11/2015
     $roles = array();
     $pags = array();
 
+
+
+
     //Comprobamos que se hayan cubierto todos los campos
     if ( empty($newUsuLogin) OR empty($newUsuName) OR empty($newUsuSurname) OR (!filter_var($newUsuEmail, FILTER_VALIDATE_EMAIL) AND empty($newUsuEmail))){
                 // Set a 400 (bad request) response code and exit.

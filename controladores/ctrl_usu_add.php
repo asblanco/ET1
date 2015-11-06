@@ -12,13 +12,8 @@ Fecha: 28/10/2015
     
     $db = new Database();
 
-    $loginClase ; //traer de la vista
-  
-    $usuario = new usuario($loginClase);
 
     //Se debe pasar el nombre, roles y hacer un bucle para añadir los roles y paginas asociadas
-        
-		
 		
 		
 	//Recogemos las variables
@@ -28,9 +23,27 @@ Fecha: 28/10/2015
 		$fechaAlta="";
 		$email= $_POST['email'];
 		$password= $_POST['password'];
-		$roles= $_POST['roles'];
-		$paginas= $_POST['paginas'];
+		$roles= array();
+		$paginas= array();
 		$idioma="es";
+
+        $newUsu = new Usuario($login);
+
+if(isset($_POST['newRol'])){
+      if (is_array($_POST['newRol'])) {
+        foreach($_POST['newRol'] as $value){
+          $roles[] = $value;
+        }
+      }
+    }
+
+    if(isset($_POST['newPag'])){
+      if (is_array($_POST['newPag'])) {
+        foreach($_POST['newPag'] as $value){
+          $pags[] = $value;
+        }
+      }
+    }
 
   //Comprobamos si ya existe el usuario
     $consultaSiUsu = $newUsu->exists($login);
@@ -40,14 +53,12 @@ Fecha: 28/10/2015
         $insertUsu = new Usuario ($login,$nombre,$apellidos,$fechaAlta,$email,$password,$idioma,$roles,$paginas);
         if ($newUsu->crear($insertUsu) == true){
             echo 'El usuario ' . $login. ' ha sido registrado en el sistema';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            header('Location:../vistas/vista_usu.php' );
  
         } else{
             echo "Error al insertar el usuario";
         }
     }
-
-
 
 
     $db->desconectar();

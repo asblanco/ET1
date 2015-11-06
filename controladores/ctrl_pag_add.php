@@ -31,8 +31,9 @@ Fecha: 01/11/2015
 	//Recogemos variables
     $nombre= $_POST['nombre'];
     $funcionalidades= $_POST['Funcionalidades'];
-    $url= "/www.gestshell.ga/paginas/" . $_FILES["archivo"]["name"];
-    $desc="";
+    $url= $_FILES["archivo"]["name"];
+    $desc=$_POST['desc'];
+    $login=$_POST['usuario'];
 	
 
    //Conectamos con el gestor de la bd
@@ -46,7 +47,7 @@ Fecha: 01/11/2015
     if ($consultaSiPag == true){
         echo '<p>La pagina ' . $nombre . ' ya existe en la bd</p>';
     } else {
-        $insertPag = new Pagina ($url,$nombre, $funcionalidades);
+        $insertPag = new Pagina ($url,$nombre, $desc, $login, $funcionalidades);
         if ($newPag->crear($insertPag) == true){
             echo 'La pagina ' . $nombre . ' ha sido registrada en el sistema';
             header('Location: ' . $_SERVER['HTTP_REFERER']);

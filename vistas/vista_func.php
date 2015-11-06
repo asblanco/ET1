@@ -9,6 +9,7 @@ Fecha: /10/2015
 <!--Importar las cabeceras y la barra de navegacion-->
 
 <?php
+include_once '../modelo/model_pag.php';
 session_start();
 
 if(!$_SESSION["idioma_usuario"]){
@@ -24,8 +25,18 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
+$db=new Database();
+$usu=new Usuario();
+$pag=new Paginas();
+ while ($row = mysqli_fetch_array($pag->getUsuarios))
+                                {
+                                    echo '<option value="'.$row['NombreFun'].'">'.$row['NombreFun'].'</option>';
+                                }
+if($_SESSION["login_usuario"] )
 include('../html/navBar.html');
 include_once('../controladores/ctrl_func.php');
+
+
 ?>
 
 <html lang="en">

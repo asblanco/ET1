@@ -28,6 +28,7 @@ Fecha: 02/11/2015
     //Obtiene los datos de la funcionalidad en un array asociativo
     $f = new Funcionalidad();
     $func = $f->consultar($funcName); 
+
 ?>
 
 <html lang="en">

@@ -50,7 +50,7 @@ header('Location:../vistas/login.php');
                     </div>
                     <div class="form-group">
                         <label for="rol"><?php echo $idioma["anadir_pagina_desc"]; ?></label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                        <textarea class="form-control" rows="5" id="comment" name="desc"></textarea>
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ header('Location:../vistas/login.php');
             
                                 while ($row = mysqli_fetch_array($Resultado))
                                 {
-                                   echo $row['Login']." <input type='checkbox' name='usuario['Login']' value='". $row['Login'] ."'> ";
+                                   echo $row['Login']." <input type='checkbox' name='usuario[]' value='". $row['Login'] ."'/> ";
                                 }
                                 ?>
                       </div>
@@ -85,7 +85,7 @@ header('Location:../vistas/login.php');
             
                                 while ($row = mysqli_fetch_array($Resultado))
                                 {
-                                    echo "<option value=\"Funcionalidades\">" . $row['NombreFun'] . "</option>";
+                                    echo '<option value="'.$row['NombreFun'].'">'.$row['NombreFun'].'</option>';
                                 }
                                 ?>
                         </select>

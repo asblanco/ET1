@@ -78,10 +78,10 @@ Fecha: /10/2015
             $pagX = $paginas->consultar($pag['Url']);
         ?>
         <div class='col-md-8 col-md-offset-2 well'>
-            <a href="vista_pag.php?borrar=<?php echo $pag['Url'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
+            <a href="vista_pag.php?borrar=<?php echo $pag['NombrePag'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
-                <div class='titulo'> <?php echo $pag['Url'] ?>
-                    <a href="vista_pag_mod.php?pag=<?php echo $pag['Url'];?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
+                <div class='titulo'> <?php echo $pag['NombrePag'] ?>
+                    <a href="vista_pag_mod.php?pag=<?php echo $pag['NombrePag'];?>"> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
                 </div>
                 <p class='descripcion'> <?php echo $pag['DescPag']; ?> </p>
             </div>

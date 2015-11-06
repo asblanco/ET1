@@ -9,7 +9,6 @@ Fecha: /10/2015
 <!--Importar las cabeceras y la barra de navegacion-->
 
 <?php
-include_once '../modelo/model_pag.php';
 session_start();
 
 if(!$_SESSION["idioma_usuario"]){
@@ -25,11 +24,8 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
-
 include('../html/navBar.html');
 include_once('../controladores/ctrl_func.php');
-
-
 ?>
 
 <html lang="en">

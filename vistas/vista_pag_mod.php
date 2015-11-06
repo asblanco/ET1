@@ -43,7 +43,7 @@ Fecha: /10/2015
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="pagina"><?php echo $idioma["modificar_pagina_nombre"]; ?></label>
-                                <input type="text" class="form-control" name="pagina" value="<?php echo $pagName; ?>">
+                                
                                 <input hidden="hidden" type="text" name="oldName" value="<?php echo $pagName; ?>">
                             </div>
                             
@@ -59,20 +59,32 @@ Fecha: /10/2015
                 <div class="panel-heading">
                   <?php echo $idioma["modificar_pagina_usuarios"]; ?>
                         <div class="pull-right">
-                          <div class="dropdown">
+                            <?php 
+                        $db = new Database();
+                        $sql = ("SELECT Login FROM Usuario");
+                        $Resultado = $db->consulta($sql) ;
+            
+                                while ($row = mysqli_fetch_array($Resultado))
+                                {
+                                   echo $row['Login']." <input type='checkbox' name='newUsu[]' value='". $row['Login'] ."'/> ";
+                                }
+                                ?>
+                            
+                          <!--
+                            <div class="dropdown">
                             <a href="#" data-toggle="dropdown">
                               <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
-                              <!-- Contenido del dropdown -->
+                             
                               <ul class="dropdown-menu">
-                                  <?php 
-                                  foreach($users as $u){ ?>
-                                      <li><a href="#" class="small" data-value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
-                                  <?php
-                                  }
-                                  ?>
-                              </ul>
+                              <?php 
+                              foreach($users as $u){ ?>
+                                  <li><a href="#" class="small addUsu valor" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox" name='newUsu[]'/>&nbsp; <?php echo $u['Login']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
                             </a>
-                        </div>
+                        </div> -->
                       </div>
                 </div>
               <!-- List group -->
@@ -89,22 +101,35 @@ Fecha: /10/2015
               </ul>
             </div>
                 
-            <!-- Lista de funcionalidades asociadas al rol -->
+            <!-- Lista de funcionalidades para la pagina -->
             <div class="panel panel-default">
               <div class="panel-heading">
               <?php echo $idioma["modificar_pagina_funcionalidad"]; ?>
-                  <div class="pull-right">
-                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
-                  </div>
+                   <div class="pull-right">
+                          <div class="pull-right">
+                        <select name="Funcionalidad">
+                        <?php 
+                        $db = new Database();
+                        $sql = ("SELECT NombreFun FROM Funcionalidad");
+                        $Resultado = $db->consulta($sql) ;
+            
+                                while ($row = mysqli_fetch_array($Resultado))
+                                {
+                                    echo '<option value="'.$row['NombreFun'].'">'.$row['NombreFun'].'</option>';
+                                }
+                                ?>
+                        </select>
+                        </div></a>
+                      </div>
                 </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover">
                     
                         <li class="list-group-item">
                             <?php echo $pagina['funcionalidad'] ?>
-                            <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
+                            
                         <!-- Elemento oculto para pasar el array con las funcionalidades modificados por POST -->
-                            <input hidden="hidden" type="text" name="newFunc[]" value="<?php echo $func['NombreFun']; ?>">
+                            <input hidden="hidden" type="text" name="newFunc" value="<?php echo $func['NombreFun']; ?>">
                         </li>
                         
                     

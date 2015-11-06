@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-11-2015 a las 22:12:39
+-- Tiempo de generación: 06-11-2015 a las 22:43:32
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -90,14 +90,18 @@ CREATE TABLE IF NOT EXISTS `Pagina` (
 INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
 ('/vistas/vista_func.php', NULL, 'Consultar Funcionalidad', 'Vista Funcionalidad'),
 ('/vistas/vista_func_add.php', NULL, 'Crear Funcionalidad', 'Crear Funcionalidad'),
+('/vistas/vista_func_del.php', NULL, 'Eliminar Funcionalidad.', 'Eliminar Funcionalidad'),
 ('/vistas/vista_func_mod.php', NULL, 'Modificar Funcionalidad.', 'Modificar Funcionalidad'),
 ('/vistas/vista_pag.php', NULL, 'Consultar Pagina', 'Vista Pagina'),
 ('/vistas/vista_pag_add.php', NULL, 'Crear Pagina', 'Crear Pagina'),
+('/vistas/vista_pag_del.php', NULL, 'Eliminar Pagina', 'Eliminar Pagina'),
 ('/vistas/vista_pag_mod.php', NULL, 'Modificar Pagina', 'Modificar Pagina'),
 ('/vistas/vista_rol.php', NULL, 'Consultar Rol', 'Vista Rol'),
 ('/vistas/vista_rol_add.php', NULL, 'Crear Rol', 'Crear Rol'),
+('/vistas/vista_rol_del.php', NULL, 'Eliminar Rol', 'Eliminar Rol'),
 ('/vistas/vista_rol_mod.php', NULL, 'Modificar Rol', 'Modificar Rol'),
 ('/vistas/vista_usu.php', NULL, 'Consultar Usuario', 'Vista Usuarios'),
+('/vistas/vista_usu_del.php', NULL, 'Eliminar Usuario', 'Eliminar Usuario'),
 ('/vistas/vista_usu_mod.php', NULL, 'Modificar Usuario', 'Modificar Usuario'),
 ('vistas/vista_usu_add.php', NULL, 'Crear Usuario', 'Crear Usuario');
 
@@ -182,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 --
 
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`, `Idioma`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14', 'es'),
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14', 'en'),
 ('prueba', 'c893bad68927b457dbed39460e6afd62', 'Prueba', 'Prueba', 'prueba@gm.com', '2015-11-01', 'es');
 
 -- --------------------------------------------------------
@@ -204,14 +208,18 @@ CREATE TABLE IF NOT EXISTS `Usu_Pag` (
 INSERT INTO `Usu_Pag` (`Login`, `Url`, `NombrePag`) VALUES
 ('admin', '/vistas/vista_func.php', 'Vista Funcionalidad'),
 ('admin', '/vistas/vista_func_add.php', 'Crear Funcionalidad'),
+('admin', '/vistas/vista_func_del.php', 'Eliminar Funcionalidad'),
 ('admin', '/vistas/vista_func_mod.php', 'Modificar Funcionalidad'),
 ('admin', '/vistas/vista_pag.php', 'Consultar Pagina'),
 ('admin', '/vistas/vista_pag_add.php', 'Crear Pagina'),
+('admin', '/vistas/vista_pag_del.php', 'Eliminar Pagina'),
 ('admin', '/vistas/vista_pag_mod.php', 'Modificar Pagina'),
 ('admin', '/vistas/vista_rol.php', 'Vista Rol'),
 ('admin', '/vistas/vista_rol_add.php', 'Crear Rol'),
+('admin', '/vistas/vista_rol_del.php', 'Eliminar Rol'),
 ('admin', '/vistas/vista_rol_mod.php', 'Modificar Rol'),
 ('admin', '/vistas/vista_usu.php', 'Vista Usuarios'),
+('admin', '/vistas/vista_usu_del.php', 'Eliminar Usuario'),
 ('admin', '/vistas/vista_usu_mod.php', 'Modificar Usuario'),
 ('admin', 'vistas/vista_usu_add.php', 'Crear Usuario');
 

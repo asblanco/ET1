@@ -39,10 +39,30 @@ header('Location:../vistas/login.php');
               <div class="panel-heading"><?php echo $idioma["anadir_usuario_usuario"]; ?></div>
               <div class="panel-body">
                 <div class="form-group">
-                    <label for="rol"><?php echo $idioma["anadir_rol_nombre"]; ?></label>
-                    <input type="text" class="form-control" id="rol">
+                    <label for="login"><?php echo $idioma["anadir_usuario_login"]; ?></label>
+                    <input type="text" class="form-control" id="login">
                 </div>
                   
+                <div class="form-group">
+                    <label for="nombre"><?php echo $idioma["anadir_usuario_nombre"]; ?></label>
+                    <input type="text" class="form-control" id="nombre">
+                </div>
+                  
+                <div class="form-group">
+                    <label for="apellidos"><?php echo $idioma["anadir_usuario_apellidos"]; ?></label>
+                    <input type="text" class="form-control" id="apellidos">
+                </div>
+                  
+                <div class="form-group">
+                    <label for="email"><?php echo $idioma["anadir_usuario_email"]; ?></label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+                  
+                <div class="form-group">
+                    <label for="password"><?php echo $idioma["anadir_usuario_password"]; ?></label>
+                    <input type="text" class="form-control" id="password">
+                </div>  
+                
               </div>
             </div>
             

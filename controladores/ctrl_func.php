@@ -16,7 +16,7 @@ Fecha: 28/10/2015
     $arrayFun = $funcionalidades->listar();
 
     //Listar Paginas en modificar 
-    include '../modelo/model_pag.php';
+    include '../modelo/model_rol.php';
     $rol = new Rol();
     $roles = $rol->listar();
     

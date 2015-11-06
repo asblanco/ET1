@@ -113,10 +113,23 @@ Modifica un usuario
             <div class="panel panel-default">
               <div class="panel-heading">
               <?php echo $idioma["modificar_usuario_paginas"]; ?>
-                  <div class="pull-right">
-                    <a href="#"><div class="glyphicon glyphicon-plus"></div></a>
+                    <div class="pull-right">
+                      <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($paginas as $p){ ?>
+                                  <li><a href="#" class="small" data-value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
                   </div>
-                </div>
+               </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover">
                     <?php 
@@ -125,7 +138,7 @@ Modifica un usuario
                             <?php echo $pag['NombrePag'] ?>
                             <a href="#" class="rm" onclick="removePag()"><div class="glyphicon glyphicon-trash"></div></a>
                         <!-- Elemento oculto para pasar el array con las paginas modificados por POST -->
-                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['Url']; ?>">
+                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['']; ?>">
                         </li>
                         
                     <?php } ?>
@@ -135,7 +148,7 @@ Modifica un usuario
             <!-- Boton guardar -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <button type="submit" class="btn btn-info btn-lg" onclick="cifrar()" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
+                    <button type="submit" class="btn btn-info btn-lg" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
                     <div class="glyphicon glyphicon-save"></div>
                     </button>
                 </div>
@@ -143,11 +156,7 @@ Modifica un usuario
         </div>
       </form>
         
-        
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/md5.js" type="text/javascript"> </script>
-        
-    <script>
+        <script>
         function removeRol() {
             $('.rm').click(function(){
               $(this).parents('li').remove();
@@ -159,17 +168,24 @@ Modifica un usuario
             })
         }
         
-        function cifrar(){
-            var input_oldPass = document.getElementById("oldPass");
-            input_oldPass.value = hex_md5(input_oldPass.value);
-            var input_newPass = document.getElementById("newPass");
-            input_newPass.value = hex_md5(input_newPass.value);
-        }
-        
     </script>
-        
+
     </body> 
 </html>
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
+
+<script>
+$(document).ready(function(){
+    $(".addRol").click(function(){
+        var value = $(this).attr("value");
+        $(".addR").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeRol()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newRolUsu[]' value='"+ value +"'></li>");
+    });
+
+    $(".addPag").click(function(){
+        var value = $(this).attr("value");
+        $(".addP").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removePag()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newPagUsu[]' value='"+ value +"'></li>");
+    });
+});
+</script>

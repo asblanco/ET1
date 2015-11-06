@@ -18,4 +18,8 @@ Fecha: 28/10/2015
     include '../modelo/model_rol.php';
     $rol = new Rol();
     $roles = $rol->listar();
+//Listar Paginas en modificar y crear Usuario
+    include '../modelo/model_pag.php';
+    $pag = new Pagina();
+    $paginas = $pag->listar();
 ?>

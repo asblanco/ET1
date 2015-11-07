@@ -75,7 +75,7 @@ Fecha: 25/10/2015
               <!-- List group -->
               <ul class="list-group list-onHover addU">
                 <?php
-                  foreach ($rol['usuarios'] as $usu){ ?> 
+                  foreach ($users as $usu){ ?> 
                     <li class="list-group-item">
                         <?php echo $usu['Login'] ?>
                         <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
@@ -110,7 +110,7 @@ Fecha: 25/10/2015
                 <!-- List group -->
                 <ul class="list-group list-onHover addF">
                     <?php 
-                      foreach ($rol['funcionalidades'] as $func){ ?>
+                      foreach ($funcRoles as $func){ ?>
                         <li class="list-group-item">
                             <?php echo $func['NombreFun'] ?>
                             <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>

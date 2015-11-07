@@ -72,34 +72,28 @@ $usu=new Usuario();
             </div>
             
                 
-                <!-- Nuevas paginas asociadas al usuario -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_usuario_paginas"]; ?>
-                      <div class="pull-right">
-                        <select name="paginas">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombrePag FROM Pagina");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo "<option value=\"Páginas\">" . $row['NombrePag'] . "</option>";
-                                }
-                                ?>
-                        </select>
-                        </div></a>
+                <!-- Lista de roles asociados al usuario -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <?php echo $idioma["modificar_usuario_roles"]; ?>
+                    <div class="pull-right">
+                      <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($roles as $r){ ?>
+                                  <li><a href="#" class="small" data-value="<?php echo $r['NombreRol']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $r['NombreRol']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
                     </div>
-                </div>
-                
-                <!-- Nuevos roles asociados al usuarios -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_func_roles"]; ?>
-                      <div class="pull-right">
-                        
-                        </div></a>
-                    </div>
-                    <!-- List group -->
+                  </div>
+               </div>
+              <!-- List group -->
               <ul class="list-group list-onHover">
                 <?php 
                   foreach ($roles as $rol){ ?>
@@ -111,7 +105,43 @@ $usu=new Usuario();
                     </li>
                 <?php } ?>
               </ul>
-                </div>
+            </div>
+            
+            <!-- Lista de paginas asociadas al usuario -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <?php echo $idioma["modificar_usuario_paginas"]; ?>
+                    <div class="pull-right">
+                      <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($paginas as $p){ ?>
+                                  <li><a href="#" class="small" data-value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
+                  </div>
+               </div>
+                <!-- List group -->
+                <ul class="list-group list-onHover">
+                    <?php 
+                      foreach ($paginas as $pag){ ?>
+                        <li class="list-group-item">
+                            <?php echo $pag['NombrePag'] ?>
+                            <a href="#" class="rm" onclick="removePag()"><div class="glyphicon glyphicon-trash"></div></a>
+                        <!-- Elemento oculto para pasar el array con las paginas modificados por POST -->
+                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['']; ?>">
+                        </li>
+                        
+                    <?php } ?>
+                </ul>
+            </div>
                     
                     <!-- Boton crear -->
                     <div class="btn-parent">

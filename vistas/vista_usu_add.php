@@ -102,7 +102,7 @@ $usu=new Usuario();
                     <!-- List group -->
               <ul class="list-group list-onHover">
                 <?php 
-                  foreach ($usu['roles'] as $rol){ ?>
+                  foreach ($roles as $rol){ ?>
                     <li class="list-group-item">
                         <?php echo $rol['NombreRol'] ?>
                         <a class="rm" href="#" onclick="removeRol()"><div class="glyphicon glyphicon-trash"></div></a>

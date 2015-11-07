@@ -55,24 +55,6 @@ header('Location:../vistas/login.php');
                   </div>
                 </div>
                 
-                <!-- Nuevos usuarios asociados al rol -->
-                <div class="panel panel-default">
-                  <div class="panel-heading"><?php echo $idioma["anadir_pagina_nombre_usuarios"]; ?>
-                        <div class="pull-right">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT Login FROM Usuario");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                   echo $row['Login']." <input type='checkbox' name='usuario[]' value='". $row['Login'] ."'/> ";
-                                }
-                                ?>
-                      </div>
-                   </div>
-                </div>
-                
                 <!-- Nuevas funcionalidades asociados al rol -->
                 <div class="panel panel-default">
                     <div class="panel-heading"><?php echo $idioma["anadir_pagina_nombre_func"]; ?>

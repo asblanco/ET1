@@ -33,7 +33,7 @@ Fecha: 01/11/2015
     $funcionalidades= $_POST['Funcionalidades'];
     $url= $_FILES["archivo"]["name"];
     $desc=$_POST['desc'];
-    $login=$_POST['usuario'];
+    $login= array();
 	
 
    //Conectamos con el gestor de la bd

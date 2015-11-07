@@ -43,7 +43,7 @@ Fecha: /10/2015
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="pagina"><?php echo $idioma["modificar_pagina_nombre"]; ?></label>
-                                
+                                <textarea class="form-control" rows="1" name="nombre"><?php echo $pagina['descripcion']; ?></textarea>
                                 <input hidden="hidden" type="text" name="oldName" value="<?php echo $pagName; ?>">
                             </div>
                             
@@ -54,52 +54,6 @@ Fecha: /10/2015
                         </div>
                 </div>
                 
-                <!--Usuarios--> 
-                <div class="panel panel-default">
-                <div class="panel-heading">
-                  <?php echo $idioma["modificar_pagina_usuarios"]; ?>
-                        <div class="pull-right">
-                            <?php 
-                        $db = new Database();
-                        $sql = ("SELECT Login FROM Usuario");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                   echo $row['Login']." <input type='checkbox' name='newUsu[]' value='". $row['Login'] ."'/> ";
-                                }
-                                ?>
-                            
-                          <!--
-                            <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                              <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
-                             
-                              <ul class="dropdown-menu">
-                              <?php 
-                              foreach($users as $u){ ?>
-                                  <li><a href="#" class="small addUsu valor" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox" name='newUsu[]'/>&nbsp; <?php echo $u['Login']; ?> </a></li>
-                              <?php
-                              }
-                              ?>
-                          </ul>
-                            </a>
-                        </div> -->
-                      </div>
-                </div>
-              <!-- List group -->
-              <ul class="list-group list-onHover">
-                <?php 
-                  foreach ($pagina['usuarios'] as $usu){ ?>
-                    <li class="list-group-item">
-                        <?php echo $usu['Login'] ?>
-                        <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
-                    <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
-                    <input hidden="hidden" type="text" name="newUsu[]" value="<?php echo $usu['Login']; ?>">
-                    </li>
-                <?php } ?>
-              </ul>
-            </div>
                 
             <!-- Lista de funcionalidades para la pagina -->
             <div class="panel panel-default">
@@ -148,11 +102,6 @@ Fecha: /10/2015
       </form>
         
     <script>
-        function removeUsu() {
-            $('.rm').click(function(){
-              $(this).parents('li').remove();
-            })
-        }
         function removeFunc() {
             $('.rm').click(function(){
               $(this).parents('li').remove();

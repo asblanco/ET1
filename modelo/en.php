@@ -42,7 +42,8 @@ $idioma["SI_borrar_funcionalidad"] = "YES";
 //add funcionalidad
 $idioma["anadir_func_funcionalidad"] = "Feature";
 $idioma["anadir_func_nombre"] = "Name:";
-$idioma["anadir_func_descripcion"] = "Description:";
+$idioma["anadir_funcionalidad_descripcion"] = "Description:";
+$idioma["anadir_funcionalidad_pagina"] = "P&aacutegina:";
 $idioma["anadir_func_usuarios"] = "Users";
 $idioma["anadir_func_roles"] = "Roles";
 $idioma["anadir_func_crear"] = "Create";

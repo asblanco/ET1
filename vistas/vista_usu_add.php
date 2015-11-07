@@ -27,8 +27,9 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
- include_once '../modelo/connect_DB.php';
+ include_once "../modelo/connect_DB.php";
 include_once "../modelo/model_usu.php";
+include_once "../controladores/ctrl_usu.php";
 $usu=new Usuario();
  include('../html/navBar.html'); ?>
 

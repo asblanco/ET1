@@ -43,7 +43,7 @@ header('Location:../vistas/login.php');
                         <input type="text" class="form-control" name="nombre">
                     </div>
                     <div class="form-group">
-                        <label for="rol"><?php echo $idioma["anadir_func_desc"]; ?></label>
+                        <label for="rol"><?php echo $idioma["anadir_funcionalidad_descripcion"]; ?></label>
                         <textarea class="form-control" rows="5" id="comment" name="desc"></textarea>
                     </div>
                   </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-11-2015 a las 13:32:17
+-- Tiempo de generación: 07-11-2015 a las 14:13:38
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -254,7 +254,7 @@ ALTER TABLE `Funcionalidad`
 -- Indices de la tabla `Pagina`
 --
 ALTER TABLE `Pagina`
- ADD PRIMARY KEY (`Url`), ADD UNIQUE KEY `url` (`Url`), ADD UNIQUE KEY `NombreFun` (`NombreFun`);
+ ADD PRIMARY KEY (`Url`), ADD UNIQUE KEY `NombrePag` (`NombrePag`), ADD KEY `FK_Fun` (`NombreFun`);
 
 --
 -- Indices de la tabla `Rol`

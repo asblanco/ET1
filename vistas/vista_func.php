@@ -71,7 +71,7 @@ include_once('../controladores/ctrl_func.php');
             <div class='col-md-2'>
                 <h4>Paginas</h4>
                 <?php
-                // array asociativo de las paginas ligadas al rol actual del bucle
+                // array asociativo de las paginas ligadas a la funcionalidad actual del bucle
                 $arrayPaginas = $funcX['paginas'];
                 foreach ($arrayPaginas as $pag ){
                     echo "<p> {$pag['Url']} </p>";

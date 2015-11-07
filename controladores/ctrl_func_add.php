@@ -12,9 +12,10 @@ Fecha: 01/11/2015
 
 	//Recogemos variables
     $nombre= $_POST['nombre'];
-    $paginas= $_POST['paginas'];
-    $roles= $_POST['roles'];
+    $newRoles = array();
+    $newPags = array();
     $desc=$_POST['desc'];
+
 	
 
    //Conectamos con el gestor de la bd

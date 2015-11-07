@@ -48,47 +48,6 @@ header('Location:../vistas/login.php');
                     </div>
                   </div>
                 </div>
-                
-                
-                <!-- Nuevas paginas asociadas a la func -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_funcionalidad_pagina"]; ?>
-                      <div class="pull-right">
-                        <select name="paginas">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombrePag FROM Pagina");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo "<option value=\"Páginas\">" . $row['NombrePag'] . "</option>";
-                                }
-                                ?>
-                        </select>
-                        </div></a>
-                    </div>
-                </div>
-                
-                <!-- Nuevos roles asociadas a la func -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?php echo $idioma["anadir_func_roles"]; ?>
-                      <div class="pull-right">
-                        <select name="roles">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombreRol FROM Rol");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo "<option value=\"Roles\">" . $row['NombreRol'] . "</option>";
-                                }
-                                ?>
-                        </select>
-                        </div></a>
-                    </div>
-                </div>
                     
                     <!-- Boton crear -->
                     <div class="btn-parent">

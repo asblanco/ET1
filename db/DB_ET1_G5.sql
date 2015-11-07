@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-11-2015 a las 22:43:32
+-- Tiempo de generación: 07-11-2015 a las 13:32:17
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -177,8 +177,8 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `Nombre` varchar(65) NOT NULL,
   `Apellidos` varchar(65) NOT NULL,
   `Email` varchar(65) NOT NULL,
-  `FechaAlta` date NOT NULL,
-  `Idioma` enum('es','en') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `FechaAlta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Idioma` enum('es','en') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'es'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -186,8 +186,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 --
 
 INSERT INTO `Usuario` (`Login`, `Password`, `Nombre`, `Apellidos`, `Email`, `FechaAlta`, `Idioma`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-14', 'en'),
-('prueba', 'c893bad68927b457dbed39460e6afd62', 'Prueba', 'Prueba', 'prueba@gm.com', '2015-11-01', 'es');
+('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', 'admin', '2015-10-13 22:00:00', 'es');
 
 -- --------------------------------------------------------
 
@@ -239,8 +238,7 @@ CREATE TABLE IF NOT EXISTS `Usu_Rol` (
 --
 
 INSERT INTO `Usu_Rol` (`Login`, `NombreRol`) VALUES
-('admin', 'Administrador'),
-('prueba', 'Administrador');
+('admin', 'Administrador');
 
 --
 -- Índices para tablas volcadas

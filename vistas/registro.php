@@ -61,7 +61,7 @@ Fecha: /10/2015
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label for="nombre"><?php echo $idioma["reg_usuario"]; ?></label>
-                            <input id="login" type='text' name='login' class="form-control" placeholder="User name" required data-validation-required-message="Please enter your user name.">
+                            <input id="login" type='text' name='login' class="form-control" placeholder="User name" required data-validation-required-message="Please enter your user name." autofocus>
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>

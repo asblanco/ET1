@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-11-2015 a las 14:13:38
+-- Tiempo de generación: 07-11-2015 a las 15:25:47
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -79,7 +79,7 @@ DELIMITER ;
 CREATE TABLE IF NOT EXISTS `Pagina` (
   `Url` varchar(65) NOT NULL,
   `DescPag` varchar(65) DEFAULT NULL,
-  `NombreFun` varchar(65) NOT NULL,
+  `NombreFun` varchar(65) DEFAULT NULL,
   `NombrePag` varchar(65) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -130,7 +130,11 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 --
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
-('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.');
+('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.'),
+('Gestor de Funcionalidades', 'Crea y elimina funcionalidades.'),
+('Gestor de Paginas', 'Sube y elimina paginas.'),
+('Gestor de Roles', 'Crea, elimina y asigna roles.'),
+('Gestor de Usuarios', 'Crea, borra y edita usuarios.');
 
 -- --------------------------------------------------------
 
@@ -149,21 +153,37 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
 ('Administrador', 'Consultar Funcionalidad'),
+('Gestor de Funcionalidades', 'Consultar Funcionalidad'),
 ('Administrador', 'Consultar Pagina'),
+('Gestor de Paginas', 'Consultar Pagina'),
 ('Administrador', 'Consultar Rol'),
+('Gestor de Roles', 'Consultar Rol'),
 ('Administrador', 'Consultar Usuario'),
+('Gestor de Usuarios', 'Consultar Usuario'),
 ('Administrador', 'Crear Funcionalidad'),
+('Gestor de Funcionalidades', 'Crear Funcionalidad'),
 ('Administrador', 'Crear Pagina'),
+('Gestor de Paginas', 'Crear Pagina'),
 ('Administrador', 'Crear Rol'),
+('Gestor de Roles', 'Crear Rol'),
 ('Administrador', 'Crear Usuario'),
+('Gestor de Usuarios', 'Crear Usuario'),
 ('Administrador', 'Eliminar Funcionalidad.'),
+('Gestor de Funcionalidades', 'Eliminar Funcionalidad.'),
 ('Administrador', 'Eliminar Pagina'),
+('Gestor de Paginas', 'Eliminar Pagina'),
 ('Administrador', 'Eliminar Rol'),
+('Gestor de Roles', 'Eliminar Rol'),
 ('Administrador', 'Eliminar Usuario'),
+('Gestor de Usuarios', 'Eliminar Usuario'),
 ('Administrador', 'Modificar Funcionalidad.'),
+('Gestor de Funcionalidades', 'Modificar Funcionalidad.'),
 ('Administrador', 'Modificar Pagina'),
+('Gestor de Paginas', 'Modificar Pagina'),
 ('Administrador', 'Modificar Rol'),
-('Administrador', 'Modificar Usuario');
+('Gestor de Roles', 'Modificar Rol'),
+('Administrador', 'Modificar Usuario'),
+('Gestor de Usuarios', 'Modificar Usuario');
 
 -- --------------------------------------------------------
 

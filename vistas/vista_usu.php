@@ -19,20 +19,8 @@ include_once "../modelo/es.php";
 if(!$_SESSION){
 session_start();
 header('Location:../vistas/login.php');}
-/*
-$db=new Database();
-$pag=new Paginas();
-$num=0;
-$row = mysqli_fetch_array($pag->getUsuarios($_SERVER['PHP_SELF']))
-    foreach ($row as $value) {
-        if($_SESSION["login_usuario"] == $value ){
-            $num=1;
-        }
-    }
-if (num=0) {
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
-           }*/
 
+include_once('../controladores/ctrl_permisos.php');
 include_once('../html/navBar.html');
 include_once('../controladores/ctrl_usu.php');
  ?>

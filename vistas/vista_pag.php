@@ -22,6 +22,7 @@ Fecha: /10/2015
 
     }
 
+    include_once('../controladores/ctrl_permisos.php');
     include('../html/navBar.html'); 
     include_once('../controladores/ctrl_pag.php');
 ?>

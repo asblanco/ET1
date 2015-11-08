@@ -23,7 +23,7 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
-
+    include_once('../controladores/ctrl_permisos.php');
     include_once('../html/navBar.html'); 
     include_once('../controladores/ctrl_rol.php');
  ?>

@@ -24,6 +24,7 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
+include_once('../controladores/ctrl_permisos.php');
 include('../html/navBar.html');
 include_once('../controladores/ctrl_func.php');
 ?>

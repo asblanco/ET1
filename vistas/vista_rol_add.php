@@ -6,9 +6,6 @@ Fecha: 25/10/2015
 ============================================================================
 -->
 
-<!--Importar las cabeceras y la barra de navegacion-->
-
-
 <?php
     session_start();
 
@@ -33,6 +30,7 @@ Fecha: 25/10/2015
 <html lang="en">
     <!-- Contenido Principal -->
     <body>
+        <form action='../controladores/ctrl_rol_add.php' method="post">
         <div class="col-md-8 col-md-offset-2"> <!-- centra el contenido -->
             <!-- Nombre y descripcion -->
             <div class="panel panel-default">
@@ -40,12 +38,12 @@ Fecha: 25/10/2015
               <div class="panel-body">
                 <div class="form-group">
                     <label for="rol"><?php echo $idioma["anadir_rol_nombre"]; ?></label>
-                    <input type="text" class="form-control" id="rol">
+                    <input type="text" class="form-control" name="nombreRol">
                 </div>
                   
                 <div class="form-group">
                     <label for="comment"><?php echo $idioma["anadir_rol_descripcion"]; ?></label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <textarea class="form-control" rows="5" name="descripcion"></textarea>
                 </div>
               </div>
             </div>
@@ -74,20 +72,12 @@ Fecha: 25/10/2015
                </div>
               <!-- List group -->
               <ul class="list-group list-onHover addU">
-                <?php
-                  foreach ($users as $usu){ ?> 
-                    <li class="list-group-item">
-                        <?php echo $usu['Login'] ?>
-                        <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
-                    <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
-                    <input hidden="hidden" type="text" name="newUsuRol[]" value="<?php echo $usu['Login']; ?>">
-                    </li>
-                <?php } ?>
+                  <!-- Lista de usuarios -->
               </ul>
             </div>
             
             <!-- Lista de funcionalidades asociadas al rol -->
-            <div class="panel panel-default">
+                        <div class="panel panel-default">
               <div class="panel-heading">
               <?php echo $idioma["modificar_rol_funcionalidades"]; ?>
                   <div class="pull-right">
@@ -109,60 +99,57 @@ Fecha: 25/10/2015
                 </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover addF">
-                    <?php 
-                      foreach ($funcRoles as $func){ ?>
-                        <li class="list-group-item">
-                            <?php echo $func['NombreFun'] ?>
-                            <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
-                        <!-- Elemento oculto para pasar el array con las funcionalidades modificados por POST -->
-                            <input hidden="hidden" type="text" name="newFuncRol[]" value="<?php echo $func['NombreFun']; ?>">
-                        </li>
-                        
-                    <?php } ?>
+
                 </ul>
             </div> 
             
             <!-- Boton crear -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <a href="vista_rol.php" class="btn btn-info btn-lg">
-                        <?php echo $idioma["anadir_rol_crear"]; ?>
-                        <div class="glyphicon glyphicon-ok"></div>
-                    </a>
+                    <button type="submit" class="btn btn-info btn-lg" value=<?php echo $idioma["anadir_rol_crear"]; ?>><?php echo $idioma["anadir_rol_crear"]; ?>
+                    <div class="glyphicon glyphicon-ok"></div>
+                    </button>
                 </div>
             </div>
         </div>
-        
-        <script>
-        function removeUsu() {
-            $('.rm').click(function(){
-              $(this).parents('li').remove();
-            })
-        }
-        function removeFunc() {
-            $('.rm').click(function(){
-              $(this).parents('li').remove();
-            })
-        }
-        
-    </script>
-        
+        </form>
     </body>
 </html>
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
 
+<!-- Script despues del include footer porque ahi se importa jquery -->
+<script>
+    function removeUsu() {
+        $('.rm').click(function(){
+          $(this).parents('li').remove();
+        })
+    }
+    function removeFunc() {
+        $('.rm').click(function(){
+          $(this).parents('li').remove();
+        })
+    }
+
+</script>
+
 <script>
 $(document).ready(function(){
     $(".addUsu").click(function(){
         var value = $(this).attr("value");
-        $(".addU").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
+        //El id no puede llevar espacios
+        var id = value.replace(/ /g,"_");
+        if (!$('#'+id).length) {
+            $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");}
     });
-
+    
     $(".addFunc").click(function(){
         var value = $(this).attr("value");
-        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
+        //El id no puede llevar espacios
+        var id = value.replace(/ /g,"_");
+        if (!$('#'+id).length) {
+            $(".addF").append(" <li class='list-group-item' id= '"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");}
     });
 });
 </script>

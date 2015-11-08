@@ -5,36 +5,32 @@ Creado por: Edgar Conde Nóvoa
 Fecha: 07/11/2015
 ============================================================================
 -->
-<!--Importar las cabeceras y la barra de navegacion-->
 
 <?php
 session_start();
 
-
 if(!$_SESSION["idioma_usuario"]){
-include_once "../modelo/es.php";
-    
+    include_once "../modelo/es.php";
 }else{
     include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
 }
 
 if(!$_SESSION){
-session_start();
-header('Location:../vistas/login.php');
-
+    session_start();
+    header('Location:../vistas/login.php');
 }
     include_once('../controladores/ctrl_permisos.php');
     include_once('../html/navBar.html'); 
     include_once('../controladores/ctrl_rol.php');
- ?>
+?>
 
 <html lang="en">
     
     <body>
     
-    <?php 
+    <?php
         if(isset($_GET['confirmar'])){
-            $roles::eliminar($_GET['confirmar']);
+            $roles->eliminar($_GET['confirmar']);
             header('location:vista_rol.php');
         } else if (isset($_GET['borrar'])){
         ?>

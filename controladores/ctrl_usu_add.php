@@ -7,7 +7,6 @@ Fecha: 28/10/2015
 -->
 
 <?php
-    include '../modelo/connect_DB.php';
     include_once "../modelo/model_usu.php";
     
     $db = new Database();

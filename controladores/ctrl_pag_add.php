@@ -7,7 +7,6 @@ Fecha: 01/11/2015
 -->
 
 <?php
-    include '../modelo/connect_DB.php';
     include '../modelo/model_pag.php';
 
     //Subimos la pagina

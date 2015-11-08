@@ -217,21 +217,21 @@ class Rol implements iModel {
         if ($objeto->exists($objeto->rolName) == false) 
         {
              //Inserta el rol en la tabla Rol
-            $insertaRol = "INSERT INTO Rol (NombreRol, DescRol) VALUES ('$objeto->rolName','$objeto->descripcion')";
-            $db->consulta($InsertaRol) or die('Error al crear el rol');
+            $insertaRol = 'INSERT INTO Rol (NombreRol, DescRol) VALUES (\'' .$objeto->rolName. '\',\'' . $objeto->descripcion . '\')';
+            $db->consulta($insertaRol) or die('Error al crear el rol');
             
             //Comprueba si esta relacionado con algun usuario
             if($objeto->usuarios != array()){
-                foreach ($objeto->$arrayA as $newUsu){
-                    $queryUsu = 'INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$newUsu['Login'].','.$objeto->rolName.')';
+                foreach ($objeto->usuarios as $newUsu){
+                    $queryUsu = 'INSERT INTO Usu_Rol (Login, NombreRol) VALUES (\'' . $newUsu . '\',\'' .$objeto->rolName. '\')';
                     $db->consulta($queryUsu) or die('Error al insertar los usuarios');
                 }
             }
             
             //Comprueba si esta relacionado con alguna funcionalidad
-            if($objeto->$arrayB != array()){
-                foreach ($objeto->$arrayB as $newFun){
-                    $queryFun = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ('.$objeto->rolName.','.$newFun['NombreFun'].')';
+            if($objeto->funcionalidades != array()){
+                foreach ($objeto->funcionalidades as $newFun){
+                    $queryFun = 'INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES (\'' . $objeto->rolName. '\',\'' . $newFun. '\')';
                     $db->consulta($queryFun) or die('Error al insertar las funcionalidades');
                 }
             }
@@ -244,8 +244,9 @@ class Rol implements iModel {
     //Elimina de la base de datos segun la primary key pasada
     public function eliminar($pk){
         $db = new Database();
-        $db->consulta('DELETE FROM Rol WHERE NombreRol = \'' .  $pk .  '\'') or die('Error al eliminar el rol');
+        $result = $db->consulta('DELETE FROM Rol WHERE NombreRol = \'' .  $pk .  '\'') or die('Error al eliminar el rol');
         $db->desconectar();
+        return $result;
     }
 }
 ?>

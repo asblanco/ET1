@@ -27,12 +27,15 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
+<<<<<<< HEAD
 include_once('../controladores/ctrl_permisos.php');
  include_once "../modelo/connect_DB.php";
 include_once "../modelo/model_usu.php";
+=======
+include_once "../modelo/connect_DB.php";
+>>>>>>> origin/master
 include_once "../controladores/ctrl_usu.php";
-$usu=new Usuario();
- include('../html/navBar.html'); ?>
+include('../html/navBar.html'); ?>
 
 
 <html lang="en">
@@ -154,9 +157,39 @@ $usu=new Usuario();
                         </div>
                     </div>
                 </div>
-            </form>        
-        </body>
-    </html>
+            </form>
+        
+            <script>
+        function removeRol() {
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        function removePag() {
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        
+    </script>
+        
+    </body>
+</html>
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
+
+
+<script>
+$(document).ready(function(){
+    $(".addRol").click(function(){
+        var value = $(this).attr("value");
+        $(".addR").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeRol()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newRolUsu[]' value='"+ value +"'></li>");
+    });
+
+    $(".addPag").click(function(){
+        var value = $(this).attr("value");
+        $(".addP").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removePag()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newPagUsu[]' value='"+ value +"'></li>");
+    });
+});
+</script>

@@ -19,7 +19,6 @@ Fecha: 25/10/2015
         include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
     }
 
-
     if(!$_SESSION){
     session_start();
     header('Location:../vistas/login.php');
@@ -133,9 +132,37 @@ Fecha: 25/10/2015
                 </div>
             </div>
         </div>
-
+        
+        <script>
+        function removeUsu() {
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        function removeFunc() {
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        
+    </script>
+        
     </body>
 </html>
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
+
+<script>
+$(document).ready(function(){
+    $(".addUsu").click(function(){
+        var value = $(this).attr("value");
+        $(".addU").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
+    });
+
+    $(".addFunc").click(function(){
+        var value = $(this).attr("value");
+        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
+    });
+});
+</script>

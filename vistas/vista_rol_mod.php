@@ -78,7 +78,7 @@ Fecha: 25/10/2015
               <ul class="list-group list-onHover addU">
                 <?php
                   foreach ($rol['usuarios'] as $usu){ ?> 
-                    <li class="list-group-item">
+                    <li class="list-group-item" id="<?php echo str_replace(" ","_", $usu['Login']) ?>">
                         <?php echo $usu['Login'] ?>
                         <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
                     <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
@@ -113,7 +113,7 @@ Fecha: 25/10/2015
                 <ul class="list-group list-onHover addF">
                     <?php 
                       foreach ($rol['funcionalidades'] as $func){ ?>
-                        <li class="list-group-item">
+                        <li class="list-group-item" id="<?php echo str_replace(" ","_", $func['NombreFun']) ?>">
                             <?php echo $func['NombreFun'] ?>
                             <a href="#" class="rm" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
                         <!-- Elemento oculto para pasar el array con las funcionalidades modificados por POST -->
@@ -159,12 +159,18 @@ Fecha: 25/10/2015
 $(document).ready(function(){
     $(".addUsu").click(function(){
         var value = $(this).attr("value");
-        $(".addU").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
+        //El id no puede llevar espacios
+        var id = value.replace(/ /g,"_");
+        if (!$('#'+id).length) {
+        $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");}
     });
 
     $(".addFunc").click(function(){
         var value = $(this).attr("value");
-        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
+        //El id no puede llevar espacios
+        var id = value.replace(/ /g,"_");
+        if (!$('#'+id).length) {
+        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");}
     });
 });
 </script>

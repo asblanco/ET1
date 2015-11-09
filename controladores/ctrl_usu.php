@@ -15,11 +15,11 @@ Fecha: 28/10/2015
     $arrayUsuarios = $users->listar();
 
 //Listar Roles en modificar y crear Usuario
-    include '../modelo/model_rol.php';
+    include_once '../modelo/model_rol.php';
     $rol = new Rol();
     $roles = $rol->listar();
 //Listar Paginas en modificar y crear Usuario
-    include '../modelo/model_pag.php';
+    include_once '../modelo/model_pag.php';
     $pag = new Pagina();
     $paginas = $pag->listar();
 ?>

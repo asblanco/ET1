@@ -121,17 +121,22 @@ Fecha: 25/10/2015
 
 <!-- Script despues del include footer porque ahi se importa jquery -->
 <script>
+    //Funcion para eliminar usuarios
     function removeUsu() {
         $(".rm").click(function(){
-            var value = $(this).parents('li').attr("id");
-          $(this).parents('li').remove();
-            //El id no puede llevar espacios
-        var value = value.replace(/ /g,"_");
-        if (!$('#'+value).length) {
-            $(".rmU").append("<li id='"+ value +"'><a href='#' class='small addUsu valor' value='"+ value +"'' tabIndex='-1'><input type='checkbox'/>&nbsp; "+ value +" </a></li>");}
+            var id = $(this).parents('li').attr("id");
+            var value = id;
+            value = id.replace("_",/ /);
+            
+            //Lo añade de nuevo al dropdown
+            if (!$('#'+id).length) {
+                $(".rmU").append("<li><a href='#' class='small addUsu valor' value='"+ value +"' tabIndex='-1'><input type='checkbox'/>&nbsp;"+ value +"</a></li>");
+            }
+            $(this).parents('li').remove();
         })        
     }
     
+    //Funcion para eliminar funcionalidades
     function removeFunc() {
         $(".rm").click(function(){
             var value = $(this).parents('li').attr("id");
@@ -144,21 +149,26 @@ Fecha: 25/10/2015
 <script>
     
 $(document).ready(function(){
+    //Funcion para añadir usuarios seleccionados en el dropdown a la pagina
     $(".addUsu").click(function(){
         var value = $(this).attr("value");
         //El id no puede llevar espacios
         var id = value.replace(/ /g,"_");
+        //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
             $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
-        $(this).remove();}
+            //Eliminarlo del dropdown
+            $(this).parents('li').remove();
+        }
     });
     
+    //Funcion para añadir funcionalidades del dropdown a la pagina
     $(".addFunc").click(function(){
         var value = $(this).attr("value");
         //El id no puede llevar espacios
         var id = value.replace(/ /g,"_");
         if (!$('#'+id).length) {
-            $(".addF").append(" <li class='list-group-item' id= '"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
+            $(".addF").append(" <li class='list-group-item' id='"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
         $(this).remove();}
     });    
     

@@ -56,14 +56,14 @@ header('Location:../vistas/login.php');
                   </div>
                 </div>
                 
-                <!-- Nuevas funcionalidades asociados al rol -->
+                <!-- Nuevas funcionalidades asociados a la pagina -->
                 <div class="panel panel-default">
                     <div class="panel-heading"><?php echo $idioma["anadir_pagina_nombre_func"]; ?>
                       <div class="pull-right">
                         <select name="Funcionalidades">
                         <?php 
                         $db = new Database();
-                        $sql = ("SELECT NombreFun FROM Funcionalidad");
+                        $sql = ("SELECT NombreFun FROM Funcionalidad WHERE NombreFun NOT IN (SELECT NombreFun FROM Pagina) ");
                         $Resultado = $db->consulta($sql) ;
             
                                 while ($row = mysqli_fetch_array($Resultado))

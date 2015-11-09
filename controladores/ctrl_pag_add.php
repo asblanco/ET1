@@ -55,9 +55,3 @@ Fecha: 01/11/2015
     }
 
 ?>
-<!--
-<script type="text/javascript">
-setTimeout("window.location = '<?php echo $_SERVER['HTTP_REFERER'] ?>'", 4000);
-</script>
-
--->

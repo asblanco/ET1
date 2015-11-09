@@ -224,8 +224,6 @@ class Pagina implements iModel {
             }
         }
         
-        
-        
         $db->desconectar();
         return true;
     }
@@ -251,7 +249,7 @@ class Pagina implements iModel {
             //Comprueba si esta relacionada con alguna funcionalidad
             $newFunc = $objeto->funcionalidad;
             $queryFun = 'INSERT INTO Pagina (NombreFun) VALUES ('.$newFunc.') WHERE Url ='.$objeto->url.'';
-            $db->consulta($queryFun) or die('Error al insertar la funcionalidad');
+            $db->consulta($queryFun) or die(header('location:../vistas/vista_pag.php'));
      
             return true;
         } else return false;

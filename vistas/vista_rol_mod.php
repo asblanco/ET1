@@ -170,7 +170,7 @@ $(document).ready(function(){
         //El id no puede llevar espacios
         var id = value.replace(/ /g,"_");
         if (!$('#'+id).length) {
-        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");}
+        $(".addF").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");}
     });
 });
 </script>

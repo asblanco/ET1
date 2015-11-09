@@ -88,7 +88,7 @@ Fecha: 25/10/2015
                           <ul class="dropdown-menu rmF">
                               <?php 
                               foreach($funcRoles as $f){ ?>
-                                  <li><a href="#" class="small addFunc" value="<?php echo $f['NombreFun']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f['NombreFun']; ?> </a></li>
+                                  <li><a href="#" class="small addFunc valor" value="<?php echo $f['NombreFun']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f['NombreFun']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -123,27 +123,17 @@ Fecha: 25/10/2015
 <script>
     //Funcion para eliminar usuarios
     function removeUsu() {
-        $(".rm").click(function(){
-            var id = $(this).parents('li').attr("id");
-            var value = id;
-            value = id.replace("_",/ /);
-            
-            //Lo añade de nuevo al dropdown
-            if (!$('#'+id).length) {
-                $(".rmU").append("<li><a href='#' class='small addUsu valor' value='"+ value +"' tabIndex='-1'><input type='checkbox'/>&nbsp;"+ value +"</a></li>");
-            }
-            $(this).parents('li').remove();
-        })        
-    }
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
     
     //Funcion para eliminar funcionalidades
     function removeFunc() {
-        $(".rm").click(function(){
-            var value = $(this).parents('li').attr("id");
-          $(this).parents('li').remove();
-            $(".rmF").append("<li><a href='#' class='small addFunc valor' value='"+ value +"'' tabIndex='-1'><input type='checkbox'/>&nbsp; "+ value +" </a></li>");
-        })     
-    }
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
 </script>
 
 <script>
@@ -157,8 +147,6 @@ $(document).ready(function(){
         //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
             $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
-            //Eliminarlo del dropdown
-            $(this).parents('li').remove();
         }
     });
     
@@ -167,9 +155,10 @@ $(document).ready(function(){
         var value = $(this).attr("value");
         //El id no puede llevar espacios
         var id = value.replace(/ /g,"_");
+        //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
             $(".addF").append(" <li class='list-group-item' id='"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
-        $(this).remove();}
+        }
     });    
     
 });

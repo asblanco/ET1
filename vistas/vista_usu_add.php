@@ -110,7 +110,7 @@ include('../html/navBar.html'); ?>
                           <ul class="dropdown-menu rmP">
                               <?php 
                               foreach($paginas as $p){ ?>
-                                  <li><a href="#" class="small addPag valor" data-value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
+                                  <li><a href="#" class="small addPag valor" value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -121,16 +121,7 @@ include('../html/navBar.html'); ?>
                </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover addP">
-                    <?php 
-                      foreach ($paginas as $pag){ ?>
-                        <li class="list-group-item">
-                            <?php echo $pag['NombrePag'] ?>
-                            <a href="#" class="rm" onclick="removePag()"><div class="glyphicon glyphicon-trash"></div></a>
-                        <!-- Elemento oculto para pasar el array con las paginas modificados por POST -->
-                            <input hidden="hidden" type="text" name="newPagUsu[]" value="<?php echo $pag['']; ?>">
-                        </li>
-                        
-                    <?php } ?>
+                    
                 </ul>
             </div>
                     
@@ -138,7 +129,7 @@ include('../html/navBar.html'); ?>
                     <div class="btn-parent">
                         <div class="btn-child"> <!-- centran el boton -->
                             <button type="submit" value="enviar" class="btn btn-info btn-lg">
-                                <?php echo $idioma["anadir_func_crear"];?>
+                                <?php echo $idioma["anadir_usuario_crear"];?>
                                 <div class="glyphicon glyphicon-ok"></div>
                             </a>
                         </div>
@@ -171,7 +162,7 @@ include('../html/navBar.html'); ?>
 <script>
     
 $(document).ready(function(){
-    //Funcion para añadir usuarios seleccionados en el dropdown a la pagina
+    //Funcion para añadir roles seleccionados en el dropdown al usuario
     $(".addRol").click(function(){
         var value = $(this).attr("value");
         //El id no puede llevar espacios

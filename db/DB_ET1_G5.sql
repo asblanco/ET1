@@ -103,7 +103,7 @@ INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
 ('/vistas/vista_usu.php', NULL, 'Consultar Usuario', 'Vista Usuarios'),
 ('/vistas/vista_usu_del.php', NULL, 'Eliminar Usuario', 'Eliminar Usuario'),
 ('/vistas/vista_usu_mod.php', NULL, 'Modificar Usuario', 'Modificar Usuario'),
-('vistas/vista_usu_add.php', NULL, 'Crear Usuario', 'Crear Usuario');
+('/vistas/vista_usu_add.php', NULL, 'Crear Usuario', 'Crear Usuario');
 
 --
 -- Disparadores `Pagina`

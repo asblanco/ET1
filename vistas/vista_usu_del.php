@@ -10,30 +10,27 @@ Fecha: 07/11/2015
 session_start();
 
 if(!$_SESSION["idioma_usuario"]){
-include_once "../modelo/es.php";
-    
+    include_once "../modelo/es.php";
 }else{
     include_once '../modelo/'.$_SESSION["idioma_usuario"].'.php';
 }
 
 if(!$_SESSION){
-session_start();
-header('Location:../vistas/login.php');}
-
-
-include_once('../controladores/ctrl_permisos.php');
-include_once('../html/navBar.html');
-include_once('../controladores/ctrl_usu.php');
- ?>
-
+    session_start();
+    header('Location:../vistas/login.php');
+}
+    include_once('../controladores/ctrl_permisos.php');
+    include_once('../html/navBar.html');
+    include_once('../controladores/ctrl_usu.php');
+?>
 
 <html lang="en">
-    <!-- Contenido Principal -->
+    
     <body>
-
-        <?php 
+        
+        <?php
         if(isset($_GET['confirmar'])){
-            $users::eliminar($_GET['confirmar']);
+            $users->eliminar($_GET['confirmar']);
             header('location:../vistas/vista_usu.php');
         } else if (isset($_GET['borrar'])){
         ?>
@@ -60,7 +57,7 @@ include_once('../controladores/ctrl_usu.php');
         </div>
          <?php
         		}
-									?>
+        ?>
 
 
     </body>

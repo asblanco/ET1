@@ -44,12 +44,15 @@ Fecha: /10/2015
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="pagina"><?php echo $idioma["modificar_pagina_nombre"]; ?></label>
-                                <textarea class="form-control" rows="1" name="nombre"><?php echo $pagina['descripcion']; ?></textarea>
-                                <input hidden="hidden" type="text" name="oldName" value="<?php echo $pagName; ?>">
-                            </div>
+             
+                                   <input type="text" class="form-control" name="newPag" value="<?php echo $pagName; ?>">
+									<!-- Campo oculto para pasar el nombre del rol al ctrl de modificar -->
+									<input hidden="hidden" type="text" name="oldPag" value="<?php echo $pagName; ?>">
+							
+							</div>
                             
                             <div class="form-group">
-                                <label for="tipo"><?php echo $idioma["modificar_pagina_descripcion"]; ?></label>
+                                <label for="comment"><?php echo $idioma["modificar_pagina_descripcion"]; ?></label>
                                 <textarea class="form-control" rows="5" name="comment"><?php echo $pagina['descripcion']; ?></textarea>
                             </div>
                         </div>

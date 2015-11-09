@@ -53,7 +53,7 @@ Fecha: /10/2015
                             
                             <div class="form-group">
                                 <label for="comment"><?php echo $idioma["modificar_pagina_descripcion"]; ?></label>
-                                <textarea class="form-control" rows="5" name="comment"><?php echo $pagina['descripcion']; ?></textarea>
+                                <textarea class="form-control" rows="5" name="newDesc"><?php echo $pagina['descripcion'] ?></textarea>
                             </div>
                         </div>
                 </div>
@@ -68,7 +68,7 @@ Fecha: /10/2015
                         <select name="Funcionalidad">
                         <?php 
                         $db = new Database();
-                        $sql = ("SELECT NombreFun FROM Funcionalidad");
+                        $sql = ("SELECT NombreFun FROM Funcionalidad WHERE NombreFun NOT IN (SELECT NombreFun FROM Pagina) ");
                         $Resultado = $db->consulta($sql) ;
             
                                 while ($row = mysqli_fetch_array($Resultado))
@@ -113,9 +113,7 @@ Fecha: /10/2015
         }
         
     </script>
-                            
-                            
-                          
+                                                                       
     </body>
 </html>
     </body>

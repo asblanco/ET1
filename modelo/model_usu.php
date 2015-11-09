@@ -366,8 +366,7 @@ class Usuario implements iModel {
             
             //Comprueba si esta relacionado con algun rol
             if($objeto->roles != array()){
-                foreach ($objeto->$arrayA as $rol){
-                    $newRol = $rol['NombreRol'];
+                foreach ($objeto->$roles as $newRol){
                     $queryRol = 'INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$objeto->loginClase.','.$newRol.')';
                     $db->consulta($queryRol) or die('Error al insertar los roles');
                 }
@@ -375,8 +374,7 @@ class Usuario implements iModel {
             
             //Comprueba si esta relacionado con alguna pagina
             if($objeto->paginas != array()){
-                foreach ($objeto->paginas as $pag){
-                    $newPag = $pag['Url'];
+                foreach ($objeto->paginas as $newPag){
                     $queryPag = 'INSERT INTO Usu_Pag (Login, Url) VALUES ('.$objeto->loginClase.','.$newPag.')';
                     $db->consulta($queryPag) or die('Error al insertar las paginas');
                 }

@@ -9,7 +9,6 @@ Fecha: 23/10/2015
 
 <!--Importar las cabeceras y la barra de navegacion-->
 
-
 <?php
 session_start();
 
@@ -83,7 +82,7 @@ include('../html/navBar.html'); ?>
                           <ul class="dropdown-menu rmR">
                               <?php 
                               foreach($roles as $r){ ?>
-                                  <li><a href="#" class="small addRol valor" data-value="<?php echo $r['NombreRol']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $r['NombreRol']; ?> </a></li>
+                                  <li><a href="#" class="small addRol valor" value="<?php echo $r['NombreRol']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $r['NombreRol']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -162,6 +161,7 @@ include('../html/navBar.html'); ?>
 <script>
     
 $(document).ready(function(){
+    
     //Funcion para añadir roles seleccionados en el dropdown al usuario
     $(".addRol").click(function(){
         var value = $(this).attr("value");

@@ -28,17 +28,17 @@ Fecha: 28/10/2015
 
         $newUsu = new Usuario($login);
 
-if(isset($_POST['newRol'])){
-      if (is_array($_POST['newRol'])) {
-        foreach($_POST['newRol'] as $value){
+if(isset($_POST['newRolUsu'])){
+      if (is_array($_POST['newRolUsu'])) {
+        foreach($_POST['newRolUsu'] as $value){
           $roles[] = $value;
         }
       }
     }
 
-    if(isset($_POST['newPag'])){
-      if (is_array($_POST['newPag'])) {
-        foreach($_POST['newPag'] as $value){
+    if(isset($_POST['newPagUsu'])){
+      if (is_array($_POST['newPagUsu'])) {
+        foreach($_POST['newPagUsu'] as $value){
           $pags[] = $value;
         }
       }

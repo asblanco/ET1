@@ -87,7 +87,7 @@ Modifica un usuario
                           <ul class="dropdown-menu rmR">
                               <?php 
                               foreach($roles as $r){ ?>
-                                  <li><a href="#" class="small addRol valor" data-value="<?php echo $r['NombreRol']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $r['NombreRol']; ?> </a></li>
+                                  <li><a href="#" class="small addRol valor" value="<?php echo $r['NombreRol']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $r['NombreRol']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -97,7 +97,7 @@ Modifica un usuario
                   </div>
                </div>
               <!-- List group -->
-              <ul class="list-group list-onHover">
+              <ul class="list-group list-onHover addR">
                 <?php 
                   foreach ($usu['roles'] as $rol){ ?>
                     <li class="list-group-item">
@@ -122,7 +122,7 @@ Modifica un usuario
                           <ul class="dropdown-menu rmP">
                               <?php 
                               foreach($paginas as $p){ ?>
-                                  <li><a href="#" class="small addPag valor" data-value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
+                                  <li><a href="#" class="small addPag valor" value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
                               <?php
                               }
                               ?>
@@ -132,7 +132,7 @@ Modifica un usuario
                   </div>
                </div>
                 <!-- List group -->
-                <ul class="list-group list-onHover">
+                <ul class="list-group list-onHover addP">
                     <?php 
                       foreach ($usu['paginas'] as $pag){ ?>
                         <li class="list-group-item">
@@ -178,39 +178,26 @@ Modifica un usuario
 <?php include('../html/footer.html'); ?>
 
 <script>
-    //Funcion para eliminar usuarios
+    //Funcion para eliminar roles
     function removeRol() {
-        $(".rm").click(function(){
-            var id = $(this).parents('li').attr("id");
-            var value = id;
-            value = id.replace("_",/ /);
-            
-            //Lo añade de nuevo al dropdown
-            if (!$('#'+id).length) {
-                $(".rmR").append("<li><a href='#' class='small addRol valor' value='"+ value +"' tabIndex='-1'><input type='checkbox'/>&nbsp;"+ value +"</a></li>");
-            }
-            $(this).parents('li').remove();
-        })        
-    }
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
     
-    //Funcion para eliminar funcionalidades
+    //Funcion para eliminar paginas
     function removePag() {
-        $(".rm").click(function(){
-            var id = $(this).parents('li').attr("id");
-            var value = id;
-            value = id.replace("_",/ /);
-            if (!$('#'+id).length) {
-                $(".rmP").append("<li><a href='#' class='small addPag valor' value='"+ value +"'' tabIndex='-1'><input type='checkbox'/>&nbsp; "+ value +" </a></li>");
-            }
-            $(this).parents('li').remove();
-        })     
-    }
+            $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
 </script>
 
 <script>
     
 $(document).ready(function(){
-    //Funcion para añadir usuarios seleccionados en el dropdown a la pagina
+    
+    //Funcion para añadir roles seleccionados en el dropdown al usuario
     $(".addRol").click(function(){
         var value = $(this).attr("value");
         //El id no puede llevar espacios
@@ -218,8 +205,6 @@ $(document).ready(function(){
         //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
             $(".addR").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeRol()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newRolUsu[]' value='"+ value +"'></li>");
-            //Eliminarlo del dropdown
-            $(this).parents('li').remove();
         }
     });
     
@@ -231,7 +216,7 @@ $(document).ready(function(){
         //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
             $(".addP").append(" <li class='list-group-item' id='"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removePag()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newPagUsu[]' value='"+ value +"'></li>");
-            $(this).parents('li').remove();}
+        }
     });    
     
 });

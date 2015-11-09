@@ -34,7 +34,7 @@ include_once('../controladores/ctrl_usu.php');
         <?php 
         if(isset($_GET['confirmar'])){
             $users::eliminar($_GET['confirmar']);
-            header('location:vista_usu.php');
+            header('location:../vistas/vista_usu.php');
         } else if (isset($_GET['borrar'])){
         ?>
         <!-- Remove Modal Page -->

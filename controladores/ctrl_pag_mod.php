@@ -5,7 +5,7 @@
     $db = new Database();
     //Nuevos datos
     $oldPagName = $_POST['oldName'];  
-    $newPagDesc = $_POST['comment'];
+    $newPagDesc = $_POST['newDesc'];
     $usu = array();
     $func = $_POST['newFunc'];
     $url = $oldPagName;

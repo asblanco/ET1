@@ -5,15 +5,11 @@ class Funcionalidad implements iModel {
     
     private $funName;
     private $descripcion;
-    private $roles = array();
-    private $paginas = array();
     public $numFun = 0;
 
-    public function __construct($funName="", $desc="", $rol=array(), $pag=array()) {
+    public function __construct($funName="", $desc="") {
         $this->funName=$funName;
         $this->descripcion=$desc;
-        $this->roles = $rol;
-        $this->paginas= $pag;
     }
     
     
@@ -127,64 +123,6 @@ class Funcionalidad implements iModel {
 
             $db->consulta($sql) or die('Error al modificar la descripcion'); 
         }
-
-    //Actualizar páginas con esa funcionalidad
-        //Crear un array asociativo con las páginas sin modificar
-        $arrayOldPag = $this->getPaginas($pk);
-        
-        //Crear el array asociativo con las nuevas páginas
-        $arrayNewPag = $objeto->paginas;
-        
-        //Comparar si hay nuevas paginas recorriendo $arrayNewPag
-        foreach ($arrayNewPag as $new){
-            $resultado = $db->consulta('SELECT Url FROM Pagina WHERE Url = \'' . $new['Url'] .  '\'');
-            //Si las filas es igual a 0, no existe, por lo tanto hay que actualizar la pagina
-            if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('UPDATE Pagina SET NombreFun='.$objeto->nombreFun.'WHERE Url= \''.$new['Url']. '\'');
-            }
-        }
-        
-        //Comparar si hay paginas a eliminar recorriendo $arrayOldPag
-        foreach ($arrayOldPag as $old){
-            //Comprobar si el usuario está en $arrayNewUsu
-            $cont=0;
-            foreach($arrayNewPag as $new){
-                if($new == $old['Url']) $cont++;
-            }
-            //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
-            if( $cont == 0 ){
-                $db->consulta('DELETE NombreFun FROM Pagina WHERE Url = \'' . $old['Url'] . '\' AND NombreFun = \'' . $pk . '\'');
-            }
-        }
-        
-        //Actualizar roles con esa funcionalidad
-        //Crear un array asociativo con los roles sin modificar
-        $arrayOldRol = $this->getRoles($pk);
-        
-        //Crear el array asociativo con los nuevos roles
-        $arrayNewRol = $objeto->roles;
-        
-        //Comparar si hay nuevos roles recorriendo $arrayNewRol
-        foreach ($arrayNewRol as $new){
-            $resultado = $db->consulta('SELECT NombreRol FROM Rol WHERE NombreRol = \'' . $new['NombreRol'] .  '\'');
-            //Si las filas es igual a 0, no existe, por lo tanto es nuevo
-            if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Rol_Fun(NombreRol,NombreFun) VALUES ('.$objeto->rolName.','.$new['NombreFun'].')');
-            }
-        }
-        
-        //Comparar si hay roles a eliminar recorriendo $arrayOldRol
-        foreach ($arrayOldPag as $old){
-            //Comprobar si el rol está en $arrayNewRol
-            $cont=0;
-            foreach($arrayNewRol as $new){
-                if($new['NombreRol'] == $old['NombreRol']) $cont++;
-            }
-            //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
-            if( $cont == 0 ){
-                $db->consulta('DELETE FROM Rol_Fun WHERE NombreFun='.$objeto->NombreFun.'AND NombreRol = \'' . $old['NombreRol'] . '\'');
-            }
-        }
         
         
         $existeNombre = $this->exists($newName);
@@ -195,6 +133,7 @@ class Funcionalidad implements iModel {
 
                 if ($db->consulta($sql) === TRUE) {
                     echo "Guardado correctamente";
+                    return true;
                 } else {
                     echo "Error actualizando el nombre: " . $db->error;
                 }

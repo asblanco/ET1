@@ -18,7 +18,7 @@ Fecha: 06/11/2015
 
     $newFunc = new Funcionalidad($newFuncName, $newFuncDesc);
     
-    
+        $modFunc->modificar($oldFuncName, $newFunc);
         header('location:../vistas/vista_func.php'); 
 ?>
 

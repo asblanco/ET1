@@ -58,7 +58,7 @@ Fecha: 25/10/2015
                         <a href="#" data-toggle="dropdown">
                           <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
                           <!-- Contenido del dropdown -->
-                          <ul class="dropdown-menu">
+                          <ul class="dropdown-menu rmU">
                               <?php 
                               foreach($users as $u){ ?>
                                   <li><a href="#" class="small addUsu valor" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
@@ -85,7 +85,7 @@ Fecha: 25/10/2015
                         <a href="#" data-toggle="dropdown">
                           <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
                           <!-- Contenido del dropdown -->
-                          <ul class="dropdown-menu">
+                          <ul class="dropdown-menu rmF">
                               <?php 
                               foreach($funcRoles as $f){ ?>
                                   <li><a href="#" class="small addFunc" value="<?php echo $f['NombreFun']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f['NombreFun']; ?> </a></li>
@@ -122,26 +122,35 @@ Fecha: 25/10/2015
 <!-- Script despues del include footer porque ahi se importa jquery -->
 <script>
     function removeUsu() {
-        $('.rm').click(function(){
+        $(".rm").click(function(){
+            var value = $(this).parents('li').attr("id");
           $(this).parents('li').remove();
-        })
+            //El id no puede llevar espacios
+        var value = value.replace(/ /g,"_");
+        if (!$('#'+value).length) {
+            $(".rmU").append("<li id='"+ value +"'><a href='#' class='small addUsu valor' value='"+ value +"'' tabIndex='-1'><input type='checkbox'/>&nbsp; "+ value +" </a></li>");}
+        })        
     }
+    
     function removeFunc() {
-        $('.rm').click(function(){
+        $(".rm").click(function(){
+            var value = $(this).parents('li').attr("id");
           $(this).parents('li').remove();
-        })
+            $(".rmF").append("<li><a href='#' class='small addFunc valor' value='"+ value +"'' tabIndex='-1'><input type='checkbox'/>&nbsp; "+ value +" </a></li>");
+        })     
     }
-
 </script>
 
 <script>
+    
 $(document).ready(function(){
     $(".addUsu").click(function(){
         var value = $(this).attr("value");
         //El id no puede llevar espacios
         var id = value.replace(/ /g,"_");
         if (!$('#'+id).length) {
-            $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");}
+            $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuRol[]' value='"+ value +"'></li>");
+        $(this).remove();}
     });
     
     $(".addFunc").click(function(){
@@ -149,7 +158,9 @@ $(document).ready(function(){
         //El id no puede llevar espacios
         var id = value.replace(/ /g,"_");
         if (!$('#'+id).length) {
-            $(".addF").append(" <li class='list-group-item' id= '"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");}
-    });
+            $(".addF").append(" <li class='list-group-item' id= '"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncRol[]' value='"+ value +"'></li>");
+        $(this).remove();}
+    });    
+    
 });
 </script>

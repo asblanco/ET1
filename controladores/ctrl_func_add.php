@@ -1,6 +1,6 @@
 <!--
 ===========================================================================
-Controlador para procesar un nuevo registro
+Controlador para añadir func
 Creado por: David Ansia
 Fecha: 01/11/2015
 ============================================================================
@@ -24,7 +24,7 @@ Fecha: 01/11/2015
     //Comprobamos si ya existe la funcionalidad
     $consultaSiFunc = $newFunc->exists($nombre);
     if ($consultaSiFunc == true){
-        echo '<p>La funcionalidad ' . $nombre . ' ya existe en la bd</p>';
+        echo "existe";
     } else {
         $insertFunc = new Funcionalidad ($nombre, $desc, $roles, $paginas);
         header('Location: ../vistas/vista_func.php');

@@ -16,23 +16,26 @@ class Usuario implements iModel {
     private $loginClase;
     private $nombre;
     private $apellidos;
-    private $fechaAlta;
     private $email;
     private $password;
     private $idioma;
     private $roles = array();
     private $paginas = array();
     
-    public function __construct($loginClase="" , $nombre="", $apellidos="" , $fechaAlta="", $email="" , $password="" , $idioma="es", $rol=array(), $pag=array()) {
+    
+    
+    public function __construct($loginClase="" , $nombre="", $apellidos="" , $email="" , $password="" , $idioma="es", $rol=array(), $pag=array()) {
         $this->loginClase = $loginClase;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
-        $this->fechaAlta = $fechaAlta;
         $this->email = $email;
         $this->password = $password;
         $this->idioma = $idioma;
         $this->roles = $rol;
         $this->paginas= $pag;
+        $db = new Database();
+        $this->fechaAlta= date('Y-m-d H:i:s');
+        $db->desconectar();
     }
     
     

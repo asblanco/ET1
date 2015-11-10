@@ -54,7 +54,7 @@ Fecha: 03/11/2015
     //d41d8cd98f00b204e9800998ecf8427e es cadena vacia en MD5
     //Si el campo contraseña esta vacio, modifica los datos
     if (strcmp($oldUsuPassword, "d41d8cd98f00b204e9800998ecf8427e")== 0){
-            $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $fechaAlta, $newUsuEmail, "", $idioma, $roles, $pags);
+            $newUsu = new Usuario($newUsuLogin, $newUsuName, $newUsuSurname, $newUsuEmail, "", $idioma, $roles, $pags);
         if ($modUsu->modificar($oldUsuLogin, $newUsu) == true){
             header('location:../vistas/vista_usu.php'); 
         }else {

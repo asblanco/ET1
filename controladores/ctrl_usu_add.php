@@ -16,7 +16,6 @@ Fecha: 28/10/2015
 		$login=$_POST['login'];
 		$nombre=$_POST['nombre'];
 		$apellidos= $_POST['apellidos'];
-		$fechaAlta="";
 		$email= $_POST['email'];
 		$password= $_POST['password'];
 		$roles= array();
@@ -46,7 +45,7 @@ Fecha: 28/10/2015
     if ($consultaSiUsu == true){
         echo '<p>El usuario ' . $login . ' ya existe en la bd</p>';
     } else {
-        $insertUsu = new Usuario ($login,$nombre,$apellidos,$fechaAlta,$email,$password,$idioma,$roles,$paginas);
+        $insertUsu = new Usuario ($login,$nombre,$apellidos,$email,$password,$idioma,$roles,$paginas);
         if ($newUsu->crear($insertUsu) == true){
             echo 'El usuario ' . $login. ' ha sido registrado en el sistema';
             header('Location:../vistas/vista_usu.php' );

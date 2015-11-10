@@ -144,6 +144,11 @@ include('../html/navBar.html'); ?>
 
 <!-- Script despues del include footer porque ahi se importa jquery -->
 <script>
+        function cifrar(){
+            var input_pass = document.getElementById("password");
+            input_pass.value = hex_md5(input_pass.value);
+        }
+    
     //Funcion para eliminar usuarios
     function removeRol() {
             $('.rm').click(function(){

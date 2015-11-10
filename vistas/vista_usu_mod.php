@@ -184,7 +184,6 @@ Modifica un usuario
             var input_newPass = document.getElementById("newPass");
             input_newPass.value = hex_md5(input_newPass.value);
         }
-</script>
 
 <script>
     

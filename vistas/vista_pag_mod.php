@@ -43,7 +43,6 @@ Fecha: /10/2015
                         <div class="panel-body">
                             <div class="form-group">
                               <label for="pagina"><?php echo $idioma["modificar_pagina_nombre"]; ?></label>
-             
                               <input type="text" class="form-control" name="newPag" value="<?php echo $pagName; ?>">
                               <!-- Campo oculto para pasar el nombre del rol al ctrl de modificar -->
                               <input hidden="hidden" type="text" name="oldPag" value="<?php echo $pagName; ?>">
@@ -56,39 +55,71 @@ Fecha: /10/2015
                         </div>
                 </div>
                 
+            <!-- Lista de usuarios asociados a la pagina -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              <?php echo $idioma["modificar_rol_usuarios"]; ?>
+                    <div class="pull-right">
+                      <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($users as $u){ ?>
+                                  <li><a href="#" class="small addUsu valor" value="<?php echo $u['Login']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $u['Login']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
+                  </div>
+               </div>
+              <!-- List group -->
+              <ul class="list-group list-onHover addU">
+                <?php
+                  foreach ($pagina['usuarios'] as $usu){ ?> 
+                    <li class="list-group-item" id="<?php echo str_replace(" ","_", $usu['Login']) ?>">
+                        <?php echo $usu['Login'] ?>
+                        <a class="rm" href="#" onclick="removeUsu()"><div class="glyphicon glyphicon-trash"></div></a>
+                    <!-- Elemento oculto para pasar el array con los ususarios modificados por POST -->
+                    <input hidden="hidden" type="text" name="newUsuPag[]" value="<?php echo $usu['Login']; ?>">
+                    </li>
+                <?php } ?>
+              </ul>
+            </div>    
                 
-            <!-- Lista de funcionalidades para la pagina -->
+            <!-- Funcionalidad de la pagina -->
             <div class="panel panel-default">
               <div class="panel-heading">
               <?php echo $idioma["modificar_pagina_funcionalidad"]; ?>
-                   <div class="pull-right">
-                          <div class="pull-right">
-                        <select name="Funcionalidad">
-                        <?php 
-                        $db = new Database();
-                        $sql = ("SELECT NombreFun FROM Funcionalidad WHERE NombreFun NOT IN (SELECT NombreFun FROM Pagina) ");
-                        $Resultado = $db->consulta($sql) ;
-            
-                                while ($row = mysqli_fetch_array($Resultado))
-                                {
-                                    echo '<option value="'.$row['NombreFun'].'">'.$row['NombreFun'].'</option>';
-                                }
-                                ?>
-                        </select>
-                        </div></a>
-                      </div>
+                  <div class="pull-right">
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                          <div class="glyphicon glyphicon-plus dropdown-toggle"></div>
+                          <!-- Contenido del dropdown -->
+                          <ul class="dropdown-menu">
+                              <?php 
+                              foreach($funcPags as $f){ ?>
+                                  <li><a href="#" class="small addFunc" value="<?php echo $f['NombreFun']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f['NombreFun']; ?> </a></li>
+                              <?php
+                              }
+                              ?>
+                          </ul>
+                        </a>
+                    </div>
+                  </div>
                 </div>
                 <!-- List group -->
-                <ul class="list-group list-onHover">
-                    
+                <ul class="list-group list-onHover addF">
                         <li class="list-group-item">
                             <?php echo $pagina['funcionalidad'] ?>
-                            
+                            <a href="#" class="rmF" onclick="removeFunc()"><div class="glyphicon glyphicon-trash"></div></a>
                         <!-- Elemento oculto para pasar el array con las funcionalidades modificados por POST -->
-                            <input hidden="hidden" type="text" name="newFunc" value="<?php echo $func['NombreFun']; ?>">
+                            <input hidden="hidden" type="text" name="newFuncPag" value="<?php echo $pagina['funcionalidad']; ?>">
                         </li>
                         
-                    
                 </ul>
             </div> 
                 
@@ -104,16 +135,37 @@ Fecha: /10/2015
       </form>
         
     <script>
-        function removeFunc() {
+        function removeUsu() {
             $('.rm').click(function(){
+              $(this).parents('li').remove();
+            })
+        }
+        function removeFunc() {
+            $('.rmF').click(function(){
               $(this).parents('li').remove();
             })
         }
         
     </script>
-                                                                       
-    </body>
-</html>
+
     </body>
 </html>
 <?php include('../html/footer.html'); ?>
+
+<script>
+$(document).ready(function(){
+    $(".addUsu").click(function(){
+        var value = $(this).attr("value");
+        //El id no puede llevar espacios
+        var id = value.replace(/ /g,"_");
+        if (!$('#'+id).length) {
+        $(".addU").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeUsu()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newUsuPag[]' value='"+ value +"'></li>");}
+    });
+
+    $(".addFunc").click(function(){
+        var value = $(this).attr("value");
+        $(".rmF").parents('li').remove();
+        $(".addF").append(" <li class='list-group-item'>"+ value +" <a class='rmF' href='#' onclick='removeFunc()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newFuncPag' value='"+ value +"'></li>");
+    });
+});
+</script>

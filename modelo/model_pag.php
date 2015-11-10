@@ -18,8 +18,8 @@ class Pagina implements iModel {
     
     public function __construct($url="",$nombrePag="", $desc="", $usu=array(), $func="") {
         $this->url=$url;
-        $this->nombrePag=$nombrePag;
-        $this->descripcion=$desc;
+        $this->nombrePag = $nombrePag;
+        $this->descripcion = $desc;
         $this->usuarios = $usu;
         $this->funcionalidad= $func;
     }
@@ -162,12 +162,10 @@ class Pagina implements iModel {
         $db = new Database();
         //Guardar los datos de $pk en un array
         $datos = $objeto->consultar($pk);
-        $oldUrl = $datos['url'];
-        $newUrl = $objeto->url;
         $oldNom = $datos['nombre'];
         $newNom = $objeto->nombrePag;
         if ($oldNom != $newNom){
-            $sql = 'UPDATE Pagina SET NombrePag=\'' . $newNom . '\' WHERE Url = \'' . $oldUrl .  '\'' ;
+            $sql = 'UPDATE Pagina SET NombrePag=\'' . $newNom . '\' WHERE Url = \'' . $pk .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar la descripcion');
         }
@@ -175,27 +173,24 @@ class Pagina implements iModel {
         $oldDesc = $datos['descripcion'];
         $newDesc = $objeto->descripcion;
         if ($oldDesc != $newDesc){
-            $sql = 'UPDATE Pagina SET DescPag=\'' . $newDesc . '\' WHERE Url = \'' . $oldUrl .  '\'' ;
+            $sql = 'UPDATE Pagina SET DescPag=\'' . $newDesc . '\' WHERE Url = \'' . $pk .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar la descripcion');
         }
         
     //Actualizar usuarios asociados a la pagina
         //Crear un array asociativo con los usuarios sin modificar
-        $sqlOldUsu = $db->consulta('SELECT Login FROM Usu_Pag WHERE Url = \'' . $pk .  '\'');
-        $arrayOldUsu = array();
-        while ($row_usu = mysqli_fetch_assoc($sqlOldUsu))
-            $arrayOldUsu[] = $row_usu;
+        $arrayOldUsu = $this->getUsuarios($pk);
         
         //Crear el array asociativo con los nuevos usuarios
-        $arrayNewUsu = $objeto->getUsuarios($pk);
+        $arrayNewUsu = $objeto->usuarios;
         
         //Comparar si hay nuevos usuarios recorriendo $newUsuarios
         foreach ($arrayNewUsu as $new){
-            $resultado = $db->consulta('SELECT Login FROM Usu_Pag WHERE Login = \'' . $new['Login'] .  '\'');
+            $resultado = $db->consulta('SELECT Login FROM Usu_Pag WHERE Login = \'' . $new .  '\' AND Url = \'' . $pk . '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nuevo
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Pag (Login, Url) VALUES ('.$new['Login'].','.$objeto->url.')');
+                $db->consulta('INSERT INTO Usu_Pag (Login, Url) VALUES (\''.$new.'\',\''.$pk.'\')');
             }
         }
         
@@ -204,7 +199,7 @@ class Pagina implements iModel {
             //Comprobar si el usuario está en $arrayNewUsu
             $cont=0;
             foreach($arrayNewUsu as $new){
-                if($new['Login'] == $old['Login']) $cont++;
+                if($new == $old['Login']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
             if( $cont == 0 ){
@@ -214,31 +209,16 @@ class Pagina implements iModel {
         
         //Actualizar funcionalidades asociadas a la pagina
         //Crear una variable con la funcionalidad sin modificar
-        
         $oldFunc = $datos['funcionalidad'];
         
         //Crear variable con la nueva funcionalidad
         $newFunc = $objeto->funcionalidad;
         
         //Comparar si hay nueva funcionalidad comparando $NewFunc y $OldFunc
-            
         if ($oldFunc != $newFunc){
-            $sql = 'UPDATE Pagina SET NombreFun=\'' . $newFunc . '\' WHERE Url = \'' . $oldUrl .  '\'';
+            $sql = 'UPDATE Pagina SET NombreFun=\'' . $newFunc . '\' WHERE Url = \'' . $pk .  '\'';
             
             $db->consulta($sql) or die('Error al modificar la funcionalidad');
-        }
-        
-        //Comparar si hay funcionalidad a eliminar 
-              
-        
-        $existeUrl = $this->exists($newUrl);
-        if($newUrl != "" && $existeUrl == false){
-            //Comparar los datos con $objeto y modificar los que sean necesarios
-            if ($oldName != $newName){
-                $sql = 'UPDATE Pagina SET Url=' . $newUrl . ' WHERE Url = \'' . $oldUrl .  '\'';
-
-                $result = $db->consulta($sql);
-            }
         }
         
         $db->desconectar();

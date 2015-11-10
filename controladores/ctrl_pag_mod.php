@@ -2,24 +2,25 @@
     include_once "../modelo/model_pag.php";
 
     $modPag = new Pagina();
-    $db = new Database();
+
     //Nuevos datos
-    $oldPagName = $_POST['oldName'];  
+    $oldPagName = $_POST['oldPag'];
+    $newPagName = $_POST['newPag'];
     $newPagDesc = $_POST['newDesc'];
+    $func = $_POST['newFuncPag'];
+    $url = $modPag->getUrl($oldPagName);
     $usu = array();
-    $func = $_POST['newFunc'];
-    $url = $oldPagName;
    
 
-    if(isset($_POST['newUsu'])){
-      if (is_array($_POST['newUsu'])) {
-        foreach($_POST['newUsu'] as $value){
+    if(isset($_POST['newUsuPag'])){
+      if (is_array($_POST['newUsuPag'])) {
+        foreach($_POST['newUsuPag'] as $value){
           $usu[] = $value;
         }
       }
     }
   
-    $newPag = new Pagina($url, $oldPagName, $newPagDesc, $usu, $func);
+    $newPag = new Pagina($url, $newPagName, $newPagDesc, $usu, $func);
     if ($modPag->modificar($url, $newPag) == true){
         header('location:../vistas/vista_pag.php'); 
     }else {

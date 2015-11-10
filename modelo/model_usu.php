@@ -303,13 +303,20 @@ class Usuario implements iModel {
         
         //Comparar si hay nuevas paginas recorriendo $arrayNewPag
         foreach ($arrayNewPag as $new){
-            $resultado = $db->consulta('SELECT Url FROM Usu_Pag WHERE NombrePag = \''. $new .'\' AND Login = \''. $pk .'\'');
+            //Comprueba si existe esa pagina en la tabla de relacion Usu_Pag
+            $result = $db->consulta('SELECT Url FROM Usu_Pag WHERE NombrePag = \''. $new .'\' AND Login = \''. $pk .'\'') or die("Error en la consulta de paginas");
+            
             //Si las filas es igual a 0, no existe, por lo tanto es nueva y se añade
-            if( mysqli_num_rows($resultado) == 0 ){
+            if( mysqli_num_rows($result) == 0 ){
+                //Como no existe, se coge la Url de la tabla Pagina
+                $resultado = $db->consulta('SELECT Url FROM Pagina WHERE NombrePag = \''. $new .'\'');
                 /* array numérico para guardar la url */
                 $row = $resultado->fetch_array(MYSQLI_NUM);
                 $url = $row[0];
-                $db->consulta('INSERT INTO Usu_Pag (Login, Url, NombrePag) VALUES (\''.$pk.'\',\''.$url.'\', \''.$new.'\')');
+                $resultado->free();
+                
+                //Insertar la relacion entre pagina y usuario
+                $db->consulta('INSERT INTO Usu_Pag (Login, Url, NombrePag) VALUES (\''. $pk .'\', \''. $url .'\', \''. $new .'\')') or die("error al insertar paginas");
             }
         }
         
@@ -355,6 +362,7 @@ class Usuario implements iModel {
     //Crea el objeto pasado en la tabla de la base de datos, si devuelve fue bien devuelve true
     public function crear($objeto){
         $db = new Database();
+        
         if ($objeto->exists($objeto->loginClase) == false) 
         {
              //Inserta el usuario en la tabla usuario
@@ -373,7 +381,13 @@ class Usuario implements iModel {
             //Comprueba si esta relacionado con alguna pagina
             if($objeto->paginas != array()){
                 foreach ($objeto->paginas as $newPag){
-                    $queryPag = 'INSERT INTO Usu_Pag (Login, Url) VALUES ('.$objeto->loginClase.','.$newPag.')';
+                    //Coger la url de la tabla pagina
+                    $resultado = $db->consulta('SELECT Url FROM Pagina WHERE NombrePag = \''. $newPag .'\'');
+                    /* array numérico para guardar la url */
+                    $row = $resultado->fetch_array(MYSQLI_NUM);
+                    $url = $row[0];
+                    
+                    $queryPag = 'INSERT INTO Usu_Pag (Login, Url, NombrePag) VALUES (\''.$objeto->loginClase.'\',\''.$url.'\', \''. $newPag .'\')';
                     $db->consulta($queryPag) or die('Error al insertar las paginas');
                 }
             }

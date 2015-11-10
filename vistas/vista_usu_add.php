@@ -59,7 +59,7 @@ include('../html/navBar.html'); ?>
                   
                 <div class="form-group">
                     <label for="email"><?php echo $idioma["anadir_usuario_email"]; ?></label>
-                    <input type="text" class="form-control" name="email" id="email">
+                    <input type="email" class="form-control" name="email" id="email">
                 </div>
                   
                 <div class="form-group">
@@ -70,7 +70,7 @@ include('../html/navBar.html'); ?>
             </div>
             
                 
-                <!-- Lista de roles asociados al usuario -->
+            <!-- Lista de roles asociados al usuario -->
             <div class="panel panel-default">
               <div class="panel-heading">
               <?php echo $idioma["modificar_usuario_roles"]; ?>

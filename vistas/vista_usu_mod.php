@@ -69,9 +69,7 @@ Modifica un usuario
                 <div class="form-group">
                     <label for="newPass"><?php echo $idioma["modificar_usuario_nueva_password"]; ?></label>
                     <input type="password" class="form-control" id="newPass" name="newPass">
-                </div>
-                  
-                  
+                </div>                  
               </div>
             </div>
             
@@ -100,7 +98,7 @@ Modifica un usuario
               <ul class="list-group list-onHover addR">
                 <?php 
                   foreach ($usu['roles'] as $rol){ ?>
-                    <li class="list-group-item">
+                    <li class="list-group-item" id="<?php echo str_replace(" ","_", $rol['NombreRol']) ?>">
                         <?php echo $rol['NombreRol'] ?>
                         <a class="rm" href="#" onclick="removeRol()"><div class="glyphicon glyphicon-trash"></div></a>
                     <!-- Elemento oculto para pasar el array con los roles modificados por POST -->

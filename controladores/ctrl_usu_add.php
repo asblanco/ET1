@@ -36,7 +36,7 @@ Fecha: 28/10/2015
     if(isset($_POST['newPagUsu'])){
       if (is_array($_POST['newPagUsu'])) {
         foreach($_POST['newPagUsu'] as $value){
-          $pags[] = $value;
+          $paginas[] = $value;
         }
       }
     }

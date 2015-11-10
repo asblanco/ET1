@@ -17,14 +17,11 @@ Fecha: 01/11/2015
 
 	$destino = "../paginas/" . $nombre_pagina;
 
-	if (move_uploaded_file($pagina, $destino))
-	{
-	echo "Su pagina se ha subido correctamente en breve seras redirigido";
-
+	if (move_uploaded_file($pagina, $destino))	{
+	   echo "Su pagina se ha subido correctamente en breve seras redirigido";
 	}
-	else 
-	{
-	echo  "Su archivo no se ha subido";
+	else {
+	   echo  "Su archivo no se ha subido";
 	}
 
 	//Recogemos variables
@@ -48,7 +45,6 @@ Fecha: 01/11/2015
         if ($newPag->crear($insertPag) == true){
             echo 'La pagina ' . $nombre . ' ha sido registrada en el sistema';
             header('Location: ' . $_SERVER['HTTP_REFERER']);
- 
         } else{
             echo "Error al insertar la pagina";
         }

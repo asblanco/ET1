@@ -44,12 +44,12 @@ include('../html/navBar.html'); ?>
               <div class="panel-body">
                 <div class="form-group">
                     <label for="login"><?php echo $idioma["anadir_usuario_login"]; ?></label>
-                    <input type="text" class="form-control" name="login" id="login">
+                    <input type="text" class="form-control" name="login" id="login" required data-validation-required-message="Please enter a login.">
                 </div>
                   
                 <div class="form-group">
                     <label for="nombre"><?php echo $idioma["anadir_usuario_nombre"]; ?></label>
-                    <input type="text" class="form-control" name="nombre" id="nombre">
+                    <input type="text" class="form-control" name="nombre" id="nombre" required data-validation-required-message="Please enter a name.">
                 </div>
                   
                 <div class="form-group">
@@ -59,12 +59,12 @@ include('../html/navBar.html'); ?>
                   
                 <div class="form-group">
                     <label for="email"><?php echo $idioma["anadir_usuario_email"]; ?></label>
-                    <input type="email" class="form-control" name="email" id="email">
+                    <input type="email" class="form-control" name="email" id="email" required data-validation-required-message="Please enter a valid email.">
                 </div>
                   
                 <div class="form-group">
                     <label for="password"><?php echo $idioma["anadir_usuario_password"]; ?></label>
-                    <input type="password" class="form-control" name="password" id="password">
+                    <input type="password" class="form-control" name="password" id="password" required data-validation-required-message="Please enter a password.">
                 </div>  
               </div>
             </div>

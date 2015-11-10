@@ -101,8 +101,8 @@ Fecha: /10/2015
                           <!-- Contenido del dropdown -->
                           <ul class="dropdown-menu">
                               <?php 
-                              foreach($funcPags as $f){ ?>
-                                  <li><a href="#" class="small addFunc" value="<?php echo $f['NombreFun']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f['NombreFun']; ?> </a></li>
+                              foreach($freeFunc as $f){ ?>
+                                  <li><a href="#" class="small addFunc" value="<?php echo $f; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $f; ?> </a></li>
                               <?php
                               }
                               ?>

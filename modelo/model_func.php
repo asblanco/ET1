@@ -47,7 +47,7 @@ class Funcionalidad implements iModel {
     private function getPaginas ($pk){
         $db = new Database();
         
-        $sqlPag = $db->consulta('SELECT Url FROM Pagina WHERE NombreFun = \'' . $pk . '\'');
+        $sqlPag = $db->consulta('SELECT Url, NombrePag FROM Pagina WHERE NombreFun = \'' . $pk . '\'');
         $arrayPag = array();
         
         while ($row_Pag = mysqli_fetch_assoc($sqlPag))
@@ -106,6 +106,27 @@ class Funcionalidad implements iModel {
         $func = array("funName"=>"$pk", "descripcion"=>"$funDesc", "roles"=>$arrayRol, "paginas"=>$arrayPag);
 
         return $func;
+    }
+    
+        
+    //Devuelve las funcionalidades que todavia no estan asociadas con ninguna pagina
+    public function freeFunc(){
+        $db = new Database();
+        
+        //Array que contiene las funcionalidades libres
+        $arrayFreeFunc = array();
+        //Array con todas las func
+        $func = $this->listar();
+        foreach ($func as $f){
+            $query = 'SELECT NombreFun FROM Pagina WHERE NombreFun = \''. $f['NombreFun'] .'\'';
+            $resultado = $db->consulta($query);
+            //Si la funcionalidad no esta en paginas, es que esta libre
+            if (mysqli_num_rows($resultado) == 0){
+                $arrayFreeFunc[] = $f['NombreFun'];
+            }
+        }
+        $db->desconectar();
+        return $arrayFreeFunc;
     }
     
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objecto pasado

@@ -75,7 +75,7 @@ include_once('../controladores/ctrl_func.php');
                 // array asociativo de las paginas ligadas a la funcionalidad actual del bucle
                 $arrayPaginas = $funcX['paginas'];
                 foreach ($arrayPaginas as $pag ){
-                    echo "<p> {$pag['Url']} </p>";
+                    echo "<p> {$pag['NombrePag']} </p>";
                 } ?>      
             </div>
         </div>

@@ -23,6 +23,6 @@ Fecha: 29/10/2015
 //Listar Funcionalidades en modificar y crear Rol
     include_once '../modelo/model_func.php';
     $funcP = new Funcionalidad();
-    $funcPags = $funcP->listar();
+    $freeFunc = $funcP->freeFunc();
 
 ?>

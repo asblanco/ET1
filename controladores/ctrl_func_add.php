@@ -11,11 +11,9 @@ Fecha: 01/11/2015
 
 	//Recogemos variables
     $nombre= $_POST['nombre'];
+    $desc=$_POST['desc'];
     $newRoles = array();
     $newPags = array();
-    $desc=$_POST['desc'];
-
-	
 
    //Conectamos con el gestor de la bd
     $db = new Database();

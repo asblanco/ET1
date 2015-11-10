@@ -23,11 +23,10 @@ session_start();
 header('Location:../vistas/login.php');
 
 }
-include_once('../controladores/ctrl_permisos.php');
- include_once '../modelo/connect_DB.php';
- include('../html/navBar.html');
-  ?>
-
+    include_once('../controladores/ctrl_permisos.php');
+    include_once '../modelo/connect_DB.php';
+    include('../html/navBar.html');
+?>
 
 
 <html lang="en">
@@ -45,7 +44,7 @@ include_once('../controladores/ctrl_permisos.php');
                     </div>
                     <div class="form-group">
                         <label for="rol"><?php echo $idioma["anadir_funcionalidad_descripcion"]; ?></label>
-                        <textarea class="form-control" rows="5" id="comment" name="desc"></textarea>
+                        <textarea class="form-control" rows="5" id="desc" name="desc"></textarea>
                     </div>
                   </div>
                 </div>

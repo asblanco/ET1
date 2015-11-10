@@ -44,19 +44,19 @@ include_once('../controladores/ctrl_func.php');
         <br>
         
         
-        
         <!-- Mostrar Funcionalidades -->
         <?php 
         foreach ($arrayFun as $fun)  { 
             //Array asoc de los datos de la funcionalidad del bucle
-            $funcX = $funcionalidades->consultar($fun['NombreFun']);?>
+            $funcX = $funcionalidades->consultar($fun['NombreFun']);
+        ?>
           <div class='col-md-8 col-md-offset-2 well'>
             <a href="vista_func_del.php?borrar=<?php echo $fun['NombreFun'];?>"> <div class='remove-icon glyphicon glyphicon-remove'></div></a>
             <div class='col-md-6'>
                 <div class='titulo'> <?php echo $fun['NombreFun']; ?> 
-            <a href='vista_func_mod.php?func=<?php echo $fun['NombreFun']; ?>'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
+                    <a href='vista_func_mod.php?func=<?php echo $fun['NombreFun']; ?>'> <div class='edit-icon glyphicon glyphicon-edit'></div></a>
                 </div>
-                <p class='descripcion'> <?php $fun['DescFun']; ?> </p>
+                <p class='descripcion'> <?php echo $fun['DescFun']; ?> </p>
             </div>
             <div class='col-md-3'>
                 <h4>Roles</h4>

@@ -21,21 +21,20 @@ Fecha: /10/2015
     }
     
     include_once('../controladores/ctrl_permisos.php');
-    include('../html/navBar.html'); 
+    include('../html/navBar.html');
     //Para poder visualizar los datos
     include_once('../controladores/ctrl_pag.php');
     //Obtiene el nombre de la pagina a modificar de la URL
     $pagName = $_GET['pag'];
     //Obtiene los datos de la pagina en un array asociativo
-    $p = new Pagina();
-    $pagina = $p->consultar($pagName); 
+    $url = $paginas->getUrl($pagName);
+    $pagina = $paginas->consultar($url);
 ?>
-
 
 <html lang="en">
     <!-- Contenido Principal -->
     <body>   
-        <!-- Pagina1 1 -->
+        <!-- Pagina 1 -->
         <form action='../controladores/ctrl_pag_mod.php' method="post">
             <div class="col-md-8 col-md-offset-2">
                 <!--Nombre y descripcion-->
@@ -43,17 +42,16 @@ Fecha: /10/2015
                     <div class="panel-heading"><?php echo $idioma["modificar_pagina_pagina"]; ?></div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="pagina"><?php echo $idioma["modificar_pagina_nombre"]; ?></label>
+                              <label for="pagina"><?php echo $idioma["modificar_pagina_nombre"]; ?></label>
              
-                                   <input type="text" class="form-control" name="newPag" value="<?php echo $pagName; ?>">
-									<!-- Campo oculto para pasar el nombre del rol al ctrl de modificar -->
-									<input hidden="hidden" type="text" name="oldPag" value="<?php echo $pagName; ?>">
-							
-							</div>
+                              <input type="text" class="form-control" name="newPag" value="<?php echo $pagName; ?>">
+                              <!-- Campo oculto para pasar el nombre del rol al ctrl de modificar -->
+                              <input hidden="hidden" type="text" name="oldPag" value="<?php echo $pagName; ?>">
+							                     </div>
                             
                             <div class="form-group">
                                 <label for="comment"><?php echo $idioma["modificar_pagina_descripcion"]; ?></label>
-                                <textarea class="form-control" rows="5" name="newDesc"><?php echo $pagina['descripcion'] ?></textarea>
+                                <textarea class="form-control" rows="5" name="newDesc"><?php echo $pagina['descripcion']; ?></textarea>     
                             </div>
                         </div>
                 </div>

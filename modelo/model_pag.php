@@ -90,6 +90,23 @@ class Pagina implements iModel {
         return $func;
     }
     
+    //Devuelve la Url segun el nombre de pagina pasado
+    public function getUrl($nPag){
+        $db = new Database();
+        
+        $query = 'SELECT Url FROM Pagina WHERE NombrePag = \'' .  $nPag .  '\'';
+        $result = $db->consulta($query);
+
+        /* array numérico */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $url = $row[0];
+
+        /* liberar la serie de resultados */
+        $result->free();
+        $db->desconectar();
+        return $url;
+    }
+    
     //Comprueba si existe
     public function exists ($pk) {
         $db = new Database();
@@ -128,14 +145,14 @@ class Pagina implements iModel {
         //Obtener el nombre
         $nomPag = $this->getNombrePag($pk);
         //Obtener la descripcion
-        $funcDesc = $this->getDesc($pk);
+        $pagDesc = $this->getDesc($pk);
         //Obtener los usuarios
         $arrayPag = $this->getUsuarios($pk);
         //Obtener la funcionalidad
         $func = $this->getFunc($pk);
         
         //Crear array asoc con los datos de $pk
-        $pag = array("url"=>"$pk", "nombre"=>$nomPag, "descripcion"=>"$funcDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
+        $pag = array("url"=>"$pk", "nombre"=>"$nomPag", "descripcion"=>"$pagDesc", "usuarios"=>$arrayPag, "funcionalidad"=>"$func");
 
         return $pag;
     }

@@ -162,10 +162,6 @@ include('../html/navBar.html'); ?>
               $(this).parents('li').remove();
             })
         }
-    function cifrar(){
-        var input_newPass = document.getElementById("password");
-        input_newPass.value = hex_md5(input_newPass.value);
-    }
 </script>
 
 <script>

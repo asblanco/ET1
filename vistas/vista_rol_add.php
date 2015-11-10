@@ -38,7 +38,7 @@ Fecha: 25/10/2015
               <div class="panel-body">
                 <div class="form-group">
                     <label for="rol"><?php echo $idioma["anadir_rol_nombre"]; ?></label>
-                    <input type="text" class="form-control" name="nombreRol">
+                    <input type="text" class="form-control" name="nombreRol" required data-validation-required-message="Please enter your password.">
                 </div>
                   
                 <div class="form-group">

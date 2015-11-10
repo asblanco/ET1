@@ -2,4 +2,4 @@
 </BR>
 </BR>
 </BR>
-<a href='ctrl_log_out.php'>Administrar</a>
+<a href='../controladores/ctrl_log_out.php'>Administrar</a>

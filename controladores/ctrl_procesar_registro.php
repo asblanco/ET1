@@ -34,8 +34,7 @@ Fecha: 01/11/2015
     if ($consultaSilogin == true){
         echo '<p>El usuario ' . $login . ' ya existe en la bd</p>';
     } else {
-        $mysqldate = date('Y-m-d H:i:s');
-        $insertUsu = new Usuario($login, $nombre, $apellidos, $mysqldate, $email, $pass, $language);
+        $insertUsu = new Usuario($login, $nombre, $apellidos, $email, $pass, $language);
         
         if ($newUsu->crear($insertUsu) == true){
             echo 'El Login ' . $login . ' ha sido registrado en el sistema';

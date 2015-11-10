@@ -127,7 +127,7 @@ include('../html/navBar.html'); ?>
                     <!-- Boton crear -->
                     <div class="btn-parent">
                         <div class="btn-child"> <!-- centran el boton -->
-                            <button type="submit" value="enviar" class="btn btn-info btn-lg">
+                            <button type="submit" onclick="cifrar()" value="enviar" class="btn btn-info btn-lg">
                                 <?php echo $idioma["anadir_usuario_crear"];?>
                                 <div class="glyphicon glyphicon-ok"></div>
                             </a>
@@ -140,6 +140,7 @@ include('../html/navBar.html'); ?>
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
+<script src="../js/md5.js" type="text/javascript"> </script>
 
 <!-- Script despues del include footer porque ahi se importa jquery -->
 <script>
@@ -156,6 +157,10 @@ include('../html/navBar.html'); ?>
               $(this).parents('li').remove();
             })
         }
+    function cifrar(){
+        var input_newPass = document.getElementById("password");
+        input_newPass.value = hex_md5(input_newPass.value);
+    }
 </script>
 
 <script>

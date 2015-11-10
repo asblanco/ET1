@@ -22,8 +22,6 @@ class Usuario implements iModel {
     private $roles = array();
     private $paginas = array();
     
-    
-    
     public function __construct($loginClase="" , $nombre="", $apellidos="" , $email="" , $password="" , $idioma="es", $rol=array(), $pag=array()) {
         $this->loginClase = $loginClase;
         $this->nombre = $nombre;

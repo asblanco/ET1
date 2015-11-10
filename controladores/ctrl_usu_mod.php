@@ -24,9 +24,6 @@ Fecha: 03/11/2015
     $roles = array();
     $pags = array();
 
-
-
-
     //Comprobamos que se hayan cubierto todos los campos
     if ( empty($newUsuLogin) OR empty($newUsuName) OR empty($newUsuSurname) OR (!filter_var($newUsuEmail, FILTER_VALIDATE_EMAIL) AND empty($newUsuEmail))){
                 // Set a 400 (bad request) response code and exit.
@@ -35,17 +32,18 @@ Fecha: 03/11/2015
                 exit;
      }
 
-    if(isset($_POST['newRolUsu'])){
-      if (is_array($_POST['newRolUsu'])) {
-        foreach($_POST['newRolUsu'] as $value){
+    if(isset($_POST['modRolUsu'])){
+      if (is_array($_POST['modRolUsu'])) {
+        foreach($_POST['modRolUsu'] as $value){
           $roles[] = $value;
         }
       }
     }
 
-    if(isset($_POST['newPagUsu'])){
-      if (is_array($_POST['newPagUsu'])) {
-        foreach($_POST['newPagUsu'] as $value){
+    //Recoge los nombres de las paginas asociadas
+    if(isset($_POST['modPagUsu'])){
+      if (is_array($_POST['modPagUsu'])) {
+        foreach($_POST['modPagUsu'] as $value){
           $pags[] = $value;
         }
       }

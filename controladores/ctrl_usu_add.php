@@ -11,9 +11,6 @@ Fecha: 28/10/2015
     
     $db = new Database();
 
-
-    //Se debe pasar el nombre, roles y hacer un bucle para añadir los roles y paginas asociadas
-		
 		
 	//Recogemos las variables
 		$login=$_POST['login'];
@@ -26,9 +23,9 @@ Fecha: 28/10/2015
 		$paginas= array();
 		$idioma="es";
 
-        $newUsu = new Usuario($login);
+    $newUsu = new Usuario($login);
 
-if(isset($_POST['newRolUsu'])){
+    if(isset($_POST['newRolUsu'])){
       if (is_array($_POST['newRolUsu'])) {
         foreach($_POST['newRolUsu'] as $value){
           $roles[] = $value;

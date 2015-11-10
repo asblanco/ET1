@@ -104,7 +104,7 @@ Modifica un usuario
                         <?php echo $rol['NombreRol'] ?>
                         <a class="rm" href="#" onclick="removeRol()"><div class="glyphicon glyphicon-trash"></div></a>
                     <!-- Elemento oculto para pasar el array con los roles modificados por POST -->
-                    <input hidden="hidden" type="text" name="newRol[]" value="<?php echo $rol['NombreRol']; ?>">
+                    <input hidden="hidden" type="text" name="modRolUsu[]" value="<?php echo $rol['NombreRol']; ?>">
                     </li>
                 <?php } ?>
               </ul>
@@ -121,7 +121,8 @@ Modifica un usuario
                           <!-- Contenido del dropdown -->
                           <ul class="dropdown-menu rmP">
                               <?php 
-                              foreach($paginas as $p){ ?>
+                              foreach($paginas as $p){
+                              ?>
                                   <li><a href="#" class="small addPag valor" value="<?php echo $p['NombrePag']; ?>" tabIndex="-1"><input type="checkbox"/>&nbsp; <?php echo $p['NombrePag']; ?> </a></li>
                               <?php
                               }
@@ -133,49 +134,36 @@ Modifica un usuario
                </div>
                 <!-- List group -->
                 <ul class="list-group list-onHover addP">
-                    <?php 
+                    <?php
                       foreach ($usu['paginas'] as $pag){ ?>
                         <li class="list-group-item">
                             <?php echo $pag['NombrePag'] ?>
                             <a href="#" class="rm" onclick="removePag()"><div class="glyphicon glyphicon-trash"></div></a>
                         <!-- Elemento oculto para pasar el array con las paginas modificados por POST -->
-                            <input hidden="hidden" type="text" name="newPag[]" value="<?php echo $pag['']; ?>">
+                            <input hidden="hidden" type="text" name="modPagUsu[]" value="<?php echo $pag['NombrePag']; ?>">
                         </li>
-                        
-                    <?php } ?>
+                    <?php
+                        }
+                    ?>
                 </ul>
             </div> 
             
             <!-- Boton guardar -->
             <div class="btn-parent">
                 <div class="btn-child"> <!-- centran el boton -->
-                    <button type="submit" class="btn btn-info btn-lg" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
+                    <button type="submit" class="btn btn-info btn-lg" onclick="cifrar()" value=<?php echo $idioma["modificar_usuario_guardar"]; ?>><?php echo $idioma["reg_guardar"]; ?>
                     <div class="glyphicon glyphicon-save"></div>
                     </button>
                 </div>
             </div>
         </div>
       </form>
-        
-        <script>
-        function removeRol() {
-            $('.rm').click(function(){
-              $(this).parents('li').remove();
-            })
-        }
-        function removePag() {
-            $('.rm').click(function(){
-              $(this).parents('li').remove();
-            })
-        }
-        
-    </script>
-
     </body> 
 </html>
 
 <!--Importar los jquery, bootstrap.js y el footer-->
 <?php include('../html/footer.html'); ?>
+<script src="../js/md5.js" type="text/javascript"> </script>
 
 <script>
     //Funcion para eliminar roles
@@ -191,6 +179,13 @@ Modifica un usuario
               $(this).parents('li').remove();
             })
         }
+    
+    function cifrar(){
+            var input_oldPass = document.getElementById("oldPass");
+            input_oldPass.value = hex_md5(input_oldPass.value);
+            var input_newPass = document.getElementById("newPass");
+            input_newPass.value = hex_md5(input_newPass.value);
+        }
 </script>
 
 <script>
@@ -204,7 +199,7 @@ $(document).ready(function(){
         var id = value.replace(/ /g,"_");
         //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
-            $(".addR").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeRol()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newRolUsu[]' value='"+ value +"'></li>");
+            $(".addR").append(" <li class='list-group-item' id='"+ id +"'>"+ value +" <a class='rm' href='#' onclick='removeRol()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='modRolUsu[]' value='"+ value +"'></li>");
         }
     });
     
@@ -215,7 +210,7 @@ $(document).ready(function(){
         var id = value.replace(/ /g,"_");
         //Añadirlo si no está ya añadido
         if (!$('#'+id).length) {
-            $(".addP").append(" <li class='list-group-item' id='"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removePag()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='newPagUsu[]' value='"+ value +"'></li>");
+            $(".addP").append(" <li class='list-group-item' id='"+ id +"'> "+ value +" <a class='rm' href='#' onclick='removePag()'><div class='glyphicon glyphicon-trash'></div></a><input hidden='hidden' type='text' name='modPagUsu[]' value='"+ value +"'></li>");
         }
     });    
     

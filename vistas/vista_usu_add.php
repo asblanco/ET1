@@ -64,7 +64,7 @@ include('../html/navBar.html'); ?>
                   
                 <div class="form-group">
                     <label for="password"><?php echo $idioma["anadir_usuario_password"]; ?></label>
-                    <input type="text" class="form-control" name="password" id="password">
+                    <input type="password" class="form-control" name="password" id="password">
                 </div>  
               </div>
             </div>

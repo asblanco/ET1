@@ -137,7 +137,7 @@ class Usuario implements iModel {
     private function getPaginas ($pk){
         $db = new Database();
         
-        $sqlPag = $db->consulta('SELECT Login, NombrePag FROM Usu_Pag WHERE Login = \'' . $pk . '\'');
+        $sqlPag = $db->consulta('SELECT Login, Url, NombrePag FROM Usu_Pag WHERE Login = \'' . $pk . '\'');
         $arrayPag = array();
         
         while ($row_pag = mysqli_fetch_assoc($sqlPag))
@@ -232,34 +232,34 @@ class Usuario implements iModel {
     //Modifica los datos del objeto con $pk, y lo guarda segun los datos de $objeto pasado
     public function modificar ($pk, $objeto) {
         $db = new Database();
-        //Guardar los datos de $pk
-        $datos = $objeto->consultar($pk);
+        //Guardar los datos del objeto $pk antes de modificar
+        $datos = $this->consultar($pk);
 		
-	    $oldLogin= $datos['loginClase'];
+	       $oldLogin= $datos['loginClase'];
         $newLogin = $objeto->loginClase;
 		
         $oldNombre = $datos['nombre'];
         $newNombre = $objeto->nombre;
 		
-		if ($oldNombre != $newNombre){
+		      if ($oldNombre != $newNombre){
             $sql = 'UPDATE Usuario SET Nombre=\''. $newNombre . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar el nombre');
         }
         
-		$oldApellidos = $datos['apellidos'];
+		      $oldApellidos = $datos['apellidos'];
         $newApellidos = $objeto->apellidos;
 		
-		if ($oldApellidos != $newApellidos){
+		      if ($oldApellidos != $newApellidos){
             $sql = 'UPDATE Usuario SET Apellidos=\''. $newApellidos . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar los apellidos');
         }
 		
-		$oldEmail = $datos['email'];
+		      $oldEmail = $datos['email'];
         $newEmail = $objeto->email;
 		
-		if ($oldEmail != $newEmail){
+		      if ($oldEmail != $newEmail){
             $sql = 'UPDATE Usuario SET Email=\''. $newEmail . '\' WHERE Login = \'' . $oldLogin .  '\'' ;
 
             $db->consulta($sql) or die('Error al modificar el email');
@@ -268,53 +268,48 @@ class Usuario implements iModel {
         
     //Actualizar roles asociados al usuario
         //Crear un array asociativo con los roles sin modificar
-        $sqlOldRol = $db->consulta('SELECT NombreRol FROM Usu_Rol WHERE Login = \'' . $pk .  '\'');
-        $arrayOldRol = array();
-        while ($row_rol = mysqli_fetch_assoc($sqlOldRol))
-            $arrayOldRol[] = $row_rol;
-        
+        $arrayOldRol = $datos['roles'];
         //Crear el array asociativo con los nuevos roles
         $arrayNewRol = $objeto->roles;
         
         //Comparar si hay nuevos roles recorriendo $newRoles
         foreach ($arrayNewRol as $new){
-            $resultado = $db->consulta('SELECT NombreRol FROM Usu_Rol WHERE NombreRol = \'' . $new['NombreRol'] .  '\'');
+            $resultado = $db->consulta('SELECT NombreRol FROM Usu_Rol WHERE NombreRol = \'' . $new .  '\' AND Login = \'' . $pk . '\'');
             //Si las filas es igual a 0, no existe, por lo tanto es nuevo
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$new['NombreRol'].','.$objeto->loginClase.')');
+                $db->consulta('INSERT INTO Usu_Rol (Login, NombreRol) VALUES (\''.$pk.'\',\''.$new.'\')');
             }
         }
         
         //Comparar si hay roles a eliminar recorriendo $arrayOldRol
-		foreach ($arrayOldRol as $old){
+		      foreach ($arrayOldRol as $old){
             //Comprobar si el rol está en $arrayNewRol
             $cont=0;
             foreach($arrayNewRol as $new){
-                if($new['NombreRol'] == $old['NombreRol']) $cont++;
+                if($new == $old['NombreRol']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarlo
             if( $cont == 0 ){
-                $db->consulta('DELETE FROM Usu_Rol WHERE NombreRol = \'' . $old['NombreRol'] . '\'');
+                $db->consulta('DELETE FROM Usu_Rol WHERE NombreRol = \'' . $old['NombreRol'] . '\' AND Login = \'' . $pk . '\'');
             }
         }
         
     //Actualizar paginas asociadas al usuario
         //Crear un array asociativo con las paginas sin modificar
-        $sqlOldPag = $db->consulta('SELECT Url FROM Usu_Pag WHERE Login = \'' . $pk .  '\'');
-        $arrayOldPag = array();
-        while ($row_pag = mysqli_fetch_assoc($sqlOldPag))
-            $arrayOldPag[] = $row_pag;
+        $arrayOldPag = $datos['paginas'];
         
-        //Crear el array asociativo con las nuevas paginas
+        //Crear el array asociativo con los nombres de las paginas nuevas
         $arrayNewPag = $objeto->paginas;
         
         //Comparar si hay nuevas paginas recorriendo $arrayNewPag
         foreach ($arrayNewPag as $new){
-            $resultado = $db->consulta('SELECT Url FROM Usu_Pag WHERE Url = \'' . $new .  '\'');
-            //Si las filas es igual a 0, no existe, por lo tanto es nueva
-            
+            $resultado = $db->consulta('SELECT Url FROM Usu_Pag WHERE NombrePag = \''. $new .'\' AND Login = \''. $pk .'\'');
+            //Si las filas es igual a 0, no existe, por lo tanto es nueva y se añade
             if( mysqli_num_rows($resultado) == 0 ){
-                $db->consulta('INSERT INTO Usu_Pag (Login, Url) VALUES ('.$objeto->loginClase.','.$new.')');
+                /* array numérico para guardar la url */
+                $row = $resultado->fetch_array(MYSQLI_NUM);
+                $url = $row[0];
+                $db->consulta('INSERT INTO Usu_Pag (Login, Url, NombrePag) VALUES (\''.$pk.'\',\''.$url.'\', \''.$new.'\')');
             }
         }
         
@@ -323,11 +318,14 @@ class Usuario implements iModel {
             //Comprobar si la pagina está en $arrayNewPaG
             $cont=0;
             foreach($arrayNewPag as $new){
-                if($new['Url'] == $old['Url']) $cont++;
+                $resultado = $db->consulta('SELECT Url FROM Usu_Pag WHERE NombrePag = \''. $new .'\' AND Login = \''. $pk .'\'');
+                $row = $resultado->fetch_array(MYSQLI_NUM);
+                $url = $row[0];
+                if($url == $old['Url']) $cont++;
             }
             //Si las filas(cont) es igual a 0, no existe, por lo tanto hay que eliminarla
             if( $cont == 0 ){
-                $db->consulta('DELETE FROM Usu_Pag WHERE Url = \'' . $old['Url'] . '\'');
+                $db->consulta('DELETE FROM Usu_Pag WHERE Url = \'' . $old['Url'] . '\' AND Login = \'' . $pk . '\'');
             }
         }
         
@@ -338,11 +336,11 @@ class Usuario implements iModel {
             if ($oldLogin != $newLogin){
                 $sql = 'UPDATE Usuario SET Login=\'' . $newLogin . '\' WHERE Login = \'' . $oldLogin .  '\'';
                 $result = $db->consulta($sql);
-                if ($result === TRUE)
-                    return true;
-                    else return false;
+                //Si da error que devuelva false
+                if ($result === FALSE)
+                    return false;
             }
-            return true;
+            $result = true;
         }
         
         $oldPass = $datos['password'];

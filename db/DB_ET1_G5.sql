@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-11-2015 a las 15:25:47
+-- Tiempo de generación: 10-11-2015 a las 00:56:22
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -27,7 +27,6 @@ create user 'admin'@'localhost' identified by 'iu';
 grant all on DB_ET1_G5.* to 'admin'@'localhost';
 
 USE DB_ET1_G5;
-
 -- --------------------------------------------------------
 
 --
@@ -44,6 +43,13 @@ CREATE TABLE IF NOT EXISTS `Funcionalidad` (
 --
 
 INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
+('Administrar', NULL),
+('Alta Apuestas', NULL),
+('Alta Socios', NULL),
+('Baja Apuestas', NULL),
+('Baja Socios', NULL),
+('Consulta Apuestas', NULL),
+('Consulta Socios', NULL),
 ('Consultar Funcionalidad', 'Permite consultar las funcionalidades existentes.'),
 ('Consultar Pagina', 'Permite consultar las paginas existentes.'),
 ('Consultar Rol', 'Permite consultar los roles existentes.'),
@@ -56,19 +62,15 @@ INSERT INTO `Funcionalidad` (`NombreFun`, `DescFun`) VALUES
 ('Eliminar Pagina', 'Permite eliminar paginas existentes.'),
 ('Eliminar Rol', 'Permite eliminar roles'),
 ('Eliminar Usuario', 'Permite eliminar usuarios de la aplicación.'),
-('Modificar Funcionalidad.', 'Permite modificar funcionalidades existentes.'),
+('Gestion Jornadas', NULL),
+('Gestion Premios', NULL),
+('Menu', NULL),
+('Modificacion Apuestas', NULL),
+('Modificacion Socios', NULL),
+('Modificar Funcionalidad', 'Permite modificar funcionalidades existentes.'),
 ('Modificar Pagina', 'Permite modificar paginas'),
 ('Modificar Rol', 'Permite modificar roles existentes.'),
 ('Modificar Usuario', 'Permite modificar usuarios de la aplicación.');
-
---
--- Disparadores `Funcionalidad`
---
-DELIMITER //
-CREATE TRIGGER `after_insert_funcionalidad` AFTER INSERT ON `Funcionalidad`
- FOR EACH ROW INSERT INTO Rol_Fun (NombreRol, NombreFun) VALUES ("Administrador", NEW.NombreFun)
-//
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -88,10 +90,22 @@ CREATE TABLE IF NOT EXISTS `Pagina` (
 --
 
 INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
+('/paginas/Administrar.php', NULL, 'Administrar', 'Administrar'),
+('/paginas/C_Alta_Apuestas.php', NULL, 'Alta Apuestas', 'Alta Apuestas'),
+('/paginas/C_Alta_Socios.php', NULL, 'Alta Socios', 'Alta Socios'),
+('/paginas/C_Baja_Apuestas.php', NULL, 'Baja Apuestas', 'Baja Apuestas'),
+('/paginas/C_Baja_Socios.php', NULL, 'Baja Socios', 'Baja Socios'),
+('/paginas/C_Consulta_Apuestas.php', NULL, 'Consulta Apuestas', 'Consulta Apuestas'),
+('/paginas/C_Consulta_Socios.php', NULL, 'Consulta Socios', 'Consulta Socios'),
+('/paginas/C_Gestion_Jornadas.php', NULL, 'Gestion Jornadas', 'Gestion Jornadas'),
+('/paginas/C_Gestion_Premios.php', NULL, 'Gestion Premios', 'Gestion Premios'),
+('/paginas/C_Menu.php', NULL, 'Menu', 'Menu'),
+('/paginas/C_Modificacion_Apuestas.php', NULL, 'Modificacion Apuestas', 'Modificacion Apuestas'),
+('/paginas/C_Modificacion_Socios.php', NULL, 'Modificacion Socios', 'Modificacion Socios'),
 ('/vistas/vista_func.php', NULL, 'Consultar Funcionalidad', 'Vista Funcionalidad'),
 ('/vistas/vista_func_add.php', NULL, 'Crear Funcionalidad', 'Crear Funcionalidad'),
 ('/vistas/vista_func_del.php', NULL, 'Eliminar Funcionalidad.', 'Eliminar Funcionalidad'),
-('/vistas/vista_func_mod.php', NULL, 'Modificar Funcionalidad.', 'Modificar Funcionalidad'),
+('/vistas/vista_func_mod.php', NULL, 'Modificar Funcionalidad', 'Modificar Funcionalidad'),
 ('/vistas/vista_pag.php', NULL, 'Consultar Pagina', 'Vista Pagina'),
 ('/vistas/vista_pag_add.php', NULL, 'Crear Pagina', 'Crear Pagina'),
 ('/vistas/vista_pag_del.php', NULL, 'Eliminar Pagina', 'Eliminar Pagina'),
@@ -101,18 +115,9 @@ INSERT INTO `Pagina` (`Url`, `DescPag`, `NombreFun`, `NombrePag`) VALUES
 ('/vistas/vista_rol_del.php', NULL, 'Eliminar Rol', 'Eliminar Rol'),
 ('/vistas/vista_rol_mod.php', NULL, 'Modificar Rol', 'Modificar Rol'),
 ('/vistas/vista_usu.php', NULL, 'Consultar Usuario', 'Vista Usuarios'),
+('/vistas/vista_usu_add.php', NULL, 'Crear Usuario', 'Crear Usuario'),
 ('/vistas/vista_usu_del.php', NULL, 'Eliminar Usuario', 'Eliminar Usuario'),
-('/vistas/vista_usu_mod.php', NULL, 'Modificar Usuario', 'Modificar Usuario'),
-('/vistas/vista_usu_add.php', NULL, 'Crear Usuario', 'Crear Usuario');
-
---
--- Disparadores `Pagina`
---
-DELIMITER //
-CREATE TRIGGER `after_insert_pagina` AFTER INSERT ON `Pagina`
- FOR EACH ROW INSERT INTO Usu_Pag (Login, Url, NombrePag) VALUES ('admin', NEW.Url, NEW.NombrePag)
-//
-DELIMITER ;
+('/vistas/vista_usu_mod.php', NULL, 'Modificar Usuario', 'Modificar Usuario');
 
 -- --------------------------------------------------------
 
@@ -130,11 +135,7 @@ CREATE TABLE IF NOT EXISTS `Rol` (
 --
 
 INSERT INTO `Rol` (`NombreRol`, `DescRol`) VALUES
-('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.'),
-('Gestor de Funcionalidades', 'Crea y elimina funcionalidades.'),
-('Gestor de Paginas', 'Sube y elimina paginas.'),
-('Gestor de Roles', 'Crea, elimina y asigna roles.'),
-('Gestor de Usuarios', 'Crea, borra y edita usuarios.');
+('Administrador', ' El administrador debe poder modificar todo. Teniendo todas las funcionalidades asignadas.');
 
 -- --------------------------------------------------------
 
@@ -153,37 +154,21 @@ CREATE TABLE IF NOT EXISTS `Rol_Fun` (
 
 INSERT INTO `Rol_Fun` (`NombreRol`, `NombreFun`) VALUES
 ('Administrador', 'Consultar Funcionalidad'),
-('Gestor de Funcionalidades', 'Consultar Funcionalidad'),
 ('Administrador', 'Consultar Pagina'),
-('Gestor de Paginas', 'Consultar Pagina'),
 ('Administrador', 'Consultar Rol'),
-('Gestor de Roles', 'Consultar Rol'),
 ('Administrador', 'Consultar Usuario'),
-('Gestor de Usuarios', 'Consultar Usuario'),
 ('Administrador', 'Crear Funcionalidad'),
-('Gestor de Funcionalidades', 'Crear Funcionalidad'),
 ('Administrador', 'Crear Pagina'),
-('Gestor de Paginas', 'Crear Pagina'),
 ('Administrador', 'Crear Rol'),
-('Gestor de Roles', 'Crear Rol'),
 ('Administrador', 'Crear Usuario'),
-('Gestor de Usuarios', 'Crear Usuario'),
 ('Administrador', 'Eliminar Funcionalidad.'),
-('Gestor de Funcionalidades', 'Eliminar Funcionalidad.'),
 ('Administrador', 'Eliminar Pagina'),
-('Gestor de Paginas', 'Eliminar Pagina'),
 ('Administrador', 'Eliminar Rol'),
-('Gestor de Roles', 'Eliminar Rol'),
 ('Administrador', 'Eliminar Usuario'),
-('Gestor de Usuarios', 'Eliminar Usuario'),
-('Administrador', 'Modificar Funcionalidad.'),
-('Gestor de Funcionalidades', 'Modificar Funcionalidad.'),
+('Administrador', 'Modificar Funcionalidad'),
 ('Administrador', 'Modificar Pagina'),
-('Gestor de Paginas', 'Modificar Pagina'),
 ('Administrador', 'Modificar Rol'),
-('Gestor de Roles', 'Modificar Rol'),
-('Administrador', 'Modificar Usuario'),
-('Gestor de Usuarios', 'Modificar Usuario');
+('Administrador', 'Modificar Usuario');
 
 -- --------------------------------------------------------
 
@@ -225,6 +210,18 @@ CREATE TABLE IF NOT EXISTS `Usu_Pag` (
 --
 
 INSERT INTO `Usu_Pag` (`Login`, `Url`, `NombrePag`) VALUES
+('admin', '/paginas/Administrar.php', 'Administrar'),
+('admin', '/paginas/C_Alta_Apuestas.php', 'Alta Apuestas'),
+('admin', '/paginas/C_Alta_Socios.php', 'Alta Socios'),
+('admin', '/paginas/C_Baja_Apuestas.php', 'Baja Apuestas'),
+('admin', '/paginas/C_Baja_Socios.php', 'Baja Socios'),
+('admin', '/paginas/C_Consulta_Apuestas.php', 'Consulta Apuestas'),
+('admin', '/paginas/C_Consulta_Socios.php', 'Consulta Socios'),
+('admin', '/paginas/C_Gestion_Jornadas.php', 'Gestion Jornadas'),
+('admin', '/paginas/C_Gestion_Premios.php', 'Gestion Premios'),
+('admin', '/paginas/C_Menu.php', 'Menu'),
+('admin', '/paginas/C_Modificacion_Apuestas.php', 'Modificacion Apuestas'),
+('admin', '/paginas/C_Modificacion_Socios.php', 'Modificacion Socios'),
 ('admin', '/vistas/vista_func.php', 'Vista Funcionalidad'),
 ('admin', '/vistas/vista_func_add.php', 'Crear Funcionalidad'),
 ('admin', '/vistas/vista_func_del.php', 'Eliminar Funcionalidad'),
@@ -238,9 +235,9 @@ INSERT INTO `Usu_Pag` (`Login`, `Url`, `NombrePag`) VALUES
 ('admin', '/vistas/vista_rol_del.php', 'Eliminar Rol'),
 ('admin', '/vistas/vista_rol_mod.php', 'Modificar Rol'),
 ('admin', '/vistas/vista_usu.php', 'Vista Usuarios'),
+('admin', '/vistas/vista_usu_add.php', 'Crear Usuario'),
 ('admin', '/vistas/vista_usu_del.php', 'Eliminar Usuario'),
-('admin', '/vistas/vista_usu_mod.php', 'Modificar Usuario'),
-('admin', 'vistas/vista_usu_add.php', 'Crear Usuario');
+('admin', '/vistas/vista_usu_mod.php', 'Modificar Usuario');
 
 -- --------------------------------------------------------
 

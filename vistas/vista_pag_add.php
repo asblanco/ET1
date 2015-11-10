@@ -47,7 +47,7 @@ header('Location:../vistas/login.php');
                   <div class="panel-body">
                     <div class="form-group">
                         <label for="rol"><?php echo $idioma["anadir_pagina_nombre_pag"]; ?></label>
-                        <input type="text" class="form-control" name="nombre">
+                        <input type="text" class="form-control" name="nombre" required data-validation-required-message="Please enter a name.">
                     </div>
                     <div class="form-group">
                         <label for="rol"><?php echo $idioma["anadir_pagina_desc"]; ?></label>

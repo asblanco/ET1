@@ -364,8 +364,8 @@ class Usuario implements iModel {
             
             //Comprueba si esta relacionado con algun rol
             if($objeto->roles != array()){
-                foreach ($objeto->$roles as $newRol){
-                    $queryRol = 'INSERT INTO Usu_Rol (Login, NombreRol) VALUES ('.$objeto->loginClase.','.$newRol.')';
+                foreach ($objeto->roles as $newRol){
+                    $queryRol = 'INSERT INTO Usu_Rol (Login, NombreRol) VALUES (\''.$objeto->loginClase.'\',\''.$newRol.'\')';
                     $db->consulta($queryRol) or die('Error al insertar los roles');
                 }
             }
